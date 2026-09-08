@@ -59,6 +59,7 @@ const assert = require('assert');
 
     await send('Page.enable');
     await send('Runtime.enable');
+    await send('Emulation.clearDeviceMetricsOverride');
     await send('Page.navigate', { url: 'http://localhost:8080/' });
     await new Promise(r => setTimeout(r, 600));
 
@@ -122,6 +123,26 @@ const assert = require('assert');
     console.log('--- Test 5: Patient Form & Declarations (Module 6) ---');
     await evaluate('document.querySelector("[data-consent-step=\\"5\\"]").click()');
     
+    // Verify placeholders are empty as requested
+    const namePlaceholder = await evaluate('document.getElementById("consent-input-name").getAttribute("placeholder")');
+    assert.equal(namePlaceholder, '', 'Patient name placeholder must be empty');
+    const docPlaceholder = await evaluate('document.getElementById("consent-input-clinician").getAttribute("placeholder")');
+    assert.equal(docPlaceholder, '', 'Clinician placeholder must be empty');
+    
+    // Verify removed fields do not exist in DOM
+    const svcExists = await evaluate('!!document.getElementById("consent-input-serviceno")');
+    assert.equal(svcExists, false, 'Service no input must be removed');
+    const rankExists = await evaluate('!!document.getElementById("consent-input-rank")');
+    assert.equal(rankExists, false, 'Rank input must be removed');
+    const unitExists = await evaluate('!!document.getElementById("consent-input-unit")');
+    assert.equal(unitExists, false, 'Unit input must be removed');
+    const diagExists = await evaluate('!!document.getElementById("consent-input-diag")');
+    assert.equal(diagExists, false, 'Diagnosis input must be removed');
+    const mrnExists = await evaluate('!!document.getElementById("consent-input-mrn")');
+    assert.equal(mrnExists, true, 'MRN/HID input must be present');
+
+    await captureScreenshot('consent-module6-unfilled.png');
+
     // Fill in form inputs
     await evaluate(`(() => {
       const nameInput = document.getElementById('consent-input-name');
