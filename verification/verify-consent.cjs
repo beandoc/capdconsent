@@ -59,6 +59,8 @@ const assert = require('assert');
 
     await send('Page.enable');
     await send('Runtime.enable');
+    await send('Page.navigate', { url: 'http://localhost:8080/' });
+    await new Promise(r => setTimeout(r, 600));
 
     console.log('--- Test 1: Verify Initial Page & Resources Button ---');
     const title = await evaluate('document.title');

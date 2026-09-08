@@ -2967,11 +2967,65 @@
   function next(){if(state.finished){go(0);return;}state.completed.add(state.index);if(state.index<7)go(state.index+1);else{stopAudio();state.finished=true;render();$('completion').focus();}}
   function updateListen(active){$('listen').innerHTML=icon(active?'stop':'volume')+esc(t(active?'stop':'listen'));$('listen').setAttribute('aria-pressed',String(active));}
   function stopAudio(){audioToken++;if('speechSynthesis' in window)window.speechSynthesis.cancel();updateListen(false);}
+  function getBestVoice(targetLang, voices){
+    if(!voices||!voices.length)return null;
+    const bad=['albert','alex','bad news','bahh','bells','boing','bubbles','cellos','deranged','fred','good news','hysterical','junior','organ','pipe organ','superstar','trinoids','whisper','wobble','zarvox','ralph'];
+    function score(v){
+      const name=(v.name||'').toLowerCase();
+      const lang=(v.lang||'').toLowerCase().replace('_','-');
+      for(const b of bad){if(name.includes(b))return -9999;}
+      let s=0;
+      const isFemale=name.includes('female')||name.includes('woman')||
+        ['tara','lekha','neerja','swara','aarohi','kavya','ananya','samantha','karen','moira','tessa','flo','shelley','sandy','kathy','jenny','aria','zira','kalpana'].some(f=>name.includes(f));
+      if(isFemale)s+=200;
+      if(name.includes('male')&&!name.includes('female'))s-=150;
+      if(['david','mark','george','richard','guy','daniel','eddy','reed','rocko','fred','albert','alex'].some(m=>name.includes(m)))s-=150;
+      const isIndian=lang==='en-in'||lang==='hi-in'||lang==='mr-in'||name.includes('india')||name.includes('hindi')||name.includes('marathi')||['tara','lekha','neerja','swara','aarohi','aman','rishi'].some(iv=>name.includes(iv));
+      if(isIndian)s+=300;
+      if(targetLang==='en'){
+        if(lang==='en-in')s+=400;
+        else if(lang.startsWith('en'))s+=100;
+        else s-=500;
+        if(name.includes('tara'))s+=600;
+        if(name.includes('neerja'))s+=600;
+        if(name.includes('samantha'))s+=200;
+      }else if(targetLang==='hi'){
+        if(lang.startsWith('hi'))s+=500;
+        else if(lang==='en-in'||isIndian)s+=200;
+        else s-=500;
+        if(name.includes('lekha'))s+=600;
+        if(name.includes('swara'))s+=600;
+        if(name.includes('kalpana'))s+=400;
+      }else if(targetLang==='mr'){
+        if(lang.startsWith('mr'))s+=550;
+        else if(lang.startsWith('hi'))s+=400;
+        else if(lang==='en-in'||isIndian)s+=200;
+        else s-=500;
+        if(name.includes('aarohi'))s+=600;
+        if(name.includes('lekha'))s+=500;
+        if(name.includes('swara'))s+=450;
+      }
+      if(name.includes('natural')||name.includes('neural'))s+=100;
+      if(name.includes('enhanced')||name.includes('premium'))s+=80;
+      return s;
+    }
+    const sorted=[...voices].sort((a,b)=>score(b)-score(a));
+    return sorted[0]&&score(sorted[0])>-1000?sorted[0]:(voices[0]||null);
+  }
+
   function speak(){
     if($('listen').getAttribute('aria-pressed')==='true'){stopAudio();return;}
     if(!('speechSynthesis' in window)){toast(t('audioUnavailable'));return;}
-    const voices=window.speechSynthesis.getVoices().filter(v=>v.localService&&v.lang.toLowerCase().startsWith(state.language));
+    const allLocal=window.speechSynthesis.getVoices().filter(v=>v.localService);
+    let voices=allLocal.filter(v=>v.lang.toLowerCase().startsWith(state.language==='en'?'en':state.language==='hi'?'hi':'mr'));
+    if(!voices.length && state.language==='mr'){
+      voices=allLocal.filter(v=>v.lang.toLowerCase().startsWith('hi')||v.lang.toLowerCase().startsWith('en'));
+    }else if(!voices.length && state.language==='hi'){
+      voices=allLocal.filter(v=>v.lang.toLowerCase().startsWith('hi')||v.lang.toLowerCase().startsWith('en'));
+    }
     if(!voices.length){toast(t('audioOffline'));return;}
+    const bestVoice=getBestVoice(state.language,voices);
+    if(!bestVoice){toast(t('audioOffline'));return;}
     const p=phase(),token=++audioToken;
     const parts=[p.title,p.description,...(p.points||[]).map(k=>tClinic(k)),...(p.note||[])];
     if(p.visual==='anatomy')parts.push(...t('hotspotDetails').flat(),...t('layerNames'),...t('cuffKey'));
@@ -2983,7 +3037,11 @@
     if(p.visual==='living')parts.push(...t('livingLabels'));
     if(p.visual==='warnings')parts.push(t('effluentNote'),t('warningIntro'),...t('warningItems'),t('warningAction'));
     parts.push(...p.statuses.map(s=>s[1]+'. '+s[2]));if(state.caregiver)parts.push(t('caregiverLabel'),p.caregiver);parts.push(p.question,...p.answers,t('reminderBody'));
-    const u=new SpeechSynthesisUtterance(parts.join('. '));u.voice=voices[0];u.lang=voices[0].lang;u.rate=.87;
+    const u=new SpeechSynthesisUtterance(parts.join('. '));
+    u.voice=bestVoice;
+    u.lang=bestVoice.lang||(state.language==='hi'?'hi-IN':state.language==='mr'?'mr-IN':'en-IN');
+    u.rate=state.language==='en'?0.93:0.90;
+    u.pitch=1.05;
     u.onend=()=>{if(token===audioToken)updateListen(false);};
     u.onerror=e=>{if(token===audioToken){updateListen(false);if(e.error!=='canceled'&&e.error!=='interrupted')toast(t('audioError'));}};
     updateListen(true);window.speechSynthesis.speak(u);
@@ -3307,6 +3365,9 @@
   });
   window.addEventListener('pagehide',()=>{stopAudio();stopSequence();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){stopAudio();if(state.playing){stopSequence();renderVisual();}}});
-  if('speechSynthesis' in window)window.speechSynthesis.getVoices();
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
   render();
   </script>\n</body>\n</html>\n
