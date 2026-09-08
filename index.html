@@ -3489,92 +3489,374 @@
     $('modal').scrollTop=0;
   }
 
+const LOGO_SC_JPG = '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';
+  const LOGO_NEPH_JPG = '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';
+  const QR_PORTAL_JPG = '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';
+
   function downloadConsentRecord(){
-    if(state.language!=='en'){window.print();return;}
-    const latin=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/[^\x20-\x7e]/g,'?');
-    const wrap=(value,limit)=>{const words=latin(value).split(/\s+/),lines=[];let line='';for(const word of words){if((line+' '+word).trim().length>limit&&line){lines.push(line);line=word;}else line=(line+' '+word).trim();}if(line)lines.push(line);return lines;};
-    const pdfEscape=s=>latin(s).replace(/([\\()])/g,'\\$1');
-    let stream='', y=795;
-    const line=(s,size,bold=false,color='0.11 0.20 0.18')=>{stream+=`BT /${bold?'F2':'F1'} ${size} Tf ${color} rg 1 0 0 1 45 ${y.toFixed(1)} Tm (${pdfEscape(s)}) Tj ET\n`;};
-
-    line('COMMAND HOSPITAL (SOUTHERN COMMAND) PUNE - DEPARTMENT OF NEPHROLOGY', 10.5, true, '0.11 0.42 0.37'); y-=16;
-    line('CAPD CATHETER INSERTION - INFORMED CONSENT & SHARED DECISION RECORD', 9, true, '0.30 0.40 0.35'); y-=14;
-    line('DISCLAIMER: FOR ILLUSTRATION AND EDUCATIVE PURPOSE ONLY', 8, true, '0.70 0.25 0.15'); y-=18;
-
-    const pt=state.consentPatient;
-    const ptName = pt.name || 'Not specified (Sign on paper)';
-    const ptAge = pt.age || 'N/A';
-    const ptMrn = pt.mrn || 'N/A';
-    const ptWard = pt.ward ? `Ward/Bed: ${pt.ward}` : '';
-    const ptDoc = pt.clinician || 'Attending Nephrologist';
-    const ptDate = pt.date || new Date().toISOString().split('T')[0];
-
-    line(`Patient: ${ptName}   Age/Sex: ${ptAge}   MRN/HID: ${ptMrn}`.trim(), 8, true); y-=12;
-    line(`Clinician: ${ptDoc}   Date: ${ptDate}   ${ptWard}`.trim(), 7.5, false); y-=15;
-
-    stream += `0.5 w 0.7 0.8 0.75 RG 45 ${y.toFixed(1)} m 550 ${y.toFixed(1)} l S\n`; y-=14;
-
-    line('1. VERIFIED CLINICAL DISCLOSURE MODULES COMPLETED', 8.5, true, '0.15 0.35 0.28'); y-=12;
-    const modules = [
-      '[X] Module 1 - Overview: Indications for permanent peritoneal dialysis access and catheter geometry.',
-      '[X] Module 2 - Surgical Technique: Percutaneous Seldinger route with explicit Open Mini-Laparotomy contingency.',
-      '[X] Module 3 - Benefits & Alternatives: Continuous gentle filtration vs Hemodialysis, Transplant, Conservative care.',
-      '[X] Module 4 - Four-Tier Risk Stratification: Immediate surgical, delayed infectious, mechanical & anesthetic risks.',
-      `[X] Module 5 - Comprehension Quiz: Verified patient grasp (${Object.keys(state.consentQuiz).length}/4 answered correctly).`
-    ];
-    for(const m of modules){ line(m, 7.2); y-=10.5; }
-    y-=3;
-
-    stream += `0.5 w 0.7 0.8 0.75 RG 45 ${y.toFixed(1)} m 550 ${y.toFixed(1)} l S\n`; y-=14;
-
-    line('2. PATIENT STATUTORY INFORMED CONSENT DECLARATIONS', 8.5, true, '0.15 0.35 0.28'); y-=12;
-    const decls = CONSENT_SECTIONS[5].declarations;
-    decls.forEach((d, idx)=>{
-      const isChecked = state.consentDeclarations[idx] !== false;
-      const prefix = isChecked ? '[X] ' : '[ ] ';
-      const rows = wrap(prefix + d, 94);
-      for(let r=0; r<rows.length; r++){
-        line(rows[r], 7.2, r===0 && isChecked);
-        y-=10;
+    const b64ToBin = b64 => {
+      const bin = atob(b64);
+      const u8 = new Uint8Array(bin.length);
+      for(let i=0; i<bin.length; i++) u8[i] = bin.charCodeAt(i);
+      return u8;
+    };
+    const latin = s => {
+      const repl = {'—':'-','–':'-','’':"'",'‘':"'",'“':'"','”':'"','☐':'[ ]','☑':'[X]'};
+      let res = String(s || '');
+      for(const [k,v] of Object.entries(repl)) res = res.split(k).join(v);
+      return res.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\x20-\x7e]/g, '?');
+    };
+    const pdfEscape = s => latin(s).replace(/([\\()])/g, '\\$1');
+    const wrapText = (text, limit=108) => {
+      const words = latin(text).split(/\s+/);
+      const lines = [];
+      let line = '';
+      for(const word of words){
+        if((line + ' ' + word).trim().length > limit && line){
+          lines.push(line);
+          line = word;
+        } else {
+          line = (line + ' ' + word).trim();
+        }
       }
-      y-=2;
-    });
-    y-=3;
+      if(line) lines.push(line);
+      return lines;
+    };
 
-    stream += `0.5 w 0.7 0.8 0.75 RG 45 ${y.toFixed(1)} m 550 ${y.toFixed(1)} l S\n`; y-=14;
+    const pt = state.consentPatient;
+    const enc = new TextEncoder();
+    let p1Stream = '';
+    const p1Line = (s, x, y, size=8, font='F1', color='0 0 0') => {
+      p1Stream += `BT /${font} ${size} Tf ${color} rg 1 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)} Tm (${pdfEscape(s)}) Tj ET\n`;
+    };
 
-    line('3. FOUR-PARTY PHYSICAL SIGNATURE VERIFICATION', 8.5, true, '0.15 0.35 0.28'); y-=24;
+    // Header logos: Neph (left) & SC (right) exactly matching hospital formal document
+    p1Stream += 'q 46 0 0 46 45 764 cm /ImNeph Do Q\n';
+    p1Stream += 'q 46 0 0 46 504 764 cm /ImSC Do Q\n';
 
-    line('___________________________________           ___________________________________           ___________________________________', 7.5, false, '0.4 0.4 0.4'); y-=11;
-    line('Patient / Representative Signature            Attending Nephrologist Signature              Witness / PD Nurse Signature', 7.5, true); y-=10;
-    line(`Name: ${ptName.slice(0,25)}                  Doctor: ${ptDoc ? ptDoc.slice(0,25) : '_______________________'}                  Date: ${ptDate}`, 7, false, '0.3 0.3 0.3'); y-=18;
+    // Title
+    p1Line('Command Hospital (SC), Pune - Department of Nephrology', 108, 796, 11.5, 'F2', '0.08 0.22 0.18');
+    p1Line('INFORMED CONSENT FOR CAPD CATHETER INSERTION', 128, 780, 12, 'F2', '0 0 0');
+    p1Line('Disclaimer: For illustration and educative purpose only', 195, 767, 7.5, 'F3', '0.50 0.25 0.10');
 
-    line('Disclaimer: This tool is for illustration and educative purpose only.', 6.5, false, '0.4 0.4 0.4'); y-=9;
-    line('Institutional Statutory Notice: Executed pursuant to Armed Forces Medical Services & Command Hospital Pune SOPs.', 6.5, false, '0.4 0.4 0.4'); y-=9;
-    line('Formal statutory legal consent is executed concurrently on Command Hospital Form No. Med/Consent/CAPD-01.', 6.5, false, '0.4 0.4 0.4'); y-=9;
-    line('Generated locally by PD Consent Buddy · Shared Decision Companion · Zero PHI stored or transmitted.', 6.5, false, '0.5 0.5 0.5');
+    // Divider
+    p1Stream += '0.6 w 0.65 0.70 0.68 RG 45 757 m 550 757 l S\n';
 
-    const objects=[
-      '<< /Type /Catalog /Pages 2 0 R >>',
-      '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>',
-      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
-      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>',
-      `<< /Length ${stream.length} >>\nstream\n${stream}endstream`
+    // Section 1. Patient & Admission Details
+    let y = 744;
+    p1Line('1. Patient & Admission Details:', 45, y, 8.8, 'F2');
+    const valName = pt.name ? pt.name : '__________________________';
+    const valAge = pt.age ? pt.age : '________';
+    const valMrn = pt.mrn ? pt.mrn : '______________';
+    const valWard = pt.ward ? pt.ward : '__________';
+
+    p1Line(`Name: ${valName}   Age/Sex: ${valAge}   Service No: ____________________`, 175, y, 8, 'F1');
+    y -= 13;
+    p1Line(`Rank: ______   Unit: ____________________   HID No: ${valMrn}   Ward: ${valWard}   Diagnosis: ____________________`, 45, y, 8, 'F1');
+    y -= 15;
+
+    // Section 2. Procedure Explained
+    p1Line('2. Procedure Explained', 45, y, 9.2, 'F2', '0.10 0.28 0.22');
+    y -= 11.5;
+    const sec2Text = 'Continuous Ambulatory Peritoneal Dialysis (CAPD) uses the lining of your abdomen (peritoneum) as a natural filter to remove waste and fluid from the blood. A soft flexible catheter must first be placed into the abdominal cavity; dialysis fluid is later run in and drained through it. It can be placed either by percutaneous method - a bedside technique using a needle and guidewire under local anaesthesia, (a \"blind\" technique), and open surgical method of catheter insertion under direct visualization of layers of abdomen.';
+    for (const l of wrapText(sec2Text, 108)) {
+      p1Line(l, 45, y, 8, 'F1');
+      y -= 10.2;
+    }
+    y -= 4;
+
+    // Info portal box with QR code
+    const boxH = 44;
+    const boxY = y - boxH;
+    p1Stream += `0.5 w 0.72 0.80 0.76 RG 0.96 0.98 0.97 rg 45 ${boxY.toFixed(1)} 505 ${boxH} re B\n`;
+    p1Stream += `q 36 0 0 36 50 ${(boxY + 4).toFixed(1)} cm /ImQR Do Q\n`;
+    p1Line('Scan for a patient-friendly explanation of peritoneal dialysis and this procedure on our info portal', 94, boxY + 25, 8.2, 'F3', '0.12 0.32 0.26');
+    p1Line('Discuss the specific procedure details planned for you (or the patient) with your treating doctor.', 94, boxY + 12, 7.8, 'F1', '0.25 0.25 0.25');
+    y = boxY - 13;
+
+    // Section 3. Risks of the Procedure
+    p1Line('3. Risks of the Procedure', 45, y, 9.2, 'F2', '0.10 0.28 0.22');
+    y -= 12;
+
+    const risks = [
+      ['Common (likely - more than 1 in 10 patients)',
+       'Pain, discomfort, or a dragging sensation at the insertion site is expected for several days after the procedure, and is usually managed with simple pain relief. Blood-tinged dialysis fluid (hemoperitoneum) in the first few exchanges after insertion is common. This happens because small blood vessels in the abdominal wall or omentum are disturbed during catheter placement, and usually settles on its own within a few exchanges without specific treatment.'],
+      ['Uncommon (possible - roughly 1 in 100 to 1 in 10 patients)',
+       'The catheter tip can move out of its ideal position in the pelvis (\"migration\"), or become wrapped by the omentum (a fold of fatty tissue that drapes over the bowel), or blocked by a small blood clot or fibrin. This usually results in poor inflow or outflow of dialysis fluid. The management may require repositioning the catheter under X-ray guidance, or operation to free and reposition it laparoscopically under general anaesthesia may be needed.\nLeakage of dialysis fluid around the insertion site, the wound, or (rarely) into the genital can happen,\nBleeding at the insertion site may occur and occasionally needs further treatment; this risk is higher if you are taking blood-thinning medication such as warfarin, dabigatran, aspirin, or clopidogrel etc'],
+      ['Rare (roughly 1 in 1,000 to 1 in 100 patients)',
+       'Infection can develop at the catheter exit site (where the tube leaves the skin) or in the tunnel beneath the skin, causing redness, tenderness, or discharge; this is usually treated with antibiotics.\nPeritonitis - infection of the fluid and lining inside the abdomen - is the most serious infective complication of peritoneal dialysis. It typically presents with cloudy dialysis fluid, abdominal pain, and sometimes fever, and is treated with antibiotics added directly into the dialysis fluid. Most episodes resolve fully with treatment, but severe or resistant episodes occasionally require the catheter to be removed, with dialysis continuing temporarily by another route until a new peritoneal catheter can safely be placed.\nAn abdominal wall hernia - a bulge where abdominal contents push through a weak point in the muscle wall, most often at the umbilicus, groin, or incision site - can develop over time.\nInjury to the bladder can occur if it is not completely empty at the time of insertion, since the bladder sits close to the path the catheter takes into the pelvis. This is why your bladder will be emptied - either by you passing urine immediately beforehand, as a routine safety step before the procedure begins. If bladder injury does occur, it is usually recognised and managed at the time without long-term consequences.'],
+      ['Very rare but serious (fewer than 1 in 1,000 patients)',
+       'Injury to the bowel or another internal organ (visceral perforation) is a recognised but uncommon complication of this \"blind\" technique, in which the catheter is passed without directly seeing inside the abdomen. Injury to a major blood vessel in the abdominal wall or pelvis, causing significant internal bleeding, is a rare but recognised risk that may require blood transfusion or emergency surgery to control. Heart attack, stroke, or a blood clot travelling to the lungs (pulmonary embolism) are recognised but very rare risks of any procedure performed under anaesthesia and sedation, including this one. Death as a result of the procedure or anaesthesia is possible but very rare'],
+      ['Anaesthesia-related risks',
+       'This procedure is normally performed under local anaesthesia, with sedation if necessary, so risks specific to general anaesthesia (such as chest infection or partial lung collapse from a breathing tube) do not usually apply. If general anaesthesia becomes necessary - for example, if open surgical insertion is required instead - the anaesthetist will explain the additional risks separately beforehand. Sedation itself can occasionally cause a slow or irregular heartbeat, a drop in blood pressure, or slowed breathing; you will be monitored continuously and this would be managed promptly if it occurred.'],
+      ['Expected course after the procedure',
+       'Timing of PD initiation will be based on the patient\'s response following catheter insertion. For many patients, before starting dialysis exchanges, patient will need to be under close follow-up for a period of up to two weeks post procedure, to allow healing and minimize the risk of early leakage']
     ];
-    let pdf='%PDF-1.4\n',offsets=[0];
-    objects.forEach((obj,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${obj}\nendobj\n`;});
-    const xref=pdf.length;
-    pdf+=`xref\n0 7\n0000000000 65535 f \n${offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')}trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
 
-    const url=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));
-    const a=document.createElement('a');
-    a.href=url;
-    a.download='Command-Hospital-CAPD-Catheter-Consent.pdf';
+    for (const [title, body] of risks) {
+      p1Line(title, 45, y, 8.2, 'F4', '0.1 0.2 0.25');
+      y -= 10;
+      for (const p of body.split('\n')) {
+        for (const l of wrapText(p, 110)) {
+          p1Line(l, 45, y, 7.5, 'F1');
+          y -= 9.4;
+        }
+        y -= 2.5;
+      }
+      y -= 2;
+    }
+
+    // Section 4
+    p1Line('4. If This Procedure Is Not Done', 45, y, 8.8, 'F2', '0.10 0.28 0.22');
+    y -= 10.5;
+    const sec4Text = 'Without this access, peritoneal dialysis cannot be performed; you may need haemodialysis instead (which has its own access risks) or dialysis may be delayed, which can be life-threatening and detrimental to your health.';
+    for (const l of wrapText(sec4Text, 110)) {
+      p1Line(l, 45, y, 7.5, 'F1');
+      y -= 9.4;
+    }
+    y -= 3;
+
+    // Section 5 intro
+    p1Line('5. Patient Consent', 45, y, 8.8, 'F2', '0.10 0.28 0.22');
+    y -= 10.5;
+    p1Line('I confirm the doctor has explained, in a language I understand (continued on Page 2):', 45, y, 7.8, 'F1');
+
+    // Page 1 footer
+    p1Stream += '0.4 w 0.7 0.7 0.7 RG 45 28 m 550 28 l S\n';
+    p1Line('Command Hospital (SC), Pune - Department of Nephrology  |  CAPD Catheter Consent Form (Page 1 of 2)', 125, 17, 7, 'F1', '0.4 0.4 0.4');
+
+    // ==================== PAGE 2 ====================
+    let p2Stream = '';
+    const p2Line = (s, x, y, size=8, font='F1', color='0 0 0') => {
+      p2Stream += `BT /${font} ${size} Tf ${color} rg 1 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)} Tm (${pdfEscape(s)}) Tj ET\n`;
+    };
+
+    p2Line('Command Hospital (SC), Pune - Department of Nephrology', 45, 810, 9.5, 'F2', '0.08 0.22 0.18');
+    p2Line('INFORMED CONSENT FOR CAPD CATHETER INSERTION (Page 2 of 2)', 45, 799, 8.5, 'F2');
+    p2Line('Disclaimer: For illustration and educative purpose only', 340, 805, 7.5, 'F3', '0.50 0.25 0.10');
+    p2Stream += '0.6 w 0.65 0.70 0.68 RG 45 792 m 550 792 l S\n';
+
+    let y2 = 780;
+    p2Line('5. Patient Consent Declarations (Continued)', 45, y2, 9, 'F2', '0.10 0.28 0.22');
+    y2 -= 13;
+
+    const decls = [
+      'The nature of my medical condition and the proposed procedure (catheter insertion into my abdomen for peritoneal dialysis) have been explained to me, including that percutaneous insertion is a blind technique carrying specific risks and the potential need for unexpected additional interventions. I acknowledge that unexpected technical challenges, anatomical variations, severe abdominal adhesions from prior surgeries, active bleeding, or failure to safely establish peritoneal access may make the continuation of the percutaneous method hazardous. In such circumstances, I explicitly authorize the operating doctor to immediately convert the procedure to an Open Mini-Laparotomy (surgical incision, fascial dissection, and trans-rectus muscle placement)',
+      'The anaesthetic technique and its risks, and other options (open/laparoscopic insertion, HD) with their risks.',
+      'My prognosis and the risks of not having the procedure; that no outcome is guaranteed despite due professional care.',
+      'That blood transfusion, ICU/HDU observation, or use of removed tissue/blood for diagnosis may be needed, and emergency resuscitation will be given per protocol if required.',
+      'That a doctor other than the named Consultant, possibly under training, may conduct or assist the procedure.',
+      'That my questions were answered in a language I understand, and I may withdraw consent at any time - including after signing - without it affecting my future care.',
+      'That images/video may be recorded to assist my treatment, handled per hospital confidentiality/data-protection policy, and that I am entitled to a copy of this signed form.',
+      'That this consent is valid for 30 days from signature unless my condition changes, I withdraw it, or it is reconfirmed on the day of the procedure (below).'
+    ];
+
+    for (const d of decls) {
+      p2Stream += `0.5 w 0.3 0.3 0.3 RG 45 ${(y2 - 2).toFixed(1)} 8.5 8.5 re S\n`;
+      p2Line('X', 46.5, y2 - 0.5, 7, 'F2', '0.1 0.35 0.25');
+      for (const l of wrapText(d, 104)) {
+        p2Line(l, 58, y2, 7.8, 'F1');
+        y2 -= 9.8;
+      }
+      y2 -= 4.5;
+    }
+
+    y2 -= 2;
+    p2Line('On this basis, I request to proceed with the procedure.', 45, y2, 8.5, 'F2');
+    y2 -= 15;
+
+    const drawTable3Col = (yTop, h, hHdr, c1, c2, c3, val1='', val2='', val3='') => {
+      const w = 505, w1 = 190, w2 = 190, w3 = 125;
+      const x0 = 45, x1 = x0 + w1, x2 = x1 + w2, x3 = x0 + w;
+      p2Stream += `0.5 w 0.6 0.65 0.6 RG ${x0} ${(yTop - h).toFixed(1)} ${w} ${h} re S\n`;
+      p2Stream += `0.94 0.96 0.95 rg ${x0} ${(yTop - hHdr).toFixed(1)} ${w} ${hHdr} re f\n`;
+      p2Stream += `0.5 w 0.6 0.65 0.6 RG ${x0} ${(yTop - hHdr).toFixed(1)} m ${x3} ${(yTop - hHdr).toFixed(1)} l S\n`;
+      p2Stream += `${x1} ${(yTop - h).toFixed(1)} m ${x1} ${yTop.toFixed(1)} l S\n`;
+      p2Stream += `${x2} ${(yTop - h).toFixed(1)} m ${x2} ${yTop.toFixed(1)} l S\n`;
+      p2Line(c1, x0 + 6, yTop - 11, 7.5, 'F2', '0.15 0.25 0.2');
+      p2Line(c2, x1 + 6, yTop - 11, 7.5, 'F2', '0.15 0.25 0.2');
+      p2Line(c3, x2 + 6, yTop - 11, 7.5, 'F2', '0.15 0.25 0.2');
+      if (val1) p2Line(val1, x0 + 6, yTop - h + 9, 7.5, 'F1');
+      if (val2) p2Line(val2, x1 + 6, yTop - h + 9, 7.5, 'F1');
+      if (val3) p2Line(val3, x2 + 6, yTop - h + 9, 7.5, 'F1');
+    };
+
+    const valPtName = pt.name ? pt.name : 'Not specified (Sign on paper)';
+    drawTable3Col(y2, 44, 16, 'Patient Name (block letters)', 'Signature / Left Thumb Impression', 'Date & Time', valPtName, '', pt.date || '2026-09-08');
+    y2 -= 56;
+
+    // Section 6. Capacity
+    p2Line('6. If Patient Lacks Capacity to Consent', 45, y2, 9, 'F2', '0.10 0.28 0.22');
+    y2 -= 12;
+    p2Line('Capacity assessed by (Name/Designation): ____________________   Basis (brief): ____________________', 45, y2, 7.8, 'F1');
+    y2 -= 11;
+    p2Line('1) Spouse/Next of Kin   2) Other relative or adult guardian   3) Unit personnel with C.O. concurrence   4) Commanding officer or Commandant.', 45, y2, 7, 'F3', '0.3 0.3 0.3');
+    y2 -= 14;
+
+    // Table 3: Authorised Representative
+    drawTable3Col(y2, 42, 16, 'Authorised Representative - Name & Relationship', 'Signature', 'Date & Time');
+    y2 -= 54;
+
+    // Section 7. Witness & Doctor's Statement
+    p2Line("7. Witness & Doctor's Statement", 45, y2, 9, 'F2', '0.10 0.28 0.22');
+    y2 -= 11;
+    const witnessTxt = 'We witnessed the patient/representative sign this form freely, having understood its contents. I have explained the procedure, risks, and consent process in a language understood, prior to the procedure.';
+    for (const l of wrapText(witnessTxt, 112)) {
+      p2Line(l, 45, y2, 7.5, 'F1');
+      y2 -= 9.5;
+    }
+    y2 -= 12;
+
+    // Table 4: Witness & Staff & Doctor
+    const hT4 = 82;
+    const w = 505, w1 = 190, w2 = 190, w3 = 125;
+    const x0 = 45, x1 = x0 + w1, x2 = x1 + w2, x3 = x0 + w;
+    p2Stream += `0.5 w 0.6 0.65 0.6 RG ${x0} ${(y2 - hT4).toFixed(1)} ${w} ${hT4} re S\n`;
+    p2Stream += `0.94 0.96 0.95 rg ${x0} ${(y2 - 16).toFixed(1)} ${w} 16 re f\n`;
+    p2Stream += `0.94 0.96 0.95 rg ${x0} ${(y2 - 57).toFixed(1)} ${w} 16 re f\n`;
+    p2Stream += `0.5 w 0.6 0.65 0.6 RG\n`;
+    p2Stream += `${x0} ${(y2 - 16).toFixed(1)} m ${x3} ${(y2 - 16).toFixed(1)} l S\n`;
+    p2Stream += `${x0} ${(y2 - 41).toFixed(1)} m ${x3} ${(y2 - 41).toFixed(1)} l S\n`;
+    p2Stream += `${x0} ${(y2 - 57).toFixed(1)} m ${x3} ${(y2 - 57).toFixed(1)} l S\n`;
+    p2Stream += `${x1} ${(y2 - hT4).toFixed(1)} m ${x1} ${y2.toFixed(1)} l S\n`;
+    p2Stream += `${x2} ${(y2 - hT4).toFixed(1)} m ${x2} ${y2.toFixed(1)} l S\n`;
+
+    p2Line('Witness - Name & Signature', x0 + 6, y2 - 11, 7.5, 'F2');
+    p2Line('Staff - Name & Signature', x1 + 6, y2 - 11, 7.5, 'F2');
+    p2Line('Date & Time', x2 + 6, y2 - 11, 7.5, 'F2');
+
+    p2Line('Doctor - Name (block letters) & Registration No.', x0 + 6, y2 - 52, 7.5, 'F2');
+    p2Line('Signature & Seal', x1 + 6, y2 - 52, 7.5, 'F2');
+    p2Line('Date & Time', x2 + 6, y2 - 52, 7.5, 'F2');
+
+    const valDoc = pt.clinician ? pt.clinician : 'Attending Nephrologist';
+    p2Line(valDoc, x0 + 6, y2 - 74, 7.5, 'F1');
+    p2Line(pt.date || '2026-09-08', x2 + 6, y2 - 74, 7.5, 'F1');
+
+    y2 -= (hT4 + 14);
+
+    // Bottom Notice
+    p2Line('Disclaimer: This tool is for illustration and educative purpose only.', 45, y2, 7.2, 'F2', '0.50 0.25 0.10');
+    y2 -= 9;
+    p2Line('Official statutory legal consent is executed concurrently on Command Hospital Form No. Med/Consent/CAPD-01 as mandated by AFMS regulations.', 45, y2, 6.6, 'F1', '0.35 0.35 0.35');
+
+    // Page 2 footer
+    p2Stream += '0.4 w 0.7 0.7 0.7 RG 45 28 m 550 28 l S\n';
+    p2Line('Command Hospital (SC), Pune - Department of Nephrology  |  CAPD Catheter Consent Form (Page 2 of 2)', 125, 17, 7, 'F1', '0.4 0.4 0.4');
+
+    // Assemble binary objects
+    const scBin = b64ToBin(LOGO_SC_JPG);
+    const nephBin = b64ToBin(LOGO_NEPH_JPG);
+    const qrBin = b64ToBin(QR_PORTAL_JPG);
+
+    const p1Bytes = enc.encode(p1Stream);
+    const p2Bytes = enc.encode(p2Stream);
+
+    const objects = [
+      { id: 1, data: enc.encode('<< /Type /Catalog /Pages 2 0 R >>') },
+      { id: 2, data: enc.encode('<< /Type /Pages /Kids [3 0 R 4 0 R] /Count 2 >>') },
+      { id: 3, data: enc.encode('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R /F4 8 0 R >> /XObject << /ImSC 9 0 R /ImNeph 10 0 R /ImQR 11 0 R >> >> /Contents 12 0 R >>') },
+      { id: 4, data: enc.encode('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R /F4 8 0 R >> >> /Contents 13 0 R >>') },
+      { id: 5, data: enc.encode('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>') },
+      { id: 6, data: enc.encode('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>') },
+      { id: 7, data: enc.encode('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>') },
+      { id: 8, data: enc.encode('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-BoldOblique >>') },
+      {
+        id: 9,
+        data: (() => {
+          const pfx = enc.encode(`<< /Type /XObject /Subtype /Image /Width 140 /Height 140 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${scBin.length} >>\nstream\n`);
+          const sfx = enc.encode('\nendstream');
+          const res = new Uint8Array(pfx.length + scBin.length + sfx.length);
+          res.set(pfx, 0);
+          res.set(scBin, pfx.length);
+          res.set(sfx, pfx.length + scBin.length);
+          return res;
+        })()
+      },
+      {
+        id: 10,
+        data: (() => {
+          const pfx = enc.encode(`<< /Type /XObject /Subtype /Image /Width 140 /Height 140 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${nephBin.length} >>\nstream\n`);
+          const sfx = enc.encode('\nendstream');
+          const res = new Uint8Array(pfx.length + nephBin.length + sfx.length);
+          res.set(pfx, 0);
+          res.set(nephBin, pfx.length);
+          res.set(sfx, pfx.length + nephBin.length);
+          return res;
+        })()
+      },
+      {
+        id: 11,
+        data: (() => {
+          const pfx = enc.encode(`<< /Type /XObject /Subtype /Image /Width 110 /Height 110 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${qrBin.length} >>\nstream\n`);
+          const sfx = enc.encode('\nendstream');
+          const res = new Uint8Array(pfx.length + qrBin.length + sfx.length);
+          res.set(pfx, 0);
+          res.set(qrBin, pfx.length);
+          res.set(sfx, pfx.length + qrBin.length);
+          return res;
+        })()
+      },
+      {
+        id: 12,
+        data: (() => {
+          const pfx = enc.encode(`<< /Length ${p1Bytes.length} >>\nstream\n`);
+          const sfx = enc.encode('\nendstream');
+          const res = new Uint8Array(pfx.length + p1Bytes.length + sfx.length);
+          res.set(pfx, 0);
+          res.set(p1Bytes, pfx.length);
+          res.set(sfx, pfx.length + p1Bytes.length);
+          return res;
+        })()
+      },
+      {
+        id: 13,
+        data: (() => {
+          const pfx = enc.encode(`<< /Length ${p2Bytes.length} >>\nstream\n`);
+          const sfx = enc.encode('\nendstream');
+          const res = new Uint8Array(pfx.length + p2Bytes.length + sfx.length);
+          res.set(pfx, 0);
+          res.set(p2Bytes, pfx.length);
+          res.set(sfx, pfx.length + p2Bytes.length);
+          return res;
+        })()
+      }
+    ];
+
+    objects.sort((a, b) => a.id - b.id);
+    const chunks = [];
+    const header = enc.encode('%PDF-1.4\n');
+    chunks.push(header);
+    let curOffset = header.length;
+    const offsets = new Array(objects.length + 1).fill(0);
+
+    for (const obj of objects) {
+      offsets[obj.id] = curOffset;
+      const prefix = enc.encode(`${obj.id} 0 obj\n`);
+      const suffix = enc.encode('\nendobj\n');
+      chunks.push(prefix);
+      chunks.push(obj.data);
+      chunks.push(suffix);
+      curOffset += prefix.length + obj.data.length + suffix.length;
+    }
+
+    const xrefOffset = curOffset;
+    let xref = `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+    for (let i = 1; i <= objects.length; i++) {
+      xref += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
+    }
+    const trailer = `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+    chunks.push(enc.encode(xref + trailer));
+
+    const blob = new Blob(chunks, {type: 'application/pdf'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Command-Hospital-CAPD-Catheter-Consent.pdf';
     document.body.append(a);
     a.click();
     a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     toast(t('consentRecordDownloaded'));
   }
 
