@@ -54,5 +54,7 @@ node verification/check.cjs
 node verification/verify-consent.cjs
 node verification/verify-mobile.cjs
 node verification/verify-languages.cjs
+node verification/verify-illustrations.cjs
 ```
 
+The illustration checks cover all eight figures in three languages, normal and enlarged text, and desktop/mobile widths, plus callout placement, connected fluid paths, and visible cuff-healing stages. They use the same `PLAYWRIGHT_MODULE` and `CHROME_PATH` settings as `check.cjs`.
