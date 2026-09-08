@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21796c">
+  <meta name="description" content="A calm, interactive guide to percutaneous peritoneal dialysis catheter placement for patients and families.">
+  <title>PD companion — Your catheter journey</title>
+  <style>
+    :root{--ink:#223d38;--muted:#586e68;--teal:#216f61;--deep:#17584d;--mint:#e9f3ed;--line:#dfe7df;--paper:#fffefa;--bg:#f6f7f2;--red:#a53c37;--scale:1;font-size:calc(16px * var(--scale));font-family:"Avenir Next",Avenir,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+    *{box-sizing:border-box}body{margin:0}button,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button,a,select,input{touch-action:manipulation}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,[tabindex="-1"]:focus-visible{outline:3px solid #287bba;outline-offset:4px}button{color:inherit}a{color:var(--teal)}svg{display:block}button svg,a svg{flex-shrink:0}.icon{width:21px;height:21px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}.skip{position:fixed;left:16px;top:12px;transform:translateY(-200%);transition:transform .15s ease;z-index:100;background:white;padding:12px 16px;border:1px solid var(--teal);border-radius:6px}.skip:focus{transform:translateY(0)}
+    .topbar{height:88px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 42px;background:var(--paper);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.brand-mark{height:43px;width:43px;border-radius:15px;background:var(--teal);color:white;display:grid;place-items:center;transform:rotate(-5deg)}.brand-mark svg{width:29px;height:29px;transform:rotate(5deg)}.brand-name{font-size:1.32rem;font-weight:750;letter-spacing:-.7px}.brand-name span{font-weight:450}.brand-sub{font-size:.67rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}.top-actions{display:flex;align-items:center;gap:22px}.font-controls{display:flex;align-items:center;gap:4px}.font-controls button{background:none;border:1px solid transparent;min-width:40px;height:42px;border-radius:8px;font-weight:600}.font-controls button:hover{background:var(--mint)}.font-label{font-size:.72rem;color:var(--muted)}.language{display:flex;gap:8px;align-items:center;border-left:1px solid var(--line);padding-left:21px}.language select{border:0;background:transparent;font-size:.85rem;color:var(--ink);padding:10px 4px;max-width:120px}.team-btn,.outline-btn{border:1px solid #c7d9cf;background:transparent;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:11px 16px;border-radius:9px;font-size:.85rem;font-weight:600;min-height:44px}.team-btn:hover,.outline-btn:hover{background:var(--mint)}
+    .shell{max-width:1510px;margin:auto;padding:32px 42px 22px}.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:27px}.eyebrow{font-size:.69rem;font-weight:750;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);display:flex;align-items:center;gap:7px}.eyebrow::before{content:"";width:6px;height:6px;background:#6d9c7f;border-radius:50%}h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:2.45rem;letter-spacing:-1.1px;line-height:1.15;margin:10px 0 9px}.welcome p{color:var(--muted);font-size:.91rem;margin:0;line-height:1.6}.pace{font-size:.76rem;color:var(--muted);display:flex;gap:7px;align-items:center;white-space:nowrap;padding-bottom:6px}.pace .icon{width:17px;height:17px}.layout{display:grid;grid-template-columns:235px minmax(0,1fr) 256px;align-items:start;gap:24px}
+    .journey{padding:22px 0 0}.section-heading{font-size:.7rem;text-transform:uppercase;letter-spacing:1.4px;font-weight:750;margin:0}.journey-heading{display:flex;align-items:center;justify-content:space-between;padding-right:12px}.step-total{font-size:.69rem;background:#e8ede4;padding:5px 9px;border-radius:20px;color:#53664f}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.73rem;margin:20px 12px 9px 0}.progress{height:5px;background:#dfe7dc;border-radius:9px;margin-right:12px;overflow:hidden}.progress-fill{height:100%;background:var(--teal);transition:width .3s}.steps{list-style:none;margin:25px 0 20px;padding:0}.steps li{position:relative;margin:0 0 5px}.steps li:not(:last-child)::after{content:"";position:absolute;left:25px;top:49px;width:1px;height:15px;background:#d4ded3}.step{width:100%;background:transparent;border:1px solid transparent;border-radius:10px;padding:11px 10px;display:flex;align-items:center;gap:12px;text-align:left;min-height:60px}.step:hover{background:#edf0e8}.step.active{background:#e4efe5;border-color:#ccddca}.step-number{width:30px;height:30px;border:1px solid #c5d2c5;border-radius:50%;display:grid;place-items:center;font-size:.76rem;background:var(--bg);flex-shrink:0;color:var(--muted)}.active .step-number{background:var(--teal);border-color:var(--teal);color:white}.done .step-number{background:#dcecdf;color:var(--teal);border-color:#bfd4c0}.step-name{font-size:.81rem;line-height:1.35;font-weight:550}.step-sub{display:block;font-size:.67rem;font-weight:400;color:var(--muted);margin-top:3px}.active .step-name{font-weight:700;color:var(--deep)}.step-number .icon{width:16px;height:16px}.caregiver-toggle{margin:27px 10px 0 0;border-top:1px solid var(--line);padding-top:23px}.caregiver-title{display:flex;gap:9px;font-size:.83rem;font-weight:650;align-items:center}.switch-row{display:flex;gap:10px;align-items:center;margin-top:12px;font-size:.75rem;color:var(--muted);cursor:pointer}.switch-row input{appearance:none;width:35px;height:21px;background:#b9c5b9;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0;margin:0}.switch-row input::after{content:"";width:15px;height:15px;border-radius:50%;background:white;position:absolute;left:3px;top:3px;transition:transform .2s}.switch-row input:checked{background:var(--teal)}.switch-row input:checked::after{transform:translateX(14px)}.journey-tip{font-size:.73rem;line-height:1.6;color:var(--muted);padding:0 12px 0 0;margin-top:23px}.reset-btn{border:0;border-bottom:1px solid #a8bcb0;background:transparent;color:var(--muted);font-size:.72rem;padding:9px 0;min-height:36px}
+    .stage{background:var(--paper);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 4px 15px #293b2803}.stage-top{padding:23px 26px 0;display:flex;align-items:center;justify-content:space-between;gap:10px}.chapter{display:inline-flex;gap:8px;align-items:center;font-size:.69rem;font-weight:650;color:var(--teal)}.chapter .icon{width:17px;height:17px}.listen{background:#f1f5ee;border:0;border-radius:7px;display:flex;gap:7px;align-items:center;font-size:.73rem;padding:9px 11px;min-height:38px}.listen:hover{background:#e2eddf}.listen .icon{width:16px;height:16px}.stage-intro{padding:0 26px}.stage h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:1.82rem;line-height:1.2;letter-spacing:-.5px;margin:16px 0 9px}.stage-desc{font-size:.89rem;line-height:1.65;color:var(--muted);margin:0 0 20px}.illustration{margin:0 20px;background:#f0f5ee;border:1px solid #e4ebe0;border-radius:12px;position:relative;overflow:hidden}.illustration::before{content:"";position:absolute;width:210px;height:210px;border:1px solid #e0e9dc;border-radius:50%;left:calc(50% - 105px);top:40px;pointer-events:none}.diagram-label{position:absolute;top:15px;left:16px;font-size:.61rem;letter-spacing:1.3px;text-transform:uppercase;color:#5c7666;z-index:1}.diagram-svg{width:100%;height:290px;position:relative}.diagram-svg text{font-family:"Avenir Next","Segoe UI",sans-serif;fill:#3d5e51;font-size:12px}.diagram-svg .caption{font-size:10px;fill:#63766b}.diagram-svg .label-bg{fill:#fffefa;stroke:#dce5d9;stroke-width:1}.diagram-svg .leader{fill:none;stroke:#9bae9c;stroke-width:1.2}.diagram-note{display:flex;justify-content:center;align-items:center;gap:6px;font-size:.65rem;color:#5d7163;text-align:center;margin:0;padding:0 12px 13px;position:relative}.diagram-note .icon{width:13px;height:13px}.hotspots{display:flex;justify-content:center;gap:7px;padding:0 12px 12px;position:relative;flex-wrap:wrap}.hotspot{border:1px solid #ccdbca;border-radius:20px;background:#fffefa;font-size:.67rem;padding:8px 11px;min-height:34px}.hotspot[aria-pressed="true"]{background:var(--teal);color:white;border-color:var(--teal)}.detail-note{margin:14px 25px 18px;display:flex;align-items:flex-start;gap:10px;font-size:.79rem;line-height:1.6;color:var(--muted);min-height:44px}.detail-note .icon{width:18px;height:18px;color:var(--teal);margin-top:2px}.detail-note strong{color:var(--ink);font-weight:650}.key-points{list-style:none;padding:0 26px;margin:15px 0 22px;display:grid;gap:12px}.key-points li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;line-height:1.5}.key-points .icon{color:var(--teal);width:18px;height:18px;margin-top:2px}.quiz{border-top:1px solid var(--line);background:#fbfcf7;padding:20px 25px}.quiz-label{font-size:.66rem;letter-spacing:1px;text-transform:uppercase;display:flex;gap:7px;align-items:center;font-weight:650;color:var(--teal);margin-bottom:9px}.quiz-label .icon{width:16px;height:16px}.quiz h3{font-size:.88rem;font-weight:600;margin:0 0 13px;line-height:1.5}.answers{display:grid;grid-template-columns:1fr 1fr;gap:9px}.answer{border:1px solid #d7e1d2;border-radius:8px;background:white;padding:12px;display:flex;text-align:left;align-items:center;gap:9px;font-size:.78rem;line-height:1.4;min-height:52px}.answer:hover{border-color:var(--teal);background:#f0f6ed}.radio-dot{border:1.5px solid #bacaba;border-radius:50%;width:16px;height:16px;flex-shrink:0;display:grid;place-items:center}.answer.selected{border-color:var(--teal);background:#eaf4e8}.answer.selected .radio-dot{border-color:var(--teal);background:var(--teal)}.answer.selected .radio-dot::after{content:"";height:6px;width:6px;border-radius:50%;background:white}.answer.retry{background:#fff6e6;border-color:#b98a38}.feedback{font-size:.8rem;line-height:1.6;margin-top:12px;color:var(--deep)}.feedback.retry-text{color:#795617}.stage-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px}.back-btn{display:flex;gap:8px;align-items:center;min-height:45px;border:0;background:transparent;font-size:.79rem;padding:10px 3px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:var(--teal);color:white;border:1px solid var(--teal);border-radius:9px;padding:13px 21px;font-size:.82rem;font-weight:600;min-height:46px}.primary:hover{background:var(--deep)}.nav-note{font-size:.66rem;color:var(--muted);text-align:center}.primary .icon,.back-btn .icon{width:17px;height:17px}.play-controls{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 25px 15px}.play-left{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.play-controls .outline-btn{font-size:.71rem;padding:7px 10px;min-height:36px}.sequence-text{font-size:.73rem;color:var(--muted);line-height:1.5}.sequence-steps{display:flex;gap:5px}.sequence-steps button{height:34px;width:34px;border:1px solid #cadac7;border-radius:50%;background:white;font-size:.74rem}.sequence-steps button[aria-pressed="true"]{background:var(--teal);color:white}.route{stroke-dasharray:5 7;stroke-linecap:round}.route.animating{animation:route 4s linear infinite}@keyframes route{to{stroke-dashoffset:-48}}
+    .right-panel{padding-top:22px}.right-panel>.section-heading{margin:0 0 19px 1px}.status-card{background:#eef2e9;border:1px solid #e1e7d9;border-radius:12px;padding:19px;margin-bottom:13px}.status-icon{height:34px;width:34px;border-radius:50%;background:#e0eadb;color:#436e4d;display:grid;place-items:center;margin-bottom:11px}.status-icon .icon{height:19px;width:19px}.status-card h3{font-size:.82rem;margin:0 0 7px;font-weight:650}.status-card p{font-size:.78rem;line-height:1.65;color:var(--muted);margin:0}.status-card:nth-of-type(2){background:#edf3f3;border-color:#dce7e4}.status-card:nth-of-type(2) .status-icon{background:#dfeceb;color:#41776f}.status-card:nth-of-type(3){background:#f6f1e8;border-color:#eae3d5}.status-card:nth-of-type(3) .status-icon{background:#efe5d3;color:#8a7043}.reassurance{display:flex;align-items:flex-start;gap:9px;padding:14px 4px 4px;color:var(--muted);font-size:.73rem;line-height:1.6}.reassurance .icon{width:18px;height:18px;color:var(--teal);margin-top:2px}.caregiver-card{background:#edf0fa;border:1px solid #d7def0;border-radius:12px;padding:17px;margin-top:18px}.caregiver-card h3{font-size:.82rem;display:flex;align-items:center;gap:8px;margin:0 0 9px;color:#4b5880}.caregiver-card p{font-size:.77rem;line-height:1.65;margin:0;color:#53617b}.caregiver-card button{margin-top:13px;font-size:.72rem;color:#4b5880}.urgent-link{border:0;background:transparent;display:flex;align-items:center;gap:8px;color:var(--red);font-size:.74rem;padding:12px 0;margin-top:16px;min-height:44px;text-decoration:underline;text-underline-offset:4px}
+    .reminder{margin:28px 0 27px;padding:16px 20px;border:1px solid #dce6d7;border-radius:11px;background:#edf3e9;display:flex;align-items:center;gap:12px;font-size:.8rem;line-height:1.6}.reminder>.icon{color:var(--teal);width:22px;height:22px}.reminder strong{font-weight:650}.reminder button{margin-left:auto;border:0;background:transparent;white-space:nowrap;color:var(--teal);display:flex;gap:7px;align-items:center;font-size:.77rem;padding:8px}.resources-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.resources-head h2{font-size:.95rem;font-weight:650;margin:0}.resources-head>span{font-size:.7rem;color:var(--muted)}.resources{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}.resource{background:var(--paper);border:1px solid var(--line);border-radius:11px;display:flex;gap:14px;align-items:center;text-align:left;padding:19px;min-height:91px}.resource:hover{border-color:#88ad92;background:#fcfff9}.resource-icon{height:43px;width:40px;border-radius:8px;background:#edf2e6;display:grid;place-items:center;color:#55724c;flex-shrink:0}.resource:nth-child(2) .resource-icon{background:#e9f0ef;color:#50847c}.resource:nth-child(3) .resource-icon{background:#f5ecdf;color:#927851}.resource:nth-child(4) .resource-icon{background:#e8f0ec;color:#286b5e}.resource:nth-child(5) .resource-icon{background:#edf2fa;color:#355a8a}.resource-title{font-size:.81rem;font-weight:650;display:block}.resource-sub{font-size:.68rem;color:var(--muted);display:block;margin-top:6px}.resource>.icon{width:17px;height:17px;margin-left:auto;color:var(--muted)}.footer{border-top:1px solid var(--line);margin-top:28px;padding-top:19px;display:flex;justify-content:space-between;align-items:flex-start;gap:25px;font-size:.65rem;line-height:1.7;color:var(--muted)}.footer p{margin:0;max-width:810px}.footer-actions{display:flex;align-items:center;gap:16px;flex-shrink:0}.footer button{border:0;padding:4px 0;background:transparent;font-size:.65rem;text-decoration:underline;text-underline-offset:3px}.offline{display:flex;gap:5px;align-items:center;white-space:nowrap}.offline .icon{width:13px;height:13px}.warning-list{list-style:none;margin:0;padding:0;display:grid;gap:9px}.warning-list li{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid #ead5cd;border-radius:8px;background:#fff5ee;font-size:.82rem;line-height:1.5;color:#843c35}.warning-list .icon{width:19px;height:19px;margin-top:2px}.warnings{padding:0 25px 20px}.urgent-call{margin:15px 0 0;font-size:.81rem;line-height:1.6;color:#843c35}.urgent-call button{margin-top:10px;color:var(--red);border-color:#d8aaa0}.completion{padding:20px 24px;text-align:center;background:#edf5e9;border:1px solid #cbdcc5;border-radius:12px;margin-bottom:18px}.completion h2{font-family:Georgia,serif;font-weight:400;margin:7px 0;font-size:1.6rem}.completion p{font-size:.85rem;line-height:1.7}.completion .icon{margin:auto;width:34px;height:34px;color:var(--teal)}
+    dialog{border:1px solid var(--line);border-radius:17px;padding:0;background:var(--paper);color:var(--ink);width:min(600px,calc(100% - 30px));max-height:90dvh;box-shadow:0 20px 90px #14362726}dialog.gallery-modal,dialog.consent-modal{width:min(940px,calc(100% - 24px));max-height:94dvh}dialog::backdrop{background:#19372e60;backdrop-filter:blur(3px)}.modal-header{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:24px 26px 17px;border-bottom:1px solid var(--line)}.modal-header h2{font-family:Georgia,serif;font-size:1.6rem;font-weight:400;margin:0}.close{border:0;background:#edf2e9;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;flex-shrink:0}.modal-body{padding:22px 26px;font-size:.89rem;line-height:1.7}.modal-body p:first-child{margin-top:0}.modal-body h3{font-size:.93rem;margin:23px 0 9px}.modal-body ul{padding-left:20px}.modal-body li{margin-bottom:10px}.modal-body a{overflow-wrap:anywhere}.modal-footer{display:flex;gap:10px;justify-content:flex-end;padding:18px 26px;border-top:1px solid var(--line)}.contact-box{background:var(--mint);border:1px solid #d2e2cc;border-radius:10px;padding:15px 18px;line-height:1.8}.contact-box strong{display:block}.contact-box a{font-size:1.15rem}.note-box{padding:13px 16px;background:#f6f0e4;border-radius:9px;font-size:.81rem;line-height:1.65}.print-check{list-style:none;padding-left:0!important}.print-check li{display:flex;gap:10px;align-items:flex-start}.print-check input{width:18px;height:18px;flex-shrink:0;margin-top:5px;accent-color:var(--teal)}.print-check label{cursor:pointer}.print-footer{font-size:.7rem;line-height:1.6;border-top:1px solid var(--line);margin-top:22px;padding-top:12px;color:var(--muted)}#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);padding:13px 20px;border-radius:10px;background:#234e42;color:white;box-shadow:0 5px 25px #12342622;z-index:20;font-size:.84rem;max-width:calc(100% - 32px);width:max-content;line-height:1.5}
+    .gallery-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}.gallery-frame{position:relative;border-radius:12px;overflow:hidden;border:1px solid #d8e2d4;background:#1b2a26}.gallery-img{width:100%;height:auto;aspect-ratio:16/10;object-fit:contain;background:#0f1a16;display:block}.gallery-badge{position:absolute;top:12px;left:12px;background:#17473dbb;color:#e8f4ee;padding:4px 10px;border-radius:20px;font-size:.68rem;font-weight:650;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(4px);border:1px solid #37685e}.gallery-info{display:flex;flex-direction:column;gap:10px}.gallery-counter{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--teal);font-weight:700}.gallery-title{font-size:1.18rem;font-family:Georgia,serif;font-weight:400;margin:0;line-height:1.3}.gallery-sub{font-size:.78rem;color:var(--muted);margin:0;line-height:1.4}.gallery-tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}.inst-tag{background:#eaf2e8;border:1px solid #d3e2cf;border-radius:14px;padding:3px 9px;font-size:.68rem;color:#355845;font-weight:600}.gallery-card{background:#f8faf6;border:1px solid #e1e9dd;border-radius:10px;padding:11px 14px}.gallery-card h4{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;margin:0 0 5px;color:var(--teal);display:flex;align-items:center;gap:6px;font-weight:700}.gallery-card h4 .icon{width:14px;height:14px}.gallery-card p{font-size:.78rem;line-height:1.55;margin:0;color:var(--ink)}.gallery-card.correlation{background:#edf4f2;border-color:#d4e5e1}.gallery-card.correlation h4{color:var(--deep)}.gallery-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}.gallery-pills{display:flex;gap:4px;overflow-x:auto;padding:2px;scrollbar-width:none}.gallery-pill{width:28px;height:28px;border-radius:50%;border:1px solid #c9d8c7;background:white;font-size:.73rem;display:grid;place-items:center;font-weight:600}.gallery-pill.active{background:var(--teal);color:white;border-color:var(--teal)}.gallery-note{display:inline-flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted);margin-right:auto}.gallery-note .icon{width:15px;height:15px;color:var(--teal)}
+    .consent-stepper{display:flex;gap:6px;overflow-x:auto;padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid var(--line);scrollbar-width:none}.consent-step-btn{border:1px solid #c9d8c7;background:white;padding:7px 13px;border-radius:20px;font-size:.72rem;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px}.consent-step-btn.active{background:var(--teal);color:white;border-color:var(--teal)}.consent-step-btn.done{background:#e7f2eb;color:#286b5e;border-color:#b8dac4}.consent-badge{display:inline-block;background:#eef5ee;border:1px solid #d2e4d4;color:var(--deep);font-size:.67rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:14px;margin-bottom:10px}.consent-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.consent-card{background:#f9fbf8;border:1px solid #e0eae0;border-radius:10px;padding:13px 15px}.consent-card h4{font-size:.8rem;font-weight:700;color:var(--deep);margin:0 0 6px;display:flex;align-items:center;gap:7px}.consent-card p{font-size:.78rem;line-height:1.55;margin:0;color:var(--ink)}.risk-card-immediate{background:#fffaf2;border-color:#eeddc3}.risk-card-immediate h4{color:#8f5615}.risk-card-delayed{background:#fdf4f2;border-color:#eed3cf}.risk-card-delayed h4{color:#9e342a}.checkin-box{margin-top:20px;padding:16px 18px;background:#edf5ee;border:1px solid #c9decb;border-radius:11px;display:flex;flex-direction:column;gap:12px}.checkin-box p{font-size:.84rem;font-weight:650;margin:0;color:var(--deep)}.checkin-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}.patient-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0;background:#f8faf6;padding:16px;border:1px solid #dfe9de;border-radius:11px}.patient-form-grid label{font-size:.73rem;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:5px}.patient-form-grid input{border:1px solid #cbd9cc;border-radius:6px;padding:8px 10px;font-size:.85rem;background:white}.decl-list{list-style:none;padding:0;margin:15px 0;display:grid;gap:9px}.decl-item{display:flex;gap:11px;align-items:flex-start;background:white;border:1px solid #d9e5d8;border-radius:8px;padding:11px 14px;font-size:.8rem;line-height:1.5}.decl-item input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}.decl-item label{cursor:pointer}.signature-preview{background:#fff;border:1px dashed #b2cbb5;border-radius:10px;padding:15px;margin:15px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}.sig-line{border-top:1px solid #444;margin-top:35px;padding-top:4px;font-size:.7rem;color:var(--muted)}
+    @media(min-width:1450px){.layout{grid-template-columns:255px minmax(0,1fr) 280px;gap:30px}.diagram-svg{height:315px}}
+    @media(max-width:1150px){.shell{padding:28px 24px 20px}.topbar{padding:0 24px}.layout{grid-template-columns:205px minmax(0,1fr);gap:21px}.right-panel{grid-column:2;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:0}.right-panel>.section-heading{grid-column:1/-1;margin:0}.status-card{margin:0;padding:15px}.reassurance,.urgent-link{grid-column:1/-1;margin:0}.caregiver-card{grid-column:1/-1}.journey{grid-row:1/3}.stage h2{font-size:1.7rem}.top-actions{gap:12px}.pace{display:none}.status-card p{font-size:.75rem}}
+    @media(max-width:760px){.topbar{height:auto;min-height:81px;padding:15px 18px;gap:10px;flex-wrap:wrap}.brand-name{font-size:1.13rem}.brand-sub{font-size:.58rem}.brand-mark{width:36px;height:36px;border-radius:11px}.top-actions{gap:4px}.top-actions>.team-btn{display:none}.font-label{display:none}.font-controls button{min-width:32px;padding:3px}.language{padding-left:9px;gap:2px}.language .icon{width:17px;height:17px}.language select{font-size:.76rem;max-width:87px}.shell{padding:23px 16px 20px}.welcome{margin-bottom:20px}.welcome h1{font-size:2rem}.welcome p{font-size:.83rem}.eyebrow{font-size:.63rem}.layout{display:flex;flex-direction:column;gap:20px}.journey{width:100%;padding:0}.journey-heading{padding:0}.progress-meta{margin-top:13px;margin-right:0}.progress{margin:0}.steps{display:flex;overflow-x:auto;gap:8px;margin:15px -16px 0;padding:0 16px 8px;scrollbar-width:thin}.steps li{flex-shrink:0;width:182px;margin:0}.steps li::after{display:none}.step{background:var(--paper);border-color:var(--line);height:100%;gap:9px;padding:10px}.step-sub{font-size:.64rem}.caregiver-toggle{border:0;padding:0;margin:12px 0 0;display:flex;align-items:center;justify-content:space-between;gap:10px}.caregiver-title{font-size:.76rem}.switch-row{margin:0}.journey-tip{display:none}.reset-btn{display:inline-block;margin-top:8px}.center{width:100%}.stage-top{padding:18px 19px 0}.stage-intro{padding:0 19px}.stage h2{font-size:1.65rem}.stage-desc{font-size:.87rem}.illustration{margin:0 12px}.diagram-svg{height:auto;min-height:240px}.detail-note{margin:14px 19px 17px}.quiz{padding:18px 19px}.answers{grid-template-columns:1fr}.stage-nav{margin-top:13px}.nav-note{display:none}.right-panel{width:100%;display:grid;grid-template-columns:1fr;gap:9px}.status-card{display:grid;grid-template-columns:34px 1fr;column-gap:12px;padding:15px}.status-icon{grid-row:1/3;margin:0}.status-card h3{margin:0 0 5px}.status-card p{font-size:.79rem}.reassurance{padding:10px 3px}.caregiver-card{margin-top:4px}.reminder{margin:21px 0 25px;padding:14px;font-size:.75rem;align-items:flex-start;flex-wrap:wrap;gap:10px}.reminder>div{flex:1;min-width:200px}.reminder button{margin-left:31px;padding:0;min-height:32px}.resources{grid-template-columns:1fr;gap:9px}.resources-head>span{font-size:.63rem}.resource{padding:15px;min-height:80px}.footer{flex-direction:column;gap:13px}.footer-actions{justify-content:space-between;width:100%}.warnings{padding:0 19px 20px}.play-controls{padding:0 19px 15px;flex-wrap:wrap}.modal-body{padding:19px}.modal-header{padding:20px 19px 15px}.modal-footer{padding:15px 19px;flex-wrap:wrap}.gallery-grid{grid-template-columns:1fr;gap:14px}.gallery-nav{justify-content:center}.gallery-pills{order:-1;width:100%;justify-content:center}.consent-grid{grid-template-columns:1fr}.patient-form-grid{grid-template-columns:1fr}.signature-preview{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    @media print{@page{size:A4;margin:16mm}body{background:white;color:#172e26;font-size:11pt}body>*:not(dialog){display:none!important}dialog:not([open]){display:none!important}dialog[open]{position:static;display:block;max-height:none;width:100%;border:0;box-shadow:none;margin:0;padding:0;overflow:visible}dialog::backdrop{display:none}.modal-header,.modal-body{padding:0}.modal-header{padding-bottom:14px}.modal-header h2{font-size:22pt}.close,.modal-footer,.no-print{display:none!important}.modal-body{font-size:11pt}.modal-body h3{font-size:12pt;margin:16px 0 8px}.modal-body li{margin-bottom:6px;break-inside:avoid}.print-footer{font-size:9pt}.contact-box,.note-box{border:1px solid #a9b7a5;background:white}a{color:inherit;text-decoration:none}.print-check input{appearance:none;border:1px solid #555;width:13px;height:13px}.print-check input:checked::after{content:"✓";font-size:11px;display:block;line-height:11px}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#phase-title">Skip to this step</a>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" data-icon="sprout"></span><div><div class="brand-name">PD <span>companion</span></div><div class="brand-sub" data-i18n="brandSub"></div></div></div>
+    <div class="top-actions">
+      <div class="font-controls"><span class="font-label" data-i18n="textSize"></span><button id="font-down" aria-label="Decrease text size">A−</button><button id="font-up" aria-label="Increase text size" style="font-size:1.14rem">A+</button></div>
+      <label class="language"><span data-icon="globe"></span><span class="sr-only" data-i18n="language"></span><select id="language" aria-label="Language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="mr">मराठी</option></select></label>
+      <button class="team-btn" data-action="team"><span data-icon="message"></span><span data-i18n="askTeam"></span></button>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="welcome"><div><div class="eyebrow" data-i18n="eyebrow"></div><h1 data-i18n="welcomeTitle"></h1><p data-i18n="welcomeBody"></p></div><div class="pace"><span data-icon="leaf"></span><span data-i18n="pace"></span></div></section>
+    <div class="layout">
+      <aside class="journey" aria-label="Your journey">
+        <div class="journey-heading"><h2 class="section-heading" data-i18n="journey"></h2><span class="step-total" data-i18n="eightSteps"></span></div>
+        <div class="progress-meta"><span id="progress-label"></span><span id="progress-percent"></span></div>
+        <div class="progress" role="progressbar" aria-label="Steps completed" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+        <nav aria-label="Journey steps"><ol class="steps" id="journey-steps"></ol></nav>
+        <div class="caregiver-toggle"><div class="caregiver-title"><span data-icon="people"></span><span data-i18n="learningTogether"></span></div><label class="switch-row"><input id="caregiver-toggle" type="checkbox" role="switch"><span data-i18n="caregiverMode"></span></label></div>
+        <p class="journey-tip" data-i18n="journeyTip"></p><button class="reset-btn" data-action="reset" data-i18n="startAgain"></button>
+      </aside>
+      <div class="center">
+        <section class="completion" id="completion" hidden tabindex="-1"></section>
+        <article class="stage" aria-labelledby="phase-title">
+          <div class="stage-top"><span class="chapter" id="chapter"></span><button class="listen" id="listen" aria-pressed="false"></button></div>
+          <div class="stage-intro"><h2 id="phase-title" tabindex="-1"></h2><p class="stage-desc" id="phase-description"></p></div>
+          <div id="visual-content"></div>
+          <section class="quiz" aria-labelledby="quiz-question"><div class="quiz-label"><span data-icon="spark"></span><span data-i18n="littleCheck"></span></div><h3 id="quiz-question"></h3><div class="answers" id="answers" role="group" aria-labelledby="quiz-question"></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div></section>
+        </article>
+        <nav class="stage-nav" aria-label="Step navigation"><button class="back-btn" id="back"><span data-icon="left"></span><span data-i18n="back"></span></button><span class="nav-note" data-i18n="noPressure"></span><button class="primary" id="next"></button></nav>
+      </div>
+      <aside class="right-panel" id="right-panel" aria-label="What to expect"></aside>
+    </div>
+    <section class="reminder"><span data-icon="message"></span><div><strong data-i18n="reminderTitle"></strong> <span data-i18n="reminderBody"></span></div><button data-action="team"><span data-i18n="askTeam"></span><span data-icon="right"></span></button></section>
+    <section aria-labelledby="resources-title"><div class="resources-head"><h2 id="resources-title" data-i18n="resources"></h2><span data-i18n="resourcesSub"></span></div><div class="resources">
+      <button class="resource" data-action="summary"><span class="resource-icon" data-icon="file"></span><span><span class="resource-title" data-i18n="summaryTitle"></span><span class="resource-sub" data-i18n="summarySub"></span></span><span data-icon="download"></span></button>
+      <button class="resource" data-action="checklist"><span class="resource-icon" data-icon="clipboard"></span><span><span class="resource-title" data-i18n="checklistTitle"></span><span class="resource-sub" data-i18n="checklistSub"></span></span><span data-icon="printer"></span></button>
+      <button class="resource" data-action="caregiver"><span class="resource-icon" data-icon="people"></span><span><span class="resource-title" data-i18n="caregiverTitle"></span><span class="resource-sub" data-i18n="caregiverSub"></span></span><span data-icon="right"></span></button>
+      <button class="resource" data-action="gallery-prompt"><span class="resource-icon" data-icon="camera"></span><span><span class="resource-title" data-i18n="galleryTitle"></span><span class="resource-sub" data-i18n="gallerySub"></span></span><span data-icon="right"></span></button>
+      <button class="resource" data-action="consent-tool"><span class="resource-icon" data-icon="shield"></span><span><span class="resource-title" data-i18n="consentTitle"></span><span class="resource-sub" data-i18n="consentSub"></span></span><span data-icon="right"></span></button>
+    </div></section>
+    <footer class="footer"><p data-i18n="disclaimer"></p><div class="footer-actions"><button data-action="sources" data-i18n="sources"></button><span class="offline"><span data-icon="shield"></span><span data-i18n="offline"></span></span></div></footer>
+  </main>
+  <dialog id="modal" aria-labelledby="modal-title"><div class="modal-header"><h2 id="modal-title"></h2><button class="close" id="close-modal" aria-label="Close dialog"></button></div><div class="modal-body" id="modal-body"></div><div class="modal-footer" id="modal-footer"></div></dialog>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <script>
+  /* CENTER CONFIGURATION: replace these fields only after local clinical review.
+     This app does not store patient information, collect consent, or send data.
+     Keep contact numbers as strings; blanks show an honest request to obtain them. */
+  const CLINIC_CONFIG = {
+    centerName: 'Your PD care team',
+    phone: '',
+    afterHoursPhone: '',
+    fastingInstructions: 'Ask your team when to stop eating and drinking. Do not guess the timing.',
+    medicationInstructions: 'Bring your medicine list. Ask which medicines to take; do not stop them on your own.',
+    bowelInstructions: 'Follow the bowel plan your team gives you. Ask about emptying your bladder before the procedure.',
+    arrivalInstructions: 'Confirm your arrival time, what to bring, and who can come with you.',
+    dischargeInstructions: 'Ask when you can go home. If you have sedation, arrange an adult to take you home and follow the team’s after-sedation instructions.',
+    dialysisStartInstructions: 'For a planned start, allow at least 2 weeks of healing when possible. If dialysis is needed sooner, your team will make a special plan. Do not start exchanges on your own.',
+    dressingInstructions: 'Keep the new dressing dry and in place. Let your PD team handle early dressing changes. Contact them if it becomes wet, dirty, loose, or blood-soaked.',
+    dailyCareInstructions: 'Once healed and trained, check the exit site each day. Clean it on your team’s schedule, and after showering or sweaty exercise. Use only the products and any prescribed ointment they teach you to use.',
+    activityInstructions: 'Avoid straining or heavy lifting while healing. Ask your team about work, exercise, and lifting limits. Follow their plan to prevent constipation.',
+    bathingInstructions: 'Keep the healing site dry. Shower only when your PD team says it is safe; ask them separately about baths and swimming.',
+    reviewedBy: '',
+    reviewDate: ''
+  };
+
+  // Translation contract: duplicate the entire en object (including phases, diagrams,
+  // handouts, and UI strings) into hi or mr, then supply reviewed local config text.
+  // null languages stay in English and explicitly report that translation is unavailable.
+  const TRANSLATIONS = {
+    en: {
+      brandSub:'A little clarity. A little comfort.',textSize:'Text size',language:'Language',askTeam:'Ask your care team',
+      eyebrow:'Your guide to peritoneal dialysis',welcomeTitle:'A small tube. A new beginning.',welcomeBody:'Understand your catheter, know what to expect, and take it one step at a time.',pace:'Your journey, at your pace',
+      journey:'Your journey',eightSteps:'8 steps',progress:'{n} of 8 completed',learningTogether:'Learning together?',caregiverMode:'Show caregiver tips',journeyTip:'You can revisit any step or jump ahead. There is no test to pass.',startAgain:'Start a fresh journey',littleCheck:'A little check-in',back:'Back',next:'Next step',finish:'Finish this journey',review:'Review from the start',noPressure:'Take your time. There’s no rush.',listen:'Listen',stop:'Stop audio',
+      reminderTitle:'You don’t have to figure this out alone.',reminderBody:'Use this guide to start a conversation with your PD nurse or kidney doctor.',resources:'A little support to take home',resourcesSub:'For you and the people who care for you',summaryTitle:'Your journey at a glance',summarySub:'One-page summary · Download PDF',checklistTitle:'Your exit-site care checklist',checklistSub:'Simple reminders · Print & keep',caregiverTitle:'A guide for your caregiver',caregiverSub:'Small ways to help · Care card',galleryTitle:'Clinical photo reference',gallerySub:'9 real procedure steps · Clinical reference',clinicalPhotosBtn:'Real procedure photos (9)',gallerySensitiveTitle:'Clinical Reference: Real Procedure Photos',gallerySensitiveIntro:'This section contains 9 real clinical photographs of percutaneous PD catheter placement, illustrating needle access, fluid hydrodissection, guidewire feeding, dilator & peel-away sheath advancement, catheter delivery, and fluid flow testing.',gallerySensitiveAudience:'It is intended for clinical training, healthcare professionals, and patients or family members who wish to see actual procedure steps.',gallerySensitiveWarning:'Because these photographs depict sterile drapes, needles, and a small incision, you can choose whether you wish to view real clinical images or remain with the calming illustrated guide.',viewPhotos:'View clinical photos (9 steps)',keepIllustrated:'Keep illustrated guide',consentTitle:'Informed Consent & Decision Companion',consentSub:'Interactive disclosure, quiz & verified record',consentQuickBtn:'Informed Consent Companion',consentCtaBtn:'Start Informed Consent Companion',consentModalTitle:'Informed Consent & Shared Decision Companion',consentReviewBtn:'Review this section again',consentProceedBtn:'I understand, proceed',consentStartBtn:'Begin Companion',consentDownloadBtn:'Download Discussion Record (A4 PDF)',consentPrintBtn:'Print Hospital Record',consentRecordDownloaded:'Your Informed Discussion Record (PDF) has been downloaded.',disclaimer:'This tool is for general education only. It does not replace a conversation with your nephrologist or PD nurse, and it is not medical advice.',sources:'About this guide & sources',offline:'Works offline',expect:'What to expect',caregiverLabel:'For your caregiver',caregiverOpen:'Open caregiver care card',urgentLink:'When to call your PD team',reassurance:'It’s okay to ask the same question again. Your comfort and understanding matter.',
+      chapter:'STEP {n} OF 8 · {category}',completed:'Completed',current:'You are here',notCompleted:'Not yet completed',
+      diagramLabel:'A simple look inside',diagramNote:'Illustration only · Not to scale · Placement varies',diagramAlt:'Simple cutaway of the abdomen. A soft tube runs from the skin exit through a tunnel under the skin, past two anchoring cuffs, and into the belly space, with its curled end low in the pelvis.',
+      anatomyLabels:['Belly space','Soft catheter','Curled tip','Exit site','Under-skin tunnel','Cuffs'],hotspotLabels:['The catheter','The exit site','The cuffs'],hotspotDetails:[['Soft and flexible.','A silicone tube carries dialysis fluid into and out of your belly. The end may be straight or coiled.'],['A place you can care for.','The exit site is where the tube comes out through your skin. A short part stays outside your body.'],['Small, soft anchors.','One or two cuffs help hold the tube in place as tissue heals around them. Two are shown here.']],
+      sequenceLabel:'Explore the route',sequenceTitles:['A small entry point','A path into the belly','A tunnel under the skin','The catheter in place'],sequenceDetails:['The team numbs the area first. A small opening gives access to the belly space.','A guidewire helps the clinician guide the soft tube into place. The guidewire is then removed.','Part of the tube passes through a short tunnel under the skin to the exit site.','The tip rests low in the pelvis. The cuffs help anchor the tube as healing takes place.'],play:'Play the journey',pause:'Pause',replay:'Replay',sequenceStep:'View placement part {n}',
+      warningIntro:'Call immediately for any of these signs. Do not wait for your next appointment.',warningItems:['New redness, pus, swelling, or pain at the exit site or along the tunnel','Fever or feeling unwell','Cloudy drained dialysis fluid, even if you feel well','New belly pain, even if the drained fluid looks clear','The tube is pulled, damaged, or seems to be coming out','Fluid leaking around the catheter'],warningAction:'Do not push a displaced tube back in. If you cannot reach the PD team promptly, seek urgent medical care. For severe illness, use your local emergency service.',callDetails:'See contact details',
+      languageUnavailable:'This translation is not yet available. The guide remains in English; ask your team for language support.',audioUnavailable:'Read-aloud is not available here. You can read the same words on screen with a caregiver.',audioOffline:'No offline English voice is installed. Use your device’s accessibility reader or read together.',audioError:'Audio could not start. The same information is available on screen.',textSizeChanged:'Text size: {n}%',pdfSaved:'Your one-page summary has been downloaded.',
+      completionTitle:'You’ve made space for understanding.',completionBody:'You’ve explored all eight steps. Keep your questions, revisit anything, and talk with your care team before making a decision. Completing this guide does not record consent.',incompleteTitle:'There’s always room to come back.',incompleteBody:'You’ve reached the end. You can revisit the steps you skipped using the journey map, or take a summary to your care team.',
+      close:'Close',print:'Print / save as PDF',download:'Download PDF',cancel:'Keep my progress',resetTitle:'Start a fresh journey?',resetBody:'This clears the completed steps and check-in answers on this page. No patient information is saved.',resetConfirm:'Start again',
+      teamTitle:'Your questions are welcome',teamIntro:'Your PD nurse and kidney doctor can explain what is right for you. This guide supports that conversation; it is not informed consent counseling.',daytime:'PD team contact',afterHours:'After-hours contact',contactMissing:'Ask your clinic for this number and keep it with you.',questionsTitle:'You might like to ask',teamQuestions:['Why is this placement method suitable for me? What are the risks and alternatives?','What will help me feel comfortable?','When should I stop eating, and which medicines should I take?','Who will change my first dressing, and when can I start dialysis?','Who should I call at night or on a weekend?'],
+      sourcesTitle:'About this guide',sourcesIntro:'A patient and family guide to percutaneous PD catheter placement. It explains a needle-and-guidewire method, without teaching anyone to perform the procedure.',reviewPending:'Local clinical review is pending. A nephrologist and PD nurse should confirm the content, contacts, and local instructions before patient use.',reviewed:'Local review: {name} · {date}',sourcesHeading:'Clinical references',sourcesNote:'The ISPD guideline directory was checked on 7 September 2026. These references inform general education; they do not mean this app is endorsed by ISPD. Source links need an internet connection.',sourceNames:['ISPD — Creating and maintaining optimal PD access in adults (2019)','ISPD — Catheter-related infection recommendations (2023)','ISPD — Peritonitis prevention and treatment (2022)'],privacyTitle:'Made for a calm learning space',privacyBody:'The guide makes no network requests, uses no analytics, and stores no personal information. Progress lasts only while this page is open. Audio uses an installed, offline device voice when available. English is provided; Hindi and Marathi are translation placeholders.',
+      handoutIntro:'A reminder to discuss with your PD team. Your individual instructions come first.',handoutHeads:['Before your visit','During placement','Healing and starting dialysis','Looking after the catheter','Call your PD team immediately'],placementSummary:'The area is numbed. A needle and guidewire help place a soft tube into your belly. A short tunnel and cuffs help keep it in place. You may be awake or drowsy; tell the team about pain.',checklistIntro:'For routine care after healing, once your PD nurse has trained you. For a newly placed catheter, follow the early dressing instructions below.',checklistItems:['Wash and dry your hands before care.','Look at the exit site and nearby skin each day.','Follow the cleaning schedule and use only the products your team recommends.','Use any prescribed ointment exactly as taught.','Keep the tube secured so it cannot tug; avoid tight clothing rubbing the site.','Know your PD team’s daytime and after-hours numbers.'],earlyCare:'While the site is healing',caregiverIntro:'You do not need to do everything. Agree with your loved one and the PD nurse on how you can help.',caregiverItems:['Ask what help feels useful; listen and write down questions.','Wash and dry your hands before helping with care.','Help look at the exit site without pulling the tube or disturbing a new dressing.','Only carry out care or exchanges after the PD team has trained you.','Keep supplies ready and support the team’s care plan.','Call the PD team immediately for the warning signs below.'],noteEmergency:'If you cannot reach the PD team promptly, seek urgent medical care. For severe illness, use your local emergency service.',
+      phases:[
+        {name:'Meet your catheter',sub:'A small tube with a big purpose',category:'Getting familiar',title:'Meet your PD catheter',description:'Peritoneal dialysis (PD) uses the lining inside your belly — the peritoneum — to help clean your blood. A soft tube called a catheter lets dialysis fluid flow in and out. With CAPD (continuous ambulatory peritoneal dialysis), you change this fluid by hand after training.',visual:'anatomy',statuses:[['heart','A new routine, gently','It’s natural to have questions. You can learn a little at a time.'],['leaf','Designed to stay with you','A short part of the tube stays outside your body and can be secured under clothing.'],['people','You’ll have support','Your PD nurse will teach you how to use and care for your catheter.']],caregiver:'Sit together and ask what feels unclear. You can pause at any step and write down questions for the PD nurse.',question:'What is the catheter there to do?',answers:['Let dialysis fluid move in and out of my belly','Go into my stomach to carry food'],correct:0,yes:'That’s right. It carries dialysis fluid into and out of the belly space, not the stomach.',no:'A helpful distinction: the tube sits in the belly space, not in the stomach. It carries dialysis fluid.'},
+        {name:'Before your procedure',sub:'Getting ready, together',category:'Preparing',title:'A little preparation helps',description:'Your team checks your health and helps choose the best place for the tube to come out. They may mark this spot while you sit or stand, away from your belt and skin folds. Bring your questions and your medicine list.',visual:'prepare',points:['fastingInstructions','medicationInstructions','bowelInstructions','arrivalInstructions'],statuses:[['clipboard','Your own preparation plan','Fasting and medicine instructions depend on your health and your center.'],['message','Tell your team','Mention allergies, blood-thinning medicines, and any past belly operations.'],['people','Plan some company','Ask who may come with you and arrange your trip home.']],caregiver:'Help gather the medicine list, written instructions, and questions. Confirm the transport plan with the clinic.',question:'What should I do about fasting and medicines?',answers:['Use the same instructions as a friend','Follow the instructions from my own care team'],correct:1,yes:'Exactly. Your team will give you a plan that fits your health and medicines.',no:'Instructions can differ. Check your own team’s plan before changing food, drink, or medicines.'},
+        {name:'Keeping you comfortable',sub:'Numbing & relaxation',category:'Your comfort',title:'Your comfort matters',description:'Local anesthetic numbs a small area; you may feel a brief sting. You may also be offered light sedation to help you relax. You will usually be awake or drowsy and may feel pressure or tugging. Tell the team if you feel pain.',visual:'comfort',note:['You can speak up.','Let the team know if you feel uncomfortable, worried, or need something explained again.'],statuses:[['heart','What you may feel','A brief sting, then pressure or tugging. Speak up about any pain.'],['leaf','Awake or lightly drowsy','Sedation is optional and depends on your needs and your team’s plan.'],['people','Someone is looking after you','Your care team checks how you are feeling throughout the procedure.']],caregiver:'Tell the team about your loved one’s worries, hearing needs, or preferred language before the procedure.',question:'If I feel pain, what should I do?',answers:['Tell the team right away','Stay quiet and wait for it to finish'],correct:0,yes:'Yes. Tell the team so they can check and help with your comfort.',no:'You do not have to stay quiet. Let the team know about pain or discomfort right away.'},
+        {name:'Placing the catheter',sub:'Follow the gentle route',category:'The procedure',title:'A small path into your belly',description:'In a bedside or procedure-room setting, a needle and guidewire help place the soft tube, then a short tunnel under the skin leads to the exit site. This percutaneous method usually uses local numbing rather than general anesthesia and avoids a large incision. Your team will explain your recovery plan.',visual:'placement',statuses:[['leaf','A small opening','The tube is guided into the belly space. Instruments are not shown in this guide.'],['clock','One step at a time','Ask your team how long your procedure and observation are likely to take.'],['shield','A check before you leave','The team tests fluid flow to check how the catheter is working.']],caregiver:'The picture is a simplified map, not instructions for carrying out the procedure. Ask the team to explain anything that is unclear.',question:'Where does the inside end of the tube rest?',answers:['In the space inside my belly, low in the pelvis','In my stomach'],correct:0,yes:'That’s right. The tip rests low in the belly space, in the pelvis.',no:'It does not go into your stomach. The tip rests low in the belly space, in the pelvis.'},
+        {name:'Right after placement',sub:'Rest, check & recover',category:'Early recovery',title:'Time to rest and check in',description:'Your team watches you after placement and checks the catheter’s fluid flow. Mild soreness can happen; tell the team about pain that is strong or getting worse. You may go home the same day if your team says you are ready.',visual:'recovery',points:['dischargeInstructions','dressingInstructions'],statuses:[['heart','A little soreness is possible','Tell the team if pain is strong, gets worse, or worries you.'],['clipboard','Before heading home','Make sure you know your dressing plan, follow-up date, and who to call.'],['people','A supported trip home','If you had sedation, follow the team’s travel and supervision instructions.']],caregiver:'Listen to the discharge instructions together. Help with the journey home, and know who to call if there is a problem.',question:'What should I know before leaving?',answers:['Only the date of my next visit','My care plan, follow-up date, and who to call'],correct:1,yes:'Yes. Ask for written instructions and a number for help, including after hours.',no:'The date matters, and so do your care plan and contact numbers. Ask for all three.'},
+        {name:'Giving your body time',sub:'The break-in period',category:'Healing',title:'Let your catheter settle in',description:'The break-in period gives the area around the tube time to heal and helps reduce leaks. For a planned start, ISPD recommends at least 2 weeks when possible. An earlier start needs a special plan from your PD team.',visual:'healing',points:['dialysisStartInstructions','dressingInstructions','activityInstructions'],statuses:[['clock','At least 2 weeks, when possible','Your team chooses the start date. Healing and readiness vary.'],['shield','Protect the dressing','Keep it dry. Ask your team for help if it is wet, dirty, loose, or blood-soaked.'],['leaf','Be gentle with yourself','Avoid straining and heavy lifting. Follow your constipation prevention plan.']],caregiver:'Help with chores that involve lifting. Keep the follow-up plan handy and leave early dressing changes to the PD team.',question:'When should I begin dialysis exchanges?',answers:['As soon as I feel ready','Only when my PD team tells me to'],correct:1,yes:'Exactly. Your team chooses the safe start date and teaches you the plan.',no:'Feeling ready does not mean the site has healed. Start only with your team’s instructions.'},
+        {name:'Living with your catheter',sub:'Small habits, daily care',category:'Life at home',title:'Build a gentle care routine',description:'Once the site has healed, your PD nurse will teach you how to look after it. Check the skin where the tube comes out each day. Keep the catheter secure and choose clothes that do not rub or pull on it.',visual:'living',points:['dailyCareInstructions','bathingInstructions','activityInstructions'],statuses:[['clipboard','Learn, then practice','Ask your nurse to watch you do the care routine and help you feel confident.'],['droplet','Water needs a plan','Showering, bathing, and swimming have different risks. Get advice for each.'],['leaf','Make room for daily life','Talk about your usual work, hobbies, and exercise so the plan fits you.']],caregiver:'With permission, help look at the site. Wash your hands first and only carry out tasks the PD team has taught you.',question:'When is it okay to start showering?',answers:['When my PD team says the site is ready','As soon as I get home'],correct:0,yes:'That’s right. Your team will explain when and how to shower safely.',no:'A new site needs to stay dry. Ask your team when it is ready and how to protect it.'},
+        {name:'When to call your team',sub:'Know the warning signs',category:'Getting help',title:'Notice a change? Make the call.',description:'You know your body. If you notice any of these changes, call your PD team immediately, even if you are unsure. Getting help early lets the team assess what is happening.',visual:'warnings',statuses:[['phone','Call right away','Do not wait for your next visit or wait to see if symptoms settle.'],['message','Say what has changed','Tell the team about pain, fever, the exit site, and any change in drained fluid.'],['shield','If you cannot reach them','Seek urgent medical care. Use your local emergency service for severe illness.']],caregiver:'Help make the call and explain what has changed. Cloudy drained fluid needs an immediate call even when your loved one feels well.',question:'The drained fluid looks cloudy, but I feel fine. What now?',answers:['Wait until tomorrow to see if it clears','Call my PD team immediately'],correct:1,yes:'Yes. Cloudy fluid can be a sign of infection even without pain. Call immediately.',no:'Please do not wait. Cloudy fluid needs an immediate call even if you feel well.'}
+      ]
+    },
+    hi: null,
+    mr: null
+  };
+  const SOURCE_URLS = ['https://doi.org/10.3747/pdi.2018.00232','https://doi.org/10.1177/08968608231172740','https://doi.org/10.1177/08968608221080586'];
+  const ICONS = {
+    sprout:'<path d="M12 21v-9M12 16C4 16 3 10 4 5c6 0 9 3 8 9M12 12c0-6 3-9 8-9 1 6-2 10-8 10"/>',
+    leaf:'<path d="M19 3c2 10-1 16-8 16-6 0-9-6-6-10 3-4 7-1 14-6ZM4 21 15 10"/>',
+    heart:'<path d="M20 5c-3-3-6-1-8 1-2-2-5-4-8-1-5 5 1 10 8 15 7-5 13-10 8-15Z"/>',
+    people:'<circle cx="9" cy="7" r="3"/><path d="M3 20v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14c3 0 4 2 4 4v2"/>',
+    clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    message:'<path d="M21 11a8 8 0 0 1-8 8H7l-4 3V11a9 9 0 0 1 18 0Z"/><path d="M7 9h10M7 13h6"/>',
+    shield:'<path d="m12 2 8 3v6c0 5-4 8-8 11-4-3-8-6-8-11V5l8-3Z"/><path d="m8 12 3 3 5-6"/>',
+    globe:'<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
+    clipboard:'<rect x="5" y="4" width="15" height="18" rx="2"/><rect x="9" y="2" width="7" height="4" rx="1"/><path d="m8 11 1 1 2-2m2 1h4m-9 6 1 1 2-2m2 1h4"/>',
+    file:'<path d="M14 2H5v20h14V7l-5-5ZM14 2v6h5M8 12h8M8 16h6"/>',
+    download:'<path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/>',
+    printer:'<path d="M6 9V3h12v6M6 18H3V9h18v9h-3M6 14h12v8H6v-8Z"/><path d="M17 11h1"/>',
+    left:'<path d="m14 5-7 7 7 7M7 12h14"/>',right:'<path d="m10 5 7 7-7 7M3 12h14"/>',
+    check:'<path d="m5 12 4 4L19 6"/>',close:'<path d="m6 6 12 12M6 18 18 6"/>',
+    volume:'<path d="m11 4-6 5H2v6h3l6 5V4ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>',
+    stop:'<rect x="5" y="5" width="14" height="14" rx="2"/>',
+    spark:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>',
+    info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/>',
+    droplet:'<path d="M12 2C9 7 5 10 5 15a7 7 0 0 0 14 0c0-5-4-8-7-13Z"/><path d="M8 15c0 2 1 3 3 3"/>',
+    phone:'<path d="m7 3 3 5-3 3c2 4 3 5 6 6l3-3 5 3c-1 8-8 5-13 0S0 4 7 3Z"/>',
+    flag:'<path d="M5 22V3c5-4 9 4 15 0v11c-6 4-10-4-15 0"/>',
+    play:'<path d="m8 4 12 8-12 8V4Z"/>',pause:'<path d="M8 4v16M16 4v16"/>',
+    calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 11h18m-13 5 3 2 5-4"/>',
+    home:'<path d="m2 11 10-9 10 9M5 9v13h14V9M9 22v-8h6v8"/>',
+    camera:'<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>'
+  };
+  const CLINICAL_STEPS = [
+    {
+      title: 'Initial Peritoneal Puncture',
+      sub: 'Infraumbilical entry under local anesthesia',
+      image: 'assets/clinical/step-1-needle-puncture.webp',
+      alt: 'Clinician inserting 18-gauge introducer needle with stopcock into lower abdomen',
+      instruments: ['18G Introducer Needle', '2-Way Stopcock', 'Local Anesthetic (1% Lidocaine)'],
+      action: 'A 1.5–2 cm infraumbilical skin nick is made under local numbing. The clinician inserts an 18G introducer needle through the subcutaneous tissue, linea alba, and parietal peritoneum.',
+      rationale: 'Direct access into the peritoneal cavity without general anesthesia. The stopcock allows instant closure to avoid premature gas or fluid escape.',
+      correlation: 'Matches Part 1 of Step 4: "A small entry point into the belly space."'
+    },
+    {
+      title: 'Saline Hydrodissection (Peritoneal Cushion)',
+      sub: 'Instilling sterile fluid to float bowel away',
+      image: 'assets/clinical/step-2-hydrodissection.webp',
+      alt: 'Saline infusion line attached to cannula instilling fluid into the peritoneal space',
+      instruments: ['Access Cannula', 'IV Infusion Line', '500–1000 mL Sterile Saline'],
+      action: 'A saline drop test confirms subatmospheric peritoneal pressure. 500 to 1,000 mL of sterile saline is rapidly infused into the peritoneal cavity.',
+      rationale: 'Creates a deep protective fluid cushion (hydrodissection), floating the intestines away from the anterior wall to virtually eliminate the risk of visceral perforation.',
+      correlation: 'Matches Step 3 and Part 1 of Step 4: Gentle numbing and fluid cushion.'
+    },
+    {
+      title: 'Pelvic Guidewire Navigation',
+      sub: 'Seldinger technique: threading the flexible J-wire',
+      image: 'assets/clinical/step-3-guidewire-advance.webp',
+      alt: 'Gloved hands threading long flexible J-tip guidewire through cannula into pelvis',
+      instruments: ['Flexible J-Tip Guidewire (0.038")', 'Cannula Hub'],
+      action: 'The flexible guidewire is fed through the needle and guided into the true pelvis (Pouch of Douglas / retrovesical space).',
+      rationale: 'The rounded "J" tip glides smoothly along the peritoneal lining without snagging or traumatizing bowel loops or omentum.',
+      correlation: 'Matches Part 2 of Step 4: "A guidewire helps guide the soft tube into place."'
+    },
+    {
+      title: 'Dilator & Peel-Away Sheath Advancement',
+      sub: 'Creating the conduit through the abdominal wall',
+      image: 'assets/clinical/step-4-dilator-sheath-advance.webp',
+      alt: 'Tapered dilator and white peel-away sheath advanced over the guidewire',
+      instruments: ['Tapered Vessel Dilator', 'Tear-Away Introducer Sheath', 'Guidewire'],
+      action: 'The needle is removed over the wire. The combined dilator and peel-away sheath unit is threaded over the wire, dilating the rectus sheath and peritoneum.',
+      rationale: 'Smoothly stretches rather than cuts the fascial fibers, promoting rapid sealing and preventing dialysate leaks after insertion.',
+      correlation: 'Matches Part 2 of Step 4: Preparing the passage into the belly.'
+    },
+    {
+      title: 'Seating the Sheath in the Peritoneal Cavity',
+      sub: 'Final pelvic angle & guidewire withdrawal',
+      image: 'assets/clinical/step-5-sheath-pelvic-seating.webp',
+      alt: 'Peel-away sheath seated at abdominal wall at 45 degree pelvic angle',
+      instruments: ['Peel-Away Sheath', 'Hub Locking Collar'],
+      action: 'The sheath is advanced at a 45° caudal angle into the pelvic inlet until the hub rests against the skin. The inner dilator and guidewire are unlocked and removed.',
+      rationale: 'Leaves a clean, temporary plastic conduit directly into the pelvic cavity while removing all sharp or rigid wire elements.',
+      correlation: 'Matches Part 2 of Step 4: Conduit ready for catheter delivery.'
+    },
+    {
+      title: 'Catheter Introduction & Deep Cuff Seating',
+      sub: 'Advancing silicone tube with internal Dacron cuff',
+      image: 'assets/clinical/step-6-catheter-cuff-feed.webp',
+      alt: 'Silicone PD catheter inserted through peel-away sheath showing white Dacron cuff',
+      instruments: ['Silicone Tenckhoff Catheter', 'Deep Dacron Cuff', 'Peel-Away Sheath Tabs'],
+      action: 'The silicone catheter is threaded through the sheath until the internal Dacron cuff reaches the level of the posterior rectus sheath / rectus muscle.',
+      rationale: 'Fibroblasts will infiltrate this porous Dacron mesh over the 2-week break-in period, creating an airtight, watertight seal against leaks and infection.',
+      correlation: 'Matches Part 3 & 4 of Step 4: "The cuffs help anchor the tube as healing takes place."'
+    },
+    {
+      title: 'Deep Pelvic Advancement via Insertion Stylet',
+      sub: 'Ensuring coiled tip reaches pelvic dependent gutter',
+      image: 'assets/clinical/step-7-stylet-pelvic-placement.webp',
+      alt: 'Long metallic insertion stylet advancing coiled catheter into pelvis',
+      instruments: ['Metallic Stiffening Stylet', 'Pelvic Pigtail / Coiled Tip'],
+      action: 'A rigid internal stylet allows the operator to direct the pliable silicone catheter deep into the true pelvis without it curling back upward into the omentum.',
+      rationale: 'Dependent pelvic positioning ensures maximum drainage efficiency during dialysis drain cycles and prevents catheter migration.',
+      correlation: 'Matches Part 4 of Step 4: "The tip rests low in the pelvis."'
+    },
+    {
+      title: 'Peeling Sheath & Tunneling to Exit Site',
+      sub: 'Removing sheath conduit & creating subcutaneous tunnel',
+      image: 'assets/clinical/step-8-peel-away-cuff-seat.webp',
+      alt: 'Peel-away sheath split in half and subcutaneous tunneling to lateral exit site',
+      instruments: ['Split-Sheath Tabs', 'Subcutaneous Tunneling Trocar', 'Superficial Cuff'],
+      action: 'The peel-away sheath is separated into two halves and peeled out. A subcutaneous tunneling tool draws the catheter outward to the lateral exit site.',
+      rationale: 'Creates a downward or lateral arc from fascia to skin exit, preventing water or debris from settling toward the tunnel.',
+      correlation: 'Matches Part 3 of Step 4: "Part of the tube passes through a short tunnel under the skin."'
+    },
+    {
+      title: 'Immediate Fluid Challenge & Flow Patency Test',
+      sub: 'Verifying rapid inflow & clear gravity outflow',
+      image: 'assets/clinical/step-9-fluid-patency-test.webp',
+      alt: '60 mL syringe and transfer set connected to catheter testing in-and-out flow',
+      instruments: ['Catheter Adapter / Transfer Set', '60 mL Syringe', 'Dialysate / Saline'],
+      action: 'The catheter is connected to a transfer set. 100–200 mL saline or dialysate is infused rapidly and drained back by gravity to verify brisk flow before dressing.',
+      rationale: 'Immediate confirmation that there are no kinks, clots, or omental wraps before the patient leaves the procedure room.',
+      correlation: 'Matches Step 5: "A check before you leave: The team tests fluid flow."'
+    }
+  ];
+  const CONSENT_SECTIONS = [
+    {
+      id: 'overview',
+      title: 'Procedure Overview & Clinical Indication',
+      shortTitle: '1. Overview',
+      badge: 'Module 1 of 6 · Purpose & Indication',
+      lead: 'Peritoneal dialysis (PD) is an established home-based renal replacement therapy that cleanses your blood using the natural peritoneal membrane inside your abdomen.',
+      cards: [
+        { icon: 'shield', title: 'What is a PD Catheter?', text: 'A soft, biocompatible silicone tube (approx. 40–45 cm) placed into the lower peritoneal cavity (belly space). It acts as a dedicated conduit to gently instill and drain sterile dialysis fluid.' },
+        { icon: 'heart', title: 'Why Access is Essential', text: 'Without a secure, sterile peritoneal catheter, home peritoneal dialysis cannot take place. It provides continuous or nightly needle-free kidney replacement therapy.' },
+        { icon: 'clock', title: 'Setting & Procedure Duration', text: 'Typically performed in a dedicated procedure suite or operating room under sterile conditions. The placement usually takes 30 to 45 minutes, followed by a short recovery check.' },
+        { icon: 'people', title: 'Shared Decision-Making', text: 'This interactive companion assists your comprehension of procedural steps, risks, and daily care. Formal legal consent is completed on your hospital’s official paperwork.' }
+      ],
+      checkin: 'Do you understand what a PD catheter is and why it is placed in the peritoneal cavity?'
+    },
+    {
+      id: 'technique',
+      title: 'Placement Technique & Pain Management',
+      shortTitle: '2. Technique',
+      badge: 'Module 2 of 6 · Percutaneous / Seldinger Method',
+      lead: 'A minimally invasive percutaneous approach (modified Seldinger technique) is performed under local numbing, avoiding general anesthesia and large incisions.',
+      cards: [
+        { icon: 'droplet', title: 'Local Anesthetic & Sedation', text: 'The skin and abdominal muscles are numbed with 1% lidocaine. Light relaxing medication (sedation) may be offered if agreed with your team. You will be awake or lightly drowsy.' },
+        { icon: 'shield', title: 'Saline Hydrodissection Cushion', text: 'Before advancing instruments, sterile saline is gently infused into the peritoneal cavity. This creates a protective fluid cushion, floating bowel loops safely away from the needle.' },
+        { icon: 'leaf', title: 'Guidewire & Peel-Away Sheath', text: 'A flexible J-tip guidewire is directed into the deep pelvis. A tapered dilator and peel-away sheath establish the channel, allowing the soft catheter to slide gently into place.' },
+        { icon: 'spark', title: 'Anchoring Cuffs & Tunnel', text: 'The catheter passes through a short subcutaneous tunnel. One or two Dacron polyester cuffs anchor into the muscle and skin layers, providing mechanical stability and bacterial barriers.' }
+      ],
+      checkin: 'Do you understand how local numbing works and how the guidewire safely delivers the soft catheter?'
+    },
+    {
+      id: 'alternatives',
+      title: 'Benefits & Treatment Alternatives',
+      shortTitle: '3. Alternatives',
+      badge: 'Module 3 of 6 · Exploring Treatment Options',
+      lead: 'Choosing renal replacement therapy is an individual decision based on clinical suitability, medical history, lifestyle preferences, and home support.',
+      cards: [
+        { icon: 'heart', title: 'Benefits of Peritoneal Dialysis', text: 'Performed at home (manual CAPD or nightly automated APD), needle-free routine, continuous gentle fluid removal, superior preservation of residual kidney function, and travel flexibility.' },
+        { icon: 'droplet', title: 'Alternative 1: Hemodialysis (HD)', text: 'Cleanses blood externally through an artificial dialyzer via an arteriovenous fistula, graft, or central venous catheter. Typically performed 3 times weekly for 4 hours at a dialysis center.' },
+        { icon: 'people', title: 'Alternative 2: Kidney Transplant', text: 'Surgical transplantation of a donor kidney. Evaluation for transplant eligibility can continue concurrently while you are receiving peritoneal dialysis.' },
+        { icon: 'clipboard', title: 'Alternative 3: Conservative Care', text: 'Comprehensive medical management focusing on quality of life, symptom control, diet, and medications without starting dialysis, when renal replacement is not desired.' }
+      ],
+      checkin: 'Have you discussed the alternatives (hemodialysis and conservative kidney care) with your doctor?'
+    },
+    {
+      id: 'risks',
+      title: 'Risks, Complications & Clinical Safeguards',
+      shortTitle: '4. Risks & Safety',
+      badge: 'Module 4 of 6 · Informed Risk Disclosure',
+      lead: 'Like any invasive procedure, PD catheter placement carries potential immediate and delayed risks. Strict clinical safeguards and patient education minimize these events.',
+      cards: [
+        { kind: 'immediate', icon: 'flag', title: 'Bleeding / Hematoma (<1-2%)', text: 'Minor oozing around the puncture site or rectus muscle hematoma. Controlled with localized pressure or a small suture; major bleeding is exceedingly rare.' },
+        { kind: 'immediate', icon: 'flag', title: 'Organ Perforation (<0.5%)', text: 'Accidental puncture of the bowel or bladder. Minimized by emptying the bladder before the procedure and instilling a protective saline cushion (hydrodissection).' },
+        { kind: 'delayed', icon: 'shield', title: 'Exit-Site Infection & Peritonitis', text: 'Microbial entry can cause exit-site inflammation or peritoneal cavity infection. Prevented by strict aseptic technique, handwashing, and immediate reporting of cloudy fluid.' },
+        { kind: 'delayed', icon: 'clock', title: 'Dialysate Leak & Tip Migration', text: 'Fluid leaking around the catheter or tip displacement. Prevented by adhering to the 2-week break-in healing period and avoiding heavy lifting or constipation.' }
+      ],
+      checkin: 'Are you aware of the potential risks and the vital importance of sterile hygiene and the break-in healing period?'
+    },
+    {
+      id: 'quiz',
+      title: 'Interactive Comprehension Check',
+      shortTitle: '5. Quiz',
+      badge: 'Module 5 of 6 · Confirming Key Concepts',
+      lead: 'Answer these 4 short questions to check your grasp of key procedural and safety concepts. You receive instant explanations for each answer.',
+      questions: [
+        {
+          q: 'Where does the PD catheter rest inside your body?',
+          options: [
+            'Inside the stomach where food is digested',
+            'In the peritoneal cavity (belly space), resting low in the pelvis',
+            'Inside a major blood vessel going to the heart'
+          ],
+          correct: 1,
+          explanation: 'Correct! The catheter sits in the peritoneal cavity (belly space) low in the pelvis, surrounded by the peritoneum. It does not enter your stomach or blood vessels.'
+        },
+        {
+          q: 'What should you do immediately if the drained dialysis fluid appears cloudy or hazy?',
+          options: [
+            'Wait 24 to 48 hours to see if it clears on its own',
+            'Call your PD team immediately, even if you feel completely well',
+            'Skip your next exchange and rest in bed'
+          ],
+          correct: 1,
+          explanation: 'Exactly right! Cloudy fluid is a primary early sign of peritonitis (infection). Immediate clinical assessment and antibiotics protect your catheter and peritoneum.'
+        },
+        {
+          q: 'Why is a break-in period of at least 2 weeks recommended before regular dialysis exchanges begin?',
+          options: [
+            'To allow tissue to heal firmly around the Dacron cuffs and prevent leaks',
+            'Because the catheter needs time to soften inside the body',
+            'To wait for lab blood culture results'
+          ],
+          correct: 0,
+          explanation: 'Correct. Waiting at least 2 weeks lets tissue grow into the Dacron cuffs, creating a tight physical seal that minimizes dialysate leaks and stabilizes the tube.'
+        },
+        {
+          q: 'Does completing this digital interactive companion replace formal hospital consent paperwork?',
+          options: [
+            'Yes, this online tool is the sole legal consent required',
+            'No, this is an educational companion; formal legal consent is executed with your clinician on official hospital documents'
+          ],
+          correct: 1,
+          explanation: 'Precisely! This companion promotes patient comprehension and shared decision-making, while official legal consent remains on your hospital’s authorized paperwork.'
+        }
+      ]
+    },
+    {
+      id: 'declarations',
+      title: 'Patient Declarations & Discussion Record',
+      shortTitle: '6. Record',
+      badge: 'Module 6 of 6 · Shared Decision-Making Record',
+      lead: 'Review the statements below, enter your details, and generate an official 1-page A4 Informed Discussion Record to take to your nephrology consultation.',
+      declarations: [
+        'I have been informed of the clinical indications, purpose, and technique of peritoneal dialysis catheter placement.',
+        'The potential benefits and alternative therapies (hemodialysis and conservative medical management) have been explained to me.',
+        'The potential procedure risks (bleeding, bowel/bladder injury, discomfort) and delayed risks (exit-site infection, peritonitis, leaks) have been disclosed.',
+        'I understand the vital importance of the break-in healing period, meticulous hand hygiene, and sterile non-touch technique.',
+        'I know the critical warning signs (cloudy fluid, fever, severe pain, tube displacement) and have emergency contact details.',
+        'I understand this companion supports shared decision-making, and official informed consent is formally signed on hospital records.'
+      ]
+    }
+  ];
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const icon = name => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.leaf}</svg>`;
+  const state = {language:'en',index:0,completed:new Set(),answers:{},caregiver:false,scale:1,hotspot:0,sequence:0,playing:false,finished:false,galleryIndex:0,galleryConfirmed:false,consentStep:0,consentQuiz:{},consentPatient:{name:'',age:'',mrn:'',clinician:'',date:new Date().toISOString().split('T')[0]},consentDeclarations:[true,true,true,true,true,true]};
+  let audioToken=0, sequenceTimer, toastTimer, activeUtterance;
+  const t = (key,vars={}) => {let value=TRANSLATIONS[state.language][key];return typeof value==='string'?value.replace(/\{(\w+)\}/g,(_,k)=>vars[k]??`{${k}}`):value;};
+  const phase = () => t('phases')[state.index];
+  function hydrate(root=document){root.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));root.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));}
+  function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,6500);}
+  function renderJourney(){
+    $('journey-steps').innerHTML=t('phases').map((p,i)=>`<li><button class="step ${i===state.index?'active':''} ${state.completed.has(i)?'done':''}" data-step="${i}" ${i===state.index?'aria-current="step"':''} aria-label="${i+1}. ${esc(p.name)}. ${esc(state.completed.has(i)?t('completed'):t('notCompleted'))}"><span class="step-number">${state.completed.has(i)?icon('check'):String(i+1).padStart(2,'0')}</span><span class="step-name">${esc(p.name)}<span class="step-sub">${esc(i===state.index?t('current'):p.sub)}</span></span></button></li>`).join('');
+    const n=state.completed.size;$('progress-label').textContent=t('progress',{n});$('progress-percent').textContent=Math.round(n/8*100)+'%';$('progress-fill').style.width=(n/8*100)+'%';document.querySelector('.progress').setAttribute('aria-valuenow',n);
+  }
+  function bodyDiagram(placement=false){
+    const labels=t('anatomyLabels'), seq=state.sequence, showRoute=!placement||seq>=1,showTunnel=!placement||seq>=2,showCuffs=!placement||seq>=3;
+    return `<svg class="diagram-svg" viewBox="0 0 550 300" role="img" aria-label="${esc(t('diagramAlt'))}">
+      <defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8e5d3"/><stop offset="1" stop-color="#edc8af"/></linearGradient><linearGradient id="cavity" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e0ead6"/><stop offset="1" stop-color="#cedfc7"/></linearGradient></defs>
+      <ellipse cx="280" cy="277" rx="109" ry="10" fill="#dde7d8"/>
+      <path d="M226 16c-7 13-30 15-48 20-18 4-31 14-36 34l-12 54c-2 11 12 17 18 6l22-44c6 22 12 47 8 68l-9 65c-3 19 5 40 13 55h78l18-21 19 21h76c9-19 15-37 12-55l-10-65c-3-21 3-46 9-68l21 44c6 11 21 5 18-6l-12-54c-4-20-18-30-36-34-18-5-41-7-48-20" fill="url(#skin)" stroke="#d5b59e" stroke-width="1.5"/>
+      <path d="M226 17q47 28 95 0" fill="none" stroke="#d5b59e" stroke-width="1.5"/>
+      <path d="M213 72q65-22 129 0l10 104c7 38-5 70-31 81h-82c-26-11-38-43-31-81Z" fill="url(#cavity)" stroke="#a8bfa4" stroke-width="1.5"/>
+      <path d="M226 83q51-16 101 0l10 96c5 25-1 48-20 61h-74c-19-13-25-36-20-61Z" fill="none" stroke="#b9ceb1" stroke-width="1.2" stroke-dasharray="4 5"/>
+      <path d="M236 117c8-9 29-8 37 0s21 9 28 2 19-4 20 4-18 10-29 8-24-9-33-1 8 15 22 12 35 2 35 10-20 7-29 5-25-5-31 4 15 13 25 9 27-2 30 7-16 13-27 11-29-6-32 3 18 11 27 7 26 0 24 8-15 11-25 10" stroke="#b7cbaa" stroke-width="7" fill="none" stroke-linecap="round" opacity=".48"/>
+      <path d="M275 128q5 7 10 0" stroke="#bca88d" fill="none" stroke-width="1.7"/>
+      ${placement?'<circle cx="227" cy="159" r="9" fill="#d2e4c9" stroke="#458873" stroke-width="2"/>':''}
+      ${showRoute?`<path d="M227 159C237 173 247 181 253 203s-1 40 20 42 29-10 19-18-24 0-16 7" fill="none" stroke="#fffefa" stroke-width="10" stroke-linecap="round"/><path class="${placement?'route':''} ${state.playing?'animating':''}" d="M227 159C237 173 247 181 253 203s-1 40 20 42 29-10 19-18-24 0-16 7" fill="none" stroke="#368b7b" stroke-width="5" stroke-linecap="round"/>`:''}
+      ${showTunnel?'<path d="M227 159C204 138 183 150 191 177l11 34c7 20-7 27-19 28h-32" stroke="#fffefa" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M227 159C204 138 183 150 191 177l11 34c7 20-7 27-19 28h-32" stroke="#368b7b" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M149 234h-16v10h16Z" fill="#4c9783" stroke="#2c7161"/><circle cx="194" cy="187" r="7" fill="#eac6aa" stroke="#b99475" stroke-width="1.5"/><path d="M194 183v8" stroke="#378777" stroke-width="4"/>':''}
+      ${showCuffs?'<path d="m222 152 8 9" stroke="#e9bc6b" stroke-width="12"/><path d="m193 158 1 10" stroke="#e9bc6b" stroke-width="12"/><path d="m222 152 8 9m-37-3 1 10" stroke="#bf9550" stroke-width="1" stroke-dasharray="2 2"/>':''}
+      <path class="leader" d="M336 105h40l17-17"/><rect class="label-bg" x="372" y="57" width="131" height="34" rx="8"/><text x="387" y="79">${esc(labels[0])}</text><circle cx="336" cy="105" r="3" fill="#85a386"/>
+      ${showTunnel?`<path class="leader" d="M177 238h-23l-15-43"/><rect class="label-bg" x="25" y="165" width="131" height="35" rx="8"/><text x="40" y="187">${esc(state.hotspot===1?labels[3]:state.hotspot===2?labels[5]:labels[1])}</text>${state.hotspot===1?'<circle cx="194" cy="187" r="14" fill="none" stroke="#277c69" stroke-width="2"/>':''}${state.hotspot===2?'<circle cx="194" cy="163" r="13" fill="none" stroke="#277c69" stroke-width="2"/><circle cx="226" cy="158" r="13" fill="none" stroke="#277c69" stroke-width="2"/>':''}`:''}
+      ${showRoute?`<path class="leader" d="M299 239h58l22-20"/><rect class="label-bg" x="372" y="192" width="131" height="35" rx="8"/><text x="387" y="214">${esc(labels[2])}</text><circle cx="299" cy="239" r="3" fill="#85a386"/>`:''}
+      ${placement&&seq===2?`<path class="leader" d="M195 149h-62l-9-43"/><rect class="label-bg" x="15" y="76" width="160" height="35" rx="8"/><text x="28" y="98">${esc(labels[4])}</text>`:''}
+    </svg>`;
+  }
+  function vignette(type){
+    let drawing='', label='';
+    if(type==='prepare'){
+      label=t('phases')[1].title;
+      drawing='<rect x="174" y="38" width="180" height="222" rx="15" fill="#fffefa" stroke="#b2c5a8" stroke-width="2" transform="rotate(-5 264 149)"/><rect x="220" y="29" width="82" height="27" rx="9" fill="#b1c7a4"/><path d="m202 92 6 6 13-15m-19 54 6 6 13-15m-19 54 6 6 13-15" stroke="#37806a" stroke-width="3" fill="none"/><path d="M236 90h83m-83 10h61m-61 34h83m-83 10h61m-61 34h83m-83 10h61M205 224h90" stroke="#cdd8c5" stroke-width="5" stroke-linecap="round"/><circle cx="365" cy="218" r="45" fill="#dce9d3" stroke="#bdcdb3"/><path d="M354 215c-13-7-6-21 4-16l7 5 7-5c10-5 17 9 4 16l-11 12-11-12Z" fill="#69a185"/><path d="m151 203-27 55m2-28 20-7m-13 25-8-16M391 64l23 39m-12-19 12-2" stroke="#b8cda8" stroke-width="3" fill="none"/>';
+    }else if(type==='comfort'||type==='recovery'){
+      label=t('phases')[type==='comfort'?2:4].title;
+      drawing='<path d="M125 169h304v58H125Z" fill="#fffdf4" stroke="#becdb7" stroke-width="2"/><rect x="133" y="144" width="73" height="32" rx="14" fill="#e4eadb"/><circle cx="181" cy="124" r="27" fill="#edc9aa" stroke="#c6a389"/><path d="M155 121c-5-30 32-40 47-16l3 13c-13-2-16-14-22-10-8 8-12 15-28 13" fill="#626253"/><path d="m171 126 6 1m12-1 6-1m-16 14q6 4 10-1" stroke="#8a6b55" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M215 134c60-17 101-3 153 23l50 18H199Z" fill="#a7c8b0" stroke="#80a88e" stroke-width="1.5"/><path d="M236 139c11 10 13 26 14 35m54-23c6 7 9 15 8 23" stroke="#87ab90" fill="none"/><path d="M131 229v30m288-30v30" stroke="#a6b89e" stroke-width="8" stroke-linecap="round"/><rect x="118" y="185" width="316" height="11" rx="5" fill="#d5e1cc"/><circle cx="343" cy="72" r="36" fill="#e2ebd9"/><path d="m326 70 12 12 21-24" stroke="#608f6d" fill="none" stroke-width="4" stroke-linecap="round"/>';
+    }else if(type==='healing'){
+      label=t('phases')[5].title;
+      drawing='<rect x="167" y="48" width="211" height="202" rx="16" fill="#fffefa" stroke="#b4c7a9" stroke-width="2"/><path d="M167 65q0-17 17-17h177q17 0 17 17v34H167Z" fill="#9bbda0"/><path d="M212 35v29m118-29v29" stroke="#568168" stroke-width="8" stroke-linecap="round"/><g fill="#dfe8d7"><rect x="191" y="119" width="30" height="25" rx="5"/><rect x="237" y="119" width="30" height="25" rx="5"/><rect x="283" y="119" width="30" height="25" rx="5"/><rect x="329" y="119" width="25" height="25" rx="5"/><rect x="191" y="160" width="30" height="25" rx="5"/><rect x="237" y="160" width="30" height="25" rx="5"/><rect x="283" y="160" width="30" height="25" rx="5"/><rect x="329" y="160" width="25" height="25" rx="5"/></g><path d="M195 131h19m28 0h18m-63 41h17m29 0h17m30-41h17m26 0h16m-60 41h18m26 0h16" stroke="#8cad89" stroke-width="2"/><circle cx="363" cy="226" r="42" fill="#dbe9d1" stroke="#bfd1b3"/><path d="M363 248v-32m0 11c-20 0-22-18-19-20 14-2 21 10 19 20m0-11c-1-14 9-21 20-20 3 14-5 24-20 25" fill="#91b78d" stroke="#608e62" stroke-width="2"/><path d="M201 216h73" stroke="#d4dfca" stroke-width="5" stroke-linecap="round"/>';
+    }else{
+      label=t('phases')[6].title;
+      drawing='<path d="m164 129 109-90 111 90v130H164Z" fill="#fffefa" stroke="#b0c3a4" stroke-width="2"/><path d="m148 138 125-102 125 102" fill="none" stroke="#8cab8b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><rect x="253" y="174" width="48" height="85" rx="6" fill="#dbe7d1"/><rect x="192" y="150" width="36" height="39" rx="5" fill="#e2eddf" stroke="#b8cdb2"/><path d="M210 150v39m-18-20h36" stroke="#b8cdb2"/><circle cx="276" cy="116" r="18" fill="#eedab6"/><path d="m270 114 5 5 9-11" stroke="#a18a60" stroke-width="2" fill="none"/><path d="M396 260v-73m0 44c-28-1-39-18-33-34 27-1 36 14 33 34m0-22c0-27 19-34 36-34 4 23-12 37-36 34" fill="#9ebd90" stroke="#719563" stroke-width="2"/><path d="M121 252h26m-13 0v-42m0 23c-22-1-22-15-20-20 15 0 22 8 20 20" fill="#adc99d" stroke="#85a476" stroke-width="2"/>';
+    }
+    return `<svg class="diagram-svg" viewBox="0 0 550 300" role="img" aria-label="${esc(label)}"><ellipse cx="276" cy="273" rx="166" ry="9" fill="#e0e8d9"/>${drawing}</svg>`;
+  }
+  function renderVisual(){
+    const p=phase();let html='';
+    if(p.visual==='warnings'){
+      html=`<div class="warnings"><p class="urgent-call" style="margin:0 0 15px">${esc(t('warningIntro'))}</p><ul class="warning-list">${t('warningItems').map(s=>`<li>${icon('flag')}<span>${esc(s)}</span></li>`).join('')}</ul><div class="urgent-call">${esc(t('warningAction'))}<br><button class="outline-btn" data-action="team">${icon('phone')}${esc(t('callDetails'))}</button></div></div>`;
+    }else{
+      const anatomy=p.visual==='anatomy', placement=p.visual==='placement';
+      html=`<figure class="illustration"><div class="diagram-label">${esc(anatomy||placement?t('diagramLabel'):p.category)}</div>${anatomy||placement?bodyDiagram(placement):vignette(p.visual)}${anatomy?`<div class="hotspots">${t('hotspotLabels').map((s,i)=>`<button class="hotspot" data-hotspot="${i}" aria-pressed="${state.hotspot===i}">${esc(s)}</button>`).join('')}</div>`:''}<figcaption class="diagram-note">${icon('info')}${esc(t('diagramNote'))}</figcaption></figure>`;
+      if(anatomy){const detail=t('hotspotDetails')[state.hotspot];html+=`<p class="detail-note" role="status">${icon('info')}<span><strong>${esc(detail[0])}</strong> ${esc(detail[1])}</span></p>`;}
+      if(placement){html+=`<p class="detail-note" role="status">${icon('info')}<span><strong>${esc(t('sequenceTitles')[state.sequence])}.</strong> ${esc(t('sequenceDetails')[state.sequence])}</span></p><div class="play-controls"><div class="play-left"><button class="outline-btn" id="play-sequence">${icon(state.playing?'pause':'play')}${esc(state.playing?t('pause'):state.sequence===3?t('replay'):t('play'))}</button><button class="outline-btn" data-action="gallery-prompt">${icon('camera')}<span>${esc(t('clinicalPhotosBtn'))}</span></button><button class="outline-btn" data-action="consent-tool">${icon('shield')}<span>${esc(t('consentQuickBtn'))}</span></button></div><div class="sequence-steps" role="group" aria-label="${esc(t('sequenceLabel'))}">${t('sequenceTitles').map((s,i)=>`<button data-sequence="${i}" aria-label="${esc(t('sequenceStep',{n:i+1})+': '+s)}" aria-pressed="${state.sequence===i}">${i+1}</button>`).join('')}</div></div>`;}
+      if(p.note)html+=`<p class="detail-note">${icon('heart')}<span><strong>${esc(p.note[0])}</strong> ${esc(p.note[1])}</span></p>`;
+      if(p.points)html+=`<ul class="key-points">${p.points.map(k=>`<li>${icon('check')}<span>${esc(CLINIC_CONFIG[k])}</span></li>`).join('')}</ul>`;
+    }
+    $('visual-content').innerHTML=html;
+  }
+  function renderRight(){
+    const p=phase();$('right-panel').innerHTML=`<h2 class="section-heading">${esc(t('expect'))}</h2>${p.statuses.map(([i,h,b])=>`<section class="status-card"><div class="status-icon">${icon(i)}</div><h3>${esc(h)}</h3><p>${esc(b)}</p></section>`).join('')}<div class="reassurance">${icon('heart')}<span>${esc(t('reassurance'))}</span></div>${state.caregiver?`<section class="caregiver-card"><h3>${icon('people')}${esc(t('caregiverLabel'))}</h3><p>${esc(p.caregiver)}</p><button class="outline-btn" data-action="caregiver">${esc(t('caregiverOpen'))}</button></section>`:''}<button class="urgent-link" data-step="7">${icon('flag')}${esc(t('urgentLink'))}</button>`;
+  }
+  function renderQuiz(){
+    const p=phase(),selected=state.answers[state.index];$('quiz-question').textContent=p.question;
+    $('answers').innerHTML=p.answers.map((a,i)=>`<button class="answer ${selected===i?'selected':''} ${selected===i&&i!==p.correct?'retry':''}" data-answer="${i}" aria-pressed="${selected===i}"><span class="radio-dot" aria-hidden="true"></span>${esc(a)}</button>`).join('');
+    $('feedback').textContent=selected===undefined?'':selected===p.correct?p.yes:p.no;$('feedback').className='feedback '+(selected!==undefined&&selected!==p.correct?'retry-text':'');
+  }
+  function render(){
+    hydrate();renderJourney();const p=phase();$('chapter').innerHTML=icon('leaf')+esc(t('chapter',{n:state.index+1,category:p.category.toUpperCase()}));$('phase-title').textContent=p.title;$('phase-description').textContent=p.description;
+    renderVisual();renderQuiz();renderRight();updateListen(false);$('back').disabled=state.index===0;$('next').innerHTML=esc(t(state.finished&&state.index===7?'review':state.index===7?'finish':'next'))+icon('right');
+    $('completion').hidden=!state.finished;
+    if(state.finished){const all=state.completed.size===8;$('completion').innerHTML=icon('sprout')+`<h2>${esc(t(all?'completionTitle':'incompleteTitle'))}</h2><p>${esc(t(all?'completionBody':'incompleteBody'))}</p><div style="margin-top:18px;padding:15px 18px;background:#eef6f2;border:1px solid #c8dece;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap"><div><strong style="display:block;font-size:.88rem;color:var(--deep)">${esc(t('consentTitle'))}</strong><span style="font-size:.78rem;color:var(--muted)">Review procedural disclosure, answer comprehension questions, and download a verified record.</span></div><button class="primary" data-action="consent-tool">${icon('shield')}${esc(t('consentCtaBtn'))}</button></div>`;}
+  }
+  function stopSequence(){clearInterval(sequenceTimer);state.playing=false;}
+  function go(index){if(index<0||index>7)return;stopAudio();stopSequence();state.index=index;state.hotspot=0;state.sequence=0;state.finished=false;render();$('phase-title').focus({preventScroll:true});if(matchMedia('(max-width:760px)').matches)$('phase-title').scrollIntoView({behavior:'instant',block:'start'});}
+  function next(){if(state.finished){go(0);return;}state.completed.add(state.index);if(state.index<7)go(state.index+1);else{stopAudio();state.finished=true;render();$('completion').focus();}}
+  function updateListen(active){$('listen').innerHTML=icon(active?'stop':'volume')+esc(t(active?'stop':'listen'));$('listen').setAttribute('aria-pressed',String(active));}
+  function stopAudio(){audioToken++;if('speechSynthesis' in window)window.speechSynthesis.cancel();activeUtterance=null;updateListen(false);}
+  function speak(){
+    if($('listen').getAttribute('aria-pressed')==='true'){stopAudio();return;}
+    if(!('speechSynthesis' in window)){toast(t('audioUnavailable'));return;}
+    // localService is essential: do not silently use a network-backed speech service.
+    const voices=window.speechSynthesis.getVoices().filter(v=>v.localService&&v.lang.toLowerCase().startsWith(state.language));
+    if(!voices.length){toast(t('audioOffline'));return;}
+    const p=phase(),token=++audioToken;
+    const parts=[p.title,p.description,...(p.points||[]).map(k=>CLINIC_CONFIG[k]),...(p.note||[])];
+    if(p.visual==='anatomy')parts.push(...t('hotspotDetails').flat());
+    if(p.visual==='placement')parts.push(...t('sequenceDetails'));
+    if(p.visual==='warnings')parts.push(t('warningIntro'),...t('warningItems'),t('warningAction'));
+    parts.push(...p.statuses.map(s=>s[1]+'. '+s[2]));if(state.caregiver)parts.push(t('caregiverLabel'),p.caregiver);parts.push(p.question,...p.answers,t('reminderBody'));
+    const u=new SpeechSynthesisUtterance(parts.join('. '));u.voice=voices[0];u.lang=voices[0].lang;u.rate=.87;u.onend=()=>{if(token===audioToken)updateListen(false);};u.onerror=e=>{if(token===audioToken){updateListen(false);if(e.error!=='canceled'&&e.error!=='interrupted')toast(t('audioError'));}};activeUtterance=u;updateListen(true);window.speechSynthesis.speak(u);
+  }
+  function setSequence(i,focus=true){stopSequence();state.sequence=i;renderVisual();if(focus)document.querySelector(`[data-sequence="${i}"]`)?.focus();}
+  function toggleSequence(){
+    if(state.playing){stopSequence();renderVisual();$('play-sequence').focus();return;}
+    if(state.sequence===3)state.sequence=0;state.playing=true;renderVisual();$('play-sequence').focus();sequenceTimer=setInterval(()=>{state.sequence++;if(state.sequence>=3){state.sequence=3;stopSequence();}const focused=document.activeElement?.id==='play-sequence';renderVisual();if(focused)$('play-sequence').focus();},4500);
+  }
+  function phoneBlock(){
+    const contact=(number)=>number?`<a href="tel:${esc(number.replace(/[^+\d]/g,''))}">${esc(number)}</a>`:esc(t('contactMissing'));
+    return `<div class="contact-box"><strong>${esc(CLINIC_CONFIG.centerName)}</strong>${esc(t('daytime'))}: ${contact(CLINIC_CONFIG.phone)}<br>${esc(t('afterHours'))}: ${contact(CLINIC_CONFIG.afterHoursPhone)}</div>`;
+  }
+  function printFooter(){return `<p class="print-footer">${esc(t('disclaimer'))}</p>`;}
+  function warningCompact(){return `<h3>${esc(t('handoutHeads')[4])}</h3><p>${esc(t('warningItems').join('; '))}.</p><p>${esc(t('noteEmergency'))}</p>`;}
+  function handoutBody(kind){
+    if(kind==='summary')return `<p>${esc(t('handoutIntro'))}</p><h3>${esc(t('handoutHeads')[0])}</h3><p>${esc(CLINIC_CONFIG.fastingInstructions)} ${esc(CLINIC_CONFIG.medicationInstructions)}</p><h3>${esc(t('handoutHeads')[1])}</h3><p>${esc(t('placementSummary'))}</p><h3>${esc(t('handoutHeads')[2])}</h3><p>${esc(CLINIC_CONFIG.dialysisStartInstructions)} ${esc(CLINIC_CONFIG.dressingInstructions)}</p><h3>${esc(t('handoutHeads')[3])}</h3><p>${esc(CLINIC_CONFIG.dailyCareInstructions)} ${esc(CLINIC_CONFIG.bathingInstructions)}</p>${warningCompact()}${phoneBlock()}${printFooter()}`;
+    if(kind==='checklist')return `<p>${esc(t('checklistIntro'))}</p><ul class="print-check">${t('checklistItems').map((s,i)=>`<li><input type="checkbox" id="care-check-${i}"><label for="care-check-${i}">${esc(s)}</label></li>`).join('')}</ul><h3>${esc(t('earlyCare'))}</h3><p>${esc(CLINIC_CONFIG.dressingInstructions)}</p><p>${esc(CLINIC_CONFIG.bathingInstructions)}</p>${warningCompact()}${phoneBlock()}${printFooter()}`;
+    return `<p>${esc(t('caregiverIntro'))}</p><ul>${t('caregiverItems').map(s=>`<li>${esc(s)}</li>`).join('')}</ul>${warningCompact()}${phoneBlock()}${printFooter()}`;
+  }
+  function renderClinicalGallery(index){
+    const cur=Math.max(0,Math.min(CLINICAL_STEPS.length-1,index));
+    state.galleryIndex=cur;
+    const step=CLINICAL_STEPS[cur];
+    $('modal-title').textContent=t('galleryTitle');
+    $('modal').classList.add('gallery-modal');
+    $('modal-body').innerHTML=`<div class="gallery-grid"><div class="gallery-frame"><img class="gallery-img" src="${step.image}" alt="${esc(step.alt)}" id="gallery-photo"><div class="gallery-badge">${esc('Step '+(cur+1)+' of '+CLINICAL_STEPS.length)}</div></div><div class="gallery-info"><div class="gallery-counter">Clinical Step ${cur+1} of ${CLINICAL_STEPS.length}</div><h3 class="gallery-title">${esc(step.title)}</h3><p class="gallery-sub">${esc(step.sub)}</p><div class="gallery-tags">${step.instruments.map(inst=>`<span class="inst-tag">${esc(inst)}</span>`).join('')}</div><div class="gallery-card"><h4>${icon('shield')} Surgical Action</h4><p>${esc(step.action)}</p></div><div class="gallery-card"><h4>${icon('leaf')} Clinical Rationale</h4><p>${esc(step.rationale)}</p></div><div class="gallery-card correlation"><h4>${icon('heart')} Guide Correlation</h4><p>${esc(step.correlation)}</p></div></div></div><div class="gallery-nav"><button class="outline-btn" id="gallery-prev" ${cur===0?'disabled':''} aria-label="Previous step">${icon('left')}<span>Previous</span></button><div class="gallery-pills" role="group" aria-label="Procedure step selector">${CLINICAL_STEPS.map((_,i)=>`<button class="gallery-pill ${i===cur?'active':''}" data-gallery-step="${i}" aria-label="Step ${i+1}" aria-pressed="${i===cur}">${i+1}</button>`).join('')}</div><button class="outline-btn" id="gallery-next" ${cur===CLINICAL_STEPS.length-1?'disabled':''} aria-label="Next step"><span>Next</span>${icon('right')}</button></div>`;
+    $('modal-footer').innerHTML=`<span class="gallery-note">${icon('info')} Real procedural photography · Modified Seldinger percutaneous technique</span><button class="primary" data-action="close">${esc(t('close'))}</button>`;
+    $('modal').showModal();$('modal').scrollTop=0;
+  }
+  function openModal(kind){
+    stopAudio();const wasPlaying=state.playing;stopSequence();if(wasPlaying)renderVisual();let title,body,buttons;
+    if(kind==='consent-tool'){renderConsentCompanion(state.consentStep||0);return;}
+    if(['summary','checklist','caregiver'].includes(kind)){title=t(kind==='summary'?'summaryTitle':kind==='checklist'?'checklistTitle':'caregiverTitle');body=handoutBody(kind);buttons=`<button class="outline-btn" data-action="print">${icon('printer')}${esc(t('print'))}</button>${kind==='summary'?`<button class="primary" data-action="download">${icon('download')}${esc(t('download'))}</button>`:''}`;}
+    else if(kind==='gallery-prompt'){
+      if(state.galleryConfirmed){renderClinicalGallery(state.galleryIndex||0);return;}
+      title=t('gallerySensitiveTitle');
+      body=`<p class="note-box" style="margin-top:0">${esc(t('gallerySensitiveIntro'))}</p><p>${esc(t('gallerySensitiveAudience'))}</p><p class="detail-note" style="margin:14px 0;border-left:3px solid var(--teal);padding-left:12px">${icon('info')}<span>${esc(t('gallerySensitiveWarning'))}</span></p>`;
+      buttons=`<button class="outline-btn" data-action="close">${esc(t('keepIllustrated'))}</button><button class="primary" data-action="confirm-gallery">${icon('camera')}${esc(t('viewPhotos'))}</button>`;
+    }
+    else if(kind==='team'){title=t('teamTitle');body=`<p>${esc(t('teamIntro'))}</p>${phoneBlock()}<h3>${esc(t('questionsTitle'))}</h3><ul>${t('teamQuestions').map(s=>`<li>${esc(s)}</li>`).join('')}</ul><p class="note-box">${esc(t('noteEmergency'))}</p>`;buttons=`<button class="primary" data-action="close">${esc(t('close'))}</button>`;}
+    else if(kind==='reset'){title=t('resetTitle');body=`<p>${esc(t('resetBody'))}</p>`;buttons=`<button class="outline-btn" data-action="close">${esc(t('cancel'))}</button><button class="primary" data-action="confirm-reset">${esc(t('resetConfirm'))}</button>`;}
+    else{title=t('sourcesTitle');body=`<p>${esc(t('sourcesIntro'))}</p><p class="note-box">${esc(CLINIC_CONFIG.reviewedBy&&CLINIC_CONFIG.reviewDate?t('reviewed',{name:CLINIC_CONFIG.reviewedBy,date:CLINIC_CONFIG.reviewDate}):t('reviewPending'))}</p><h3>${esc(t('sourcesHeading'))}</h3><ul>${t('sourceNames').map((s,i)=>`<li><a href="${SOURCE_URLS[i]}" target="_blank" rel="noopener noreferrer">${esc(s)}</a></li>`).join('')}</ul><p>${esc(t('sourcesNote'))}</p><h3>${esc(t('privacyTitle'))}</h3><p>${esc(t('privacyBody'))}</p>`;buttons=`<button class="primary" data-action="close">${esc(t('close'))}</button>`;}
+    $('modal-title').textContent=title;$('modal-body').innerHTML=body;$('modal-footer').innerHTML=buttons;$('close-modal').innerHTML=icon('close');$('modal').showModal();$('modal').scrollTop=0;
+  }
+  function renderConsentCompanion(stepIndex){
+    const cur=Math.max(0,Math.min(CONSENT_SECTIONS.length-1,stepIndex));
+    state.consentStep=cur;
+    const sec=CONSENT_SECTIONS[cur];
+    $('modal-title').textContent=t('consentModalTitle');
+    $('modal').classList.remove('gallery-modal');
+    $('modal').classList.add('consent-modal');
+    const stepper=`<div class="consent-stepper" role="tablist" aria-label="Consent discussion modules">${CONSENT_SECTIONS.map((s,i)=>`<button class="consent-step-btn ${i===cur?'active':''} ${i<cur?'done':''}" data-consent-step="${i}" role="tab" aria-selected="${i===cur}"><span class="step-icon">${i<cur?icon('check'):i+1}</span><span>${esc(s.shortTitle)}</span></button>`).join('')}</div>`;
+    let content=`<span class="consent-badge">${esc(sec.badge)}</span><h3 style="margin:0 0 6px;font-family:Georgia,serif;font-size:1.3rem;font-weight:400;color:var(--deep)">${esc(sec.title)}</h3><p style="margin:0 0 16px;font-size:.84rem;color:var(--muted);line-height:1.6">${esc(sec.lead)}</p>`;
+    if(sec.id==='overview'||sec.id==='technique'||sec.id==='alternatives'||sec.id==='risks'){
+      content+=`<div class="consent-grid">${sec.cards.map(c=>`<div class="consent-card ${c.kind==='immediate'?'risk-card-immediate':c.kind==='delayed'?'risk-card-delayed':''}"><h4>${icon(c.icon)}<span>${esc(c.title)}</span></h4><p>${esc(c.text)}</p></div>`).join('')}</div>`;
+      content+=`<div class="checkin-box"><p>${icon('heart')} ${esc(sec.checkin)}</p><div class="checkin-actions"><button class="outline-btn" data-consent-review>${esc(t('consentReviewBtn'))}</button><button class="primary" data-consent-next>${esc(t('consentProceedBtn'))} (${cur+2}/6)${icon('right')}</button></div></div>`;
+    }else if(sec.id==='quiz'){
+      content+=`<div class="consent-quiz-list">${sec.questions.map((q,qIdx)=>{
+        const selected=state.consentQuiz[qIdx];
+        const isAnswered=selected!==undefined;
+        const isCorrect=selected===q.correct;
+        return `<div class="consent-quiz-item" style="margin-bottom:16px;background:#f9fbf8;border:1px solid #dfeae0;border-radius:10px;padding:14px 16px">
+          <div style="font-weight:700;font-size:.84rem;color:var(--deep);margin-bottom:10px">Question ${qIdx+1} of ${sec.questions.length}: ${esc(q.q)}</div>
+          <div class="answers" style="grid-template-columns:1fr;gap:6px">
+            ${q.options.map((opt,optIdx)=>`<button class="answer ${selected===optIdx?'selected':''} ${selected===optIdx&&!isCorrect?'retry':''}" data-consent-quiz-q="${qIdx}" data-consent-quiz-opt="${optIdx}" aria-pressed="${selected===optIdx}"><span class="radio-dot" aria-hidden="true"></span>${esc(opt)}</button>`).join('')}
+          </div>
+          ${isAnswered?`<p class="detail-note" style="margin:10px 0 0;font-size:.78rem;border-left:3px solid ${isCorrect?'var(--teal)':'#c75043'};padding-left:10px">${isCorrect?icon('check'):icon('flag')}<span>${esc(q.explanation)}</span></p>`:''}
+        </div>`;
+      }).join('')}</div>`;
+      const answeredCount=Object.keys(state.consentQuiz).length;
+      content+=`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:12px 14px;background:#edf5ee;border-radius:9px;border:1px solid #c9decb;flex-wrap:wrap">
+        <span style="font-size:.79rem;font-weight:600;color:var(--deep)">${answeredCount} of ${sec.questions.length} questions completed</span>
+        <button class="primary" data-consent-next>${esc(t('consentProceedBtn'))} to Declarations (6/6)${icon('right')}</button>
+      </div>`;
+    }else if(sec.id==='declarations'){
+      const pt=state.consentPatient;
+      content+=`<div class="patient-form-grid">
+        <label>Patient Full Name<input type="text" id="consent-input-name" placeholder="e.g. Eleanor Vance" value="${esc(pt.name)}"></label>
+        <label>Age / Gender<input type="text" id="consent-input-age" placeholder="e.g. 62 / Female" value="${esc(pt.age)}"></label>
+        <label>Hospital / MRN ID<input type="text" id="consent-input-mrn" placeholder="e.g. MRN-94021" value="${esc(pt.mrn)}"></label>
+        <label>Attending Clinician<input type="text" id="consent-input-clinician" placeholder="e.g. Dr. A. Sharma" value="${esc(pt.clinician)}"></label>
+        <label>Discussion Date<input type="date" id="consent-input-date" value="${esc(pt.date)}"></label>
+      </div>
+      <h4 style="margin:18px 0 8px;font-size:.88rem;color:var(--deep);font-weight:700">Patient Informed Understanding Declarations</h4>
+      <ul class="decl-list">
+        ${sec.declarations.map((d,i)=>`<li class="decl-item"><input type="checkbox" id="consent-decl-${i}" data-consent-decl="${i}" ${state.consentDeclarations[i]?'checked':''}><label for="consent-decl-${i}"><strong>${i+1}.</strong> ${esc(d)}</label></li>`).join('')}
+      </ul>
+      <h4 style="margin:18px 0 8px;font-size:.88rem;color:var(--deep);font-weight:700">Physical Signature Verification Preview</h4>
+      <div class="signature-preview">
+        <div>
+          <strong>Patient / Authorized Guardian</strong>
+          <p style="font-size:.72rem;color:var(--muted);margin:4px 0 0">I confirm I have reviewed this companion and discussed my questions.</p>
+          <div class="sig-line">Patient Signature / Thumbprint &amp; Date</div>
+        </div>
+        <div>
+          <strong>Attending Nephrologist</strong>
+          <p style="font-size:.72rem;color:var(--muted);margin:4px 0 0">I have explained procedural indications, risks, alternatives, and answered questions.</p>
+          <div class="sig-line">Clinician Signature, Reg No. &amp; Date</div>
+        </div>
+        <div>
+          <strong>PD Access Nurse / Witness</strong>
+          <p style="font-size:.72rem;color:var(--muted);margin:4px 0 0">Verified patient comprehension review and early access education.</p>
+          <div class="sig-line">Nurse Signature &amp; Date</div>
+        </div>
+      </div>
+      <p class="note-box" style="margin-top:14px">${icon('info')} <strong>Hospital Record Notice:</strong> This companion assists patient comprehension, retention, and shared decision-making. Formal statutory informed consent is executed concurrently on your healthcare facility’s official documentation.</p>`;
+    }
+    $('modal-body').innerHTML=stepper+content;
+    if(cur===5){
+      $('modal-footer').innerHTML=`<button class="outline-btn" data-action="print">${icon('printer')}<span>${esc(t('consentPrintBtn'))}</span></button><button class="primary" data-action="download-consent">${icon('download')}<span>${esc(t('consentDownloadBtn'))}</span></button><button class="outline-btn" data-action="close">${esc(t('close'))}</button>`;
+    }else{
+      $('modal-footer').innerHTML=`<button class="outline-btn" data-action="close">${esc(t('close'))}</button><button class="primary" data-consent-next>${esc(t('consentProceedBtn'))}${icon('right')}</button>`;
+    }
+    $('close-modal').innerHTML=icon('close');
+    $('modal').showModal();
+    $('modal').scrollTop=0;
+  }
+  // Dependency-free, one-page A4 PDF. English/Latin handout uses standard PDF fonts.
+  // For Devanagari translations, use the print route (browser font shaping) or embed
+  // a suitable Unicode font and PDF shaping implementation before enabling download.
+  function downloadSummary(){
+    const latin=s=>String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/[^\x20-\x7e]/g,'?');
+    // Preserve non-Latin clinic instructions via the browser's native PDF export.
+    const custom=Object.values(CLINIC_CONFIG).join('');if(/[^\u0000-\u024f\u2000-\u206f]/.test(custom)||state.language!=='en'){window.print();return;}
+    const wrap=(value,limit)=>{const words=latin(value).split(/\s+/),lines=[];let line='';for(const word of words){if((line+' '+word).trim().length>limit&&line){lines.push(line);line=word;}else line=(line+' '+word).trim();}if(line)lines.push(line);return lines;};
+    const heads=t('handoutHeads');const sections=[
+      [heads[0],CLINIC_CONFIG.fastingInstructions+' '+CLINIC_CONFIG.medicationInstructions],
+      [heads[1],t('placementSummary')],
+      [heads[2],CLINIC_CONFIG.dialysisStartInstructions+' '+CLINIC_CONFIG.dressingInstructions],
+      [heads[3],CLINIC_CONFIG.dailyCareInstructions+' '+CLINIC_CONFIG.activityInstructions+' '+CLINIC_CONFIG.bathingInstructions],
+      [heads[4],t('warningItems').join('; ')+'. '+t('noteEmergency')],
+      [CLINIC_CONFIG.centerName,t('daytime')+': '+(CLINIC_CONFIG.phone||t('contactMissing'))+'  '+t('afterHours')+': '+(CLINIC_CONFIG.afterHoursPhone||t('contactMissing'))]
+    ];
+    let font=10,leading=14,limit=93;
+    const height=()=>sections.reduce((n,[h,b])=>n+25+wrap(b,limit).length*leading,0)+wrap(t('disclaimer'),limit).length*leading+100;
+    while(height()>735&&font>8){font-=.5;leading-=.6;limit+=5;}
+    // Extremely long local instructions should flow over pages, not be truncated.
+    if(height()>735){window.print();return;}
+    const pdfEscape=s=>latin(s).replace(/([\\()])/g,'\\$1');let stream='',y=790;
+    const line=(s,size,bold=false,color='0.14 0.24 0.20')=>{stream+=`BT /${bold?'F2':'F1'} ${size} Tf ${color} rg 1 0 0 1 45 ${y.toFixed(1)} Tm (${pdfEscape(s)}) Tj ET\n`;};
+    line('PD companion',11,true,'0.13 0.43 0.35');y-=29;line(t('summaryTitle'),20,true);y-=22;line(t('handoutIntro'),9);y-=25;
+    for(const [heading,body]of sections){line(heading,11,true);y-=17;for(const row of wrap(body,limit)){line(row,font);y-=leading;}y-=10;}
+    y-=3;for(const row of wrap(t('disclaimer'),limit)){line(row,8);y-=11;}y-=5;line('Sources: ISPD PD access (2019), catheter infections (2023), peritonitis (2022).',8);
+    const objects=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>',`<< /Length ${stream.length} >>\nstream\n${stream}endstream`];
+    let pdf='%PDF-1.4\n',offsets=[0];objects.forEach((obj,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${obj}\nendobj\n`;});const xref=pdf.length;pdf+=`xref\n0 7\n0000000000 65535 f \n${offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')}trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+    const url=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));const a=document.createElement('a');a.href=url;a.download='PD-companion-your-journey.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(t('pdfSaved'));
+  }
+  function downloadConsentRecord(){
+    const latin=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/[^\x20-\x7e]/g,'?');
+    const wrap=(value,limit)=>{const words=latin(value).split(/\s+/),lines=[];let line='';for(const word of words){if((line+' '+word).trim().length>limit&&line){lines.push(line);line=word;}else line=(line+' '+word).trim();}if(line)lines.push(line);return lines;};
+    const pdfEscape=s=>latin(s).replace(/([\\()])/g,'\\$1');
+    let stream='', y=795;
+    const line=(s,size,bold=false,color='0.14 0.24 0.20')=>{stream+=`BT /${bold?'F2':'F1'} ${size} Tf ${color} rg 1 0 0 1 45 ${y.toFixed(1)} Tm (${pdfEscape(s)}) Tj ET\n`;};
+
+    line('PERITONEAL DIALYSIS CATHETER PLACEMENT - INFORMED DISCUSSION RECORD', 10.5, true, '0.13 0.43 0.35'); y-=16;
+    line('Shared Decision-Making, Procedural Disclosure & Comprehension Record (ISPD Reference)', 8.5, false, '0.35 0.45 0.40'); y-=20;
+
+    const pt=state.consentPatient;
+    const ptName = pt.name || 'Not specified (Sign on paper)';
+    const ptAge = pt.age || 'N/A';
+    const ptMrn = pt.mrn || 'N/A';
+    const ptDoc = pt.clinician || CLINIC_CONFIG.reviewedBy || 'Attending Nephrologist';
+    const ptDate = pt.date || new Date().toISOString().split('T')[0];
+
+    line(`Patient Name: ${ptName}    Age/Sex: ${ptAge}    MRN / Hospital ID: ${ptMrn}`, 8.5, true); y-=13;
+    line(`Attending Clinician: ${ptDoc}    Discussion Date: ${ptDate}    Center: ${CLINIC_CONFIG.centerName}`, 8, false); y-=16;
+
+    stream += `0.5 w 0.7 0.8 0.75 RG 45 ${y.toFixed(1)} m 550 ${y.toFixed(1)} l S\n`; y-=15;
+
+    line('1. VERIFIED CLINICAL DISCLOSURE MODULES COMPLETED', 9, true, '0.15 0.35 0.28'); y-=13;
+    const modules = [
+      '[X] Module 1 - Overview & Purpose: Peritoneal cavity access for continuous ambulatory (CAPD) or automated (APD) dialysis.',
+      '[X] Module 2 - Placement Technique: Percutaneous modified Seldinger route, 1% lidocaine numbing, saline fluid cushion.',
+      '[X] Module 3 - Benefits & Alternatives: In-center hemodialysis (fistula/graft/line), transplant evaluation, conservative care.',
+      '[X] Module 4 - Material Risks: Bleeding, organ injury (<0.5%), exit-site infection, peritonitis, dialysate leaks.',
+      `[X] Module 5 - Comprehension Quiz: Patient completed 4-question check (${Object.keys(state.consentQuiz).length}/4 answered).`
+    ];
+    for(const m of modules){ line(m, 7.5); y-=11; }
+    y-=4;
+
+    stream += `0.5 w 0.7 0.8 0.75 RG 45 ${y.toFixed(1)} m 550 ${y.toFixed(1)} l S\n`; y-=15;
+
+    line('2. PATIENT INFORMED UNDERSTANDING DECLARATIONS', 9, true, '0.15 0.35 0.28'); y-=13;
+    const decls = CONSENT_SECTIONS[5].declarations;
+    decls.forEach((d, idx)=>{
+      const isChecked = state.consentDeclarations[idx] !== false;
+      const prefix = isChecked ? '[X] ' : '[ ] ';
+      const rows = wrap(prefix + d, 92);
+      for(let r=0; r<rows.length; r++){
+        line(rows[r], 7.5, r===0 && isChecked);
+        y-=10.5;
+      }
+      y-=2;
+    });
+    y-=4;
+
+    stream += `0.5 w 0.7 0.8 0.75 RG 45 ${y.toFixed(1)} m 550 ${y.toFixed(1)} l S\n`; y-=15;
+
+    line('3. SHARED DECISION-MAKING & COUNSELING SIGNATURES', 9, true, '0.15 0.35 0.28'); y-=26;
+
+    line('___________________________________           ___________________________________           ___________________________________', 7.5, false, '0.4 0.4 0.4'); y-=11;
+    line('Patient / Representative Signature            Attending Nephrologist Signature              PD Access Nurse / Witness Signature', 7.5, true); y-=10;
+    line(`Printed Name: ${ptName.slice(0,25)}           Doctor Name: ${ptDoc.slice(0,25)}             Nurse Name: _______________________`, 7, false, '0.3 0.3 0.3'); y-=10;
+    line(`Date: ${ptDate}                               Date & Reg. No: ____________________          Date: ${ptDate}`, 7, false, '0.3 0.3 0.3'); y-=20;
+
+    line('Statutory Notice: This document records patient participation in digital shared decision-making and informed disclosure.', 7, false, '0.4 0.4 0.4'); y-=9;
+    line('Formal institutional legal consent is executed concurrently on official hospital documentation as mandated by healthcare regulations.', 7, false, '0.4 0.4 0.4'); y-=9;
+    line('Generated by Peritoneal Dialysis Interactive Decision Companion · Zero personal health data stored or transmitted.', 6.5, false, '0.5 0.5 0.5');
+
+    const objects=[
+      '<< /Type /Catalog /Pages 2 0 R >>',
+      '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>',
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>',
+      `<< /Length ${stream.length} >>\nstream\n${stream}endstream`
+    ];
+    let pdf='%PDF-1.4\n',offsets=[0];
+    objects.forEach((obj,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${obj}\nendobj\n`;});
+    const xref=pdf.length;
+    pdf+=`xref\n0 7\n0000000000 65535 f \n${offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')}trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+
+    const url=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='PD-Catheter-Informed-Consent-Record.pdf';
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast(t('consentRecordDownloaded'));
+  }
+  function resizeText(delta){state.scale=Math.min(1.375,Math.max(1,state.scale+delta));document.documentElement.style.setProperty('--scale',state.scale);$('font-down').disabled=state.scale<=1;$('font-up').disabled=state.scale>=1.375;toast(t('textSizeChanged',{n:Math.round(state.scale*100)}));}
+  function closeModal(){$('modal').classList.remove('gallery-modal','consent-modal');$('modal').close();}
+  document.addEventListener('click',event=>{
+    const target=event.target.closest('button');if(!target)return;
+    if(target.dataset.step!==undefined){go(Number(target.dataset.step));return;}
+    if(target.dataset.answer!==undefined){state.answers[state.index]=Number(target.dataset.answer);renderQuiz();document.querySelector(`[data-answer="${target.dataset.answer}"]`).focus();return;}
+    if(target.dataset.hotspot!==undefined){state.hotspot=Number(target.dataset.hotspot);renderVisual();document.querySelector(`[data-hotspot="${state.hotspot}"]`).focus();return;}
+    if(target.dataset.sequence!==undefined){setSequence(Number(target.dataset.sequence));return;}
+    if(target.id==='play-sequence'){toggleSequence();return;}
+    if(target.id==='gallery-prev'){if(state.galleryIndex>0)renderClinicalGallery(state.galleryIndex-1);return;}
+    if(target.id==='gallery-next'){if(state.galleryIndex<CLINICAL_STEPS.length-1)renderClinicalGallery(state.galleryIndex+1);return;}
+    if(target.dataset.galleryStep!==undefined){renderClinicalGallery(Number(target.dataset.galleryStep));return;}
+    if(target.dataset.consentStep!==undefined){state.consentStep=Number(target.dataset.consentStep);renderConsentCompanion(state.consentStep);return;}
+    if(target.hasAttribute('data-consent-next')||target.closest('[data-consent-next]')){
+      if(state.consentStep<CONSENT_SECTIONS.length-1){
+        state.consentStep++;
+        renderConsentCompanion(state.consentStep);
+      }
+      return;
+    }
+    if(target.hasAttribute('data-consent-review')||target.closest('[data-consent-review]')){$('modal').scrollTop=0;toast('Reviewing current section');return;}
+    if(target.dataset.consentQuizQ!==undefined){
+      const q=Number(target.dataset.consentQuizQ),opt=Number(target.dataset.consentQuizOpt);
+      state.consentQuiz[q]=opt;
+      renderConsentCompanion(state.consentStep);
+      return;
+    }
+    const action=target.dataset.action;if(!action)return;
+    if(action==='close')closeModal();
+    else if(action==='print')window.print();
+    else if(action==='download')downloadSummary();
+    else if(action==='download-consent')downloadConsentRecord();
+    else if(action==='consent-tool')openModal('consent-tool');
+    else if(action==='confirm-reset'){state.completed.clear();state.answers={};closeModal();go(0);}
+    else if(action==='confirm-gallery'){state.galleryConfirmed=true;renderClinicalGallery(state.galleryIndex||0);}
+    else openModal(action);
+  });
+  document.addEventListener('change',event=>{
+    const decl=event.target.dataset.consentDecl;
+    if(decl!==undefined){state.consentDeclarations[Number(decl)]=event.target.checked;return;}
+  });
+  document.addEventListener('input',event=>{
+    if(event.target.id==='consent-input-name')state.consentPatient.name=event.target.value;
+    if(event.target.id==='consent-input-age')state.consentPatient.age=event.target.value;
+    if(event.target.id==='consent-input-mrn')state.consentPatient.mrn=event.target.value;
+    if(event.target.id==='consent-input-clinician')state.consentPatient.clinician=event.target.value;
+    if(event.target.id==='consent-input-date')state.consentPatient.date=event.target.value;
+  });
+  $('back').addEventListener('click',()=>go(state.index-1));$('next').addEventListener('click',next);$('listen').addEventListener('click',speak);$('font-down').addEventListener('click',()=>resizeText(-.125));$('font-up').addEventListener('click',()=>resizeText(.125));$('font-down').disabled=true;
+  $('caregiver-toggle').addEventListener('change',e=>{state.caregiver=e.target.checked;stopAudio();renderRight();});
+  $('language').addEventListener('change',e=>{const lang=e.target.value;if(!TRANSLATIONS[lang]){e.target.value=state.language;toast(t('languageUnavailable'));return;}stopAudio();state.language=lang;document.documentElement.lang=lang;render();});
+  $('close-modal').addEventListener('click',closeModal);
+  $('modal').addEventListener('close',()=>$('modal').classList.remove('gallery-modal','consent-modal'));
+  $('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
+  document.addEventListener('keydown',e=>{
+    if($('modal').open && $('modal').classList.contains('gallery-modal')){
+      if(e.key==='ArrowLeft'&&state.galleryIndex>0)renderClinicalGallery(state.galleryIndex-1);
+      else if(e.key==='ArrowRight'&&state.galleryIndex<CLINICAL_STEPS.length-1)renderClinicalGallery(state.galleryIndex+1);
+    }
+  });
+  window.addEventListener('pagehide',()=>{stopAudio();stopSequence();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){stopAudio();if(state.playing){stopSequence();renderVisual();}}});
+  if('speechSynthesis' in window)window.speechSynthesis.getVoices();
+  render();
+  </script>
+</body>
+</html>

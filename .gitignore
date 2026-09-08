@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Safety backup files
+*.bak
+
+# Audit and verification test output artifacts
+audit-mobile-*.png
+verification/*.png
+verification/*.pdf
