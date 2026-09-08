@@ -3178,57 +3178,110 @@
         if(name.includes('neerja'))s+=600;
         if(name.includes('samantha'))s+=200;
       }else if(targetLang==='hi'){
-        if(lang.startsWith('hi'))s+=500;
-        else if(lang==='en-in'||isIndian)s+=200;
-        else s-=500;
-        if(name.includes('lekha'))s+=600;
-        if(name.includes('swara'))s+=600;
-        if(name.includes('kalpana'))s+=400;
+        if(lang.startsWith('hi'))s+=900;
+        else if(lang==='en-in'||isIndian)s+=100;
+        else s-=1500;
+        if(name.includes('lekha'))s+=700;
+        if(name.includes('swara'))s+=700;
+        if(name.includes('kalpana'))s+=500;
+        if(name.includes('google')&&name.includes('हिन्दी'))s+=800;
       }else if(targetLang==='mr'){
-        if(lang.startsWith('mr'))s+=550;
-        else if(lang.startsWith('hi'))s+=400;
-        else if(lang==='en-in'||isIndian)s+=200;
-        else s-=500;
-        if(name.includes('aarohi'))s+=600;
-        if(name.includes('lekha'))s+=500;
-        if(name.includes('swara'))s+=450;
+        if(lang.startsWith('mr'))s+=950;
+        else if(lang.startsWith('hi'))s+=700;
+        else if(lang==='en-in'||isIndian)s+=100;
+        else s-=1500;
+        if(name.includes('aarohi'))s+=700;
+        if(name.includes('lekha'))s+=600;
+        if(name.includes('swara'))s+=550;
+        if(name.includes('google')&&(name.includes('मराठी')||name.includes('marathi')))s+=800;
       }
-      if(name.includes('natural')||name.includes('neural'))s+=100;
-      if(name.includes('enhanced')||name.includes('premium'))s+=80;
+      if(name.includes('natural')||name.includes('neural'))s+=120;
+      if(name.includes('enhanced')||name.includes('premium'))s+=90;
+      if(v.localService)s+=40;
       return s;
     }
     const sorted=[...voices].sort((a,b)=>score(b)-score(a));
     return sorted[0]&&score(sorted[0])>-1000?sorted[0]:(voices[0]||null);
   }
 
+  function cleanSpeechText(text, lang){
+    if(!text)return '';
+    let s=String(text);
+    s=s.replace(/[·•]/g, ', ');
+    s=s.replace(/[—–]/g, ', ');
+    s=s.replace(/\.{2,}/g, lang==='en'?'. ':'। ');
+
+    if(lang==='hi'||lang==='mr'){
+      s=s.replace(/।\s*\.+/g, '। ');
+      s=s.replace(/\.+\s*।/g, '। ');
+      s=s.replace(/\bसेमी\.?/g, ' सेंटीमीटर');
+      s=s.replace(/\bमिमी\.?/g, ' मिलीमीटर');
+      s=s.replace(/डॉ\./g, 'डॉक्टर ');
+      s=s.replace(/सं\./g, 'संख्या ');
+      s=s.replace(/नं\./g, 'नंबर ');
+      s=s.replace(/\s*\(([^)]+)\)\s*/g, ', $1, ');
+      s=s.replace(/(?<!\d)\.(?!\d)/g, '। ');
+      s=s.replace(/([^\d])\.(?=\d)/g, '$1। ');
+      s=s.replace(/(?<=\d)\.([^\d])/g, '। $1');
+      s=s.replace(/[:;]/g, ', ');
+      s=s.replace(/।\s*।+/g, '। ');
+      s=s.replace(/,\s*।/g, '। ');
+      s=s.replace(/।\s*,/g, '। ');
+      s=s.replace(/\s*([,।])\s*/g, '$1 ');
+    }else{
+      s=s.replace(/[:;]/g, ', ');
+      s=s.replace(/\s*\.+\s*/g, '. ');
+      s=s.replace(/\s*([,.])\s*/g, '$1 ');
+    }
+
+    s=s.replace(/[*#~_\\\/]/g, ' ');
+    s=s.replace(/,\s*,+/g, ', ');
+    s=s.replace(/\s+/g, ' ').trim();
+    return s;
+  }
+
   function speak(){
     if($('listen').getAttribute('aria-pressed')==='true'){stopAudio();return;}
     if(!('speechSynthesis' in window)){toast(t('audioUnavailable'));return;}
-    const allLocal=window.speechSynthesis.getVoices().filter(v=>v.localService);
-    let voices=allLocal.filter(v=>v.lang.toLowerCase().startsWith(state.language==='en'?'en':state.language==='hi'?'hi':'mr'));
-    if(!voices.length && state.language==='mr'){
-      voices=allLocal.filter(v=>v.lang.toLowerCase().startsWith('hi')||v.lang.toLowerCase().startsWith('en'));
-    }else if(!voices.length && state.language==='hi'){
-      voices=allLocal.filter(v=>v.lang.toLowerCase().startsWith('hi')||v.lang.toLowerCase().startsWith('en'));
+    const allVoices=window.speechSynthesis.getVoices();
+    const targetLang=state.language;
+    let voices=allVoices.filter(v=>{
+      const l=(v.lang||'').toLowerCase().replace('_','-');
+      if(targetLang==='hi') return l.startsWith('hi');
+      if(targetLang==='mr') return l.startsWith('mr') || l.startsWith('hi');
+      return l.startsWith('en');
+    });
+    if(!voices.length && targetLang==='mr'){
+      voices=allVoices.filter(v=>(v.lang||'').toLowerCase().startsWith('hi'));
+    }
+    if(!voices.length){
+      voices=allVoices;
     }
     if(!voices.length){toast(t('audioOffline'));return;}
-    const bestVoice=getBestVoice(state.language,voices);
+    const bestVoice=getBestVoice(targetLang,voices);
     if(!bestVoice){toast(t('audioOffline'));return;}
     const p=phase(),token=++audioToken;
+    const isIndic=targetLang==='hi'||targetLang==='mr';
+    const sep=isIndic?'। ':'. ';
     const parts=[p.title,p.description,...(p.points||[]).map(k=>tClinic(k)),...(p.note||[])];
     if(p.visual==='anatomy')parts.push(...t('hotspotDetails').flat(),...t('layerNames'),...t('cuffKey'));
     if(p.visual==='prepare')parts.push(...t('markLabels'));
     if(p.visual==='comfort')parts.push(...t('numbLabels'));
-    if(p.visual==='placement')parts.push(...t('awakeNote'),...t('sequenceTitles').map((s,i)=>s+'. '+t('sequenceDetails')[i]));
+    if(p.visual==='placement')parts.push(...t('awakeNote'),...t('sequenceTitles').map((s,i)=>s+(isIndic?'। ':'. ')+t('sequenceDetails')[i]));
     if(p.visual==='recovery')parts.push(...t('flowLabels'));
-    if(p.visual==='healing')parts.push(...t('cuffStages').map((s,i)=>s+'. '+t('cuffStageNotes')[i]));
+    if(p.visual==='healing')parts.push(...t('cuffStages').map((s,i)=>s+(isIndic?'। ':'. ')+t('cuffStageNotes')[i]));
     if(p.visual==='living')parts.push(...t('livingLabels'));
     if(p.visual==='warnings')parts.push(t('effluentNote'),t('warningIntro'),...t('warningItems'),t('warningAction'));
-    parts.push(...p.statuses.map(s=>s[1]+'. '+s[2]));if(state.caregiver)parts.push(t('caregiverLabel'),p.caregiver);parts.push(p.question,...p.answers,t('reminderBody'));
-    const u=new SpeechSynthesisUtterance(parts.join('. '));
+    parts.push(...p.statuses.map(s=>s[1]+(isIndic?'। ':'. ')+s[2]));
+    if(state.caregiver)parts.push(t('caregiverLabel'),p.caregiver);
+    parts.push(p.question,...p.answers,t('reminderBody'));
+
+    const rawText=parts.filter(Boolean).join(sep);
+    const spokenText=cleanSpeechText(rawText,targetLang);
+    const u=new SpeechSynthesisUtterance(spokenText);
     u.voice=bestVoice;
-    u.lang=bestVoice.lang||(state.language==='hi'?'hi-IN':state.language==='mr'?'mr-IN':'en-IN');
-    u.rate=state.language==='en'?0.93:0.90;
+    u.lang=bestVoice.lang||(targetLang==='hi'?'hi-IN':targetLang==='mr'?'mr-IN':'en-IN');
+    u.rate=targetLang==='en'?0.93:0.88;
     u.pitch=1.05;
     u.onend=()=>{if(token===audioToken)updateListen(false);};
     u.onerror=e=>{if(token===audioToken){updateListen(false);if(e.error!=='canceled'&&e.error!=='interrupted')toast(t('audioError'));}};
