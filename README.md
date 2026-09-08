@@ -3,13 +3,14 @@
 Open **index.html** in Chrome, Edge, Safari, or Firefox. 
 
 > [!IMPORTANT]
-> **Asset Packaging:** The app is no longer a single standalone file. The `assets/clinical/*.webp` directory containing 9 high-resolution procedural photographs must accompany `index.html` when copying or deploying the tool to clinic tablets or computers.
+> **Asset Packaging:** The app is no longer a single standalone file. The `assets/clinical/*.webp` directory containing 10 high-resolution procedural photographs must accompany `index.html` when copying or deploying the tool to clinic tablets or computers.
 
 This is a comprehensive patient and caregiver education and shared decision-making system for **percutaneous PD catheter insertion (CAPD/APD)**. It integrates:
 1. **Realistic Anatomical Rebuild Engine:** Layered cut-through of the abdominal wall (skin $\to$ fat $\to$ anterior rectus sheath $\to$ rectus abdominis muscle $\to$ posterior rectus sheath $\to$ parietal peritoneum $\to$ cavity), anatomically grounded front-view torso (colon, small bowel, bladder, deep cuff in muscle, subcutaneous tunnel, downward-facing exit, curled pelvic tip), 5 interactive anatomy hotspots, and rebuilt vector figures across all 8 journey steps.
 2. **8-Stage Bedside Percutaneous Sequence:** Grounded in the Komenda/Manitoba bedside percutaneous technique with play/pause/replay controls, individual stage selection, and automated `.route` guidewire motion animation (with strict WCAG `prefers-reduced-motion: reduce` compliance).
-3. **9-Step Real Clinical Photo Reference:** Accessible via an opt-in sensitive content warning gate (`assets/clinical/step-1` to `step-9`), illustrating sterile drapes, 18G needle puncture, saline hydrodissection cushion, J-tip guidewire feeding, dilator & peel-away sheath conduit advancement, Dacron cuff seating, rigid stylet pelvic positioning, split-sheath removal with subcutaneous tunneling, and fluid flow patency testing.
+3. **10-Step Real Clinical Photo Reference:** Accessible via an opt-in sensitive content warning gate (`assets/clinical/step-1` to `step-10`), illustrating sterile drapes, 18G needle puncture, saline hydrodissection cushion, J-tip guidewire feeding, dilator & peel-away sheath conduit advancement, Dacron cuff seating, rigid stylet pelvic positioning, split-sheath removal with subcutaneous tunneling, fluid flow patency testing, and the completed catheter assembly with titanium adapter and minicap.
 4. **Command Hospital (SC) Pune Informed Consent & Decision Companion:** Incorporates military and civilian admission fields (Service No, Rank, Unit, HID No, Ward, Diagnosis, Clinician), 4-tier risk stratification (immediate, delayed infectious, technical/mechanical, anesthetic), 4-question comprehension quiz with real-time feedback, 6 statutory declarations (including Open Mini-Laparotomy contingency authorization), capacity assessment protocol, 4-party physical signature lines, and offline single-page A4 PDF generation.
+5. **Complete Trilingual Localization (English, हिन्दी, मराठी):** Seamless one-click language toggle between English, Hindi, and Marathi across the entire tool — including educational journey phases, layered anatomical vector diagrams, quiz check-ins, clinical instruction handouts, photo gallery descriptions, and Command Hospital Pune consent modules.
 
 ## Privacy & PHI Disclosure on Shared Devices
 
@@ -52,5 +53,6 @@ node verification/check.cjs
 
 node verification/verify-consent.cjs
 node verification/verify-mobile.cjs
+node verification/verify-languages.cjs
 ```
 

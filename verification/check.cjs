@@ -31,12 +31,15 @@ const fs = require('node:fs');
       assert.equal(await page.evaluate(() => document.activeElement.dataset.hotspot), String(i));
     }
     await page.locator('#caregiver-toggle').check();
-    assert.equal(await page.locator('.caregiver-card').count(), 1);
     await page.locator('#language').selectOption('hi');
-    assert.equal(await page.locator('#language').inputValue(), 'en');
-    assert.match(await page.locator('#toast').textContent(), /not yet available/);
+    assert.equal(await page.locator('#language').inputValue(), 'hi');
+    assert.equal(await page.locator('#phase-title').textContent(), 'अपने पीडी कैथेटर को समझें');
     await page.locator('#language').selectOption('mr');
+    assert.equal(await page.locator('#language').inputValue(), 'mr');
+    assert.equal(await page.locator('#phase-title').textContent(), 'तुमचे पीडी कॅथेटर समजून घ्या');
+    await page.locator('#language').selectOption('en');
     assert.equal(await page.locator('#language').inputValue(), 'en');
+    assert.equal(await page.locator('#phase-title').textContent(), 'Meet your PD catheter');
 
     // Every phase gives immediate feedback, accepts correction and retains it on revisits.
     for (let i = 0; i < 8; i++) {
@@ -89,8 +92,8 @@ const fs = require('node:fs');
         assert.equal(await page.locator('#modal').evaluate(el => el.classList.contains('gallery-modal')), true);
         assert.equal(await page.locator('#modal-title').textContent(), 'Clinical photo reference');
         
-        // Verify all 9 clinical steps navigate and photos render with valid natural dimensions
-        for (let s = 0; s < 9; s++) {
+        // Verify all 10 clinical steps navigate and photos render with valid natural dimensions
+        for (let s = 0; s < 10; s++) {
           assert.equal(await page.evaluate(() => state.galleryIndex), s);
           const imgNaturalWidth = await page.locator('#gallery-photo').evaluate(async img => {
             if (!img.complete) {
@@ -101,7 +104,7 @@ const fs = require('node:fs');
           });
           const imgSrc = await page.locator('#gallery-photo').getAttribute('src');
           assert(imgNaturalWidth > 0, `Clinical image for step ${s+1} (${imgSrc}) failed to load or has 0 naturalWidth`);
-          if (s < 8) {
+          if (s < 9) {
             await page.locator('#gallery-next').click();
           }
         }
