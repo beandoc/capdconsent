@@ -62,7 +62,7 @@ const assert = require('assert');
 
     console.log('--- Test 1: Verify Initial Page & Resources Button ---');
     const title = await evaluate('document.title');
-    assert.equal(title, 'PD companion — Your catheter journey');
+    assert.equal(title, 'PD Consent Buddy — Your catheter journey');
 
     const hasResourceBtn = await evaluate('!!document.querySelector("button[data-action=\\"consent-tool\\"]")');
     assert.equal(hasResourceBtn, true, 'Resource consent button must exist');

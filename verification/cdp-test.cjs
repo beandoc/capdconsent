@@ -62,7 +62,7 @@ const assert = require('assert');
     
     console.log('--- Step 1: Check initial page state ---');
     const title = await evaluate('document.title');
-    assert.equal(title, 'PD companion — Your catheter journey');
+    assert.equal(title, 'PD Consent Buddy — Your catheter journey');
     
     console.log('--- Step 2: Navigate to Step 4 (Placing the catheter) ---');
     await evaluate('go(3)');

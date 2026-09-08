@@ -1,4 +1,4 @@
-# PD companion — Simulation, Clinical Reference & Consent Companion
+# PD Consent Buddy — Simulation, Clinical Reference & Consent Companion
 
 Open **index.html** in Chrome, Edge, Safari, or Firefox. 
 
