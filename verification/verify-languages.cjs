@@ -62,6 +62,7 @@ const assert = require('assert');
 
     console.log('--- Test 1: Verify Hindi Switch & UI Rendering ---');
     await evaluate(`{
+      go(0);
       const sel = document.getElementById('language');
       sel.value = 'hi';
       sel.dispatchEvent(new Event('change'));

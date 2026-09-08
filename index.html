@@ -1570,9 +1570,16 @@
     }
 
     .gallery-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}
-    .gallery-frame{position:relative;border-radius:12px;overflow:hidden;border:1px solid #d8e2d4;background:#1b2a26}
+    .gallery-frame{position:relative;border-radius:12px;overflow:hidden;border:1px solid #d8e2d4;background:#1b2a26;touch-action:pan-y;user-select:none;-webkit-user-select:none}
     .gallery-img{width:100%;height:auto;aspect-ratio:16/10;object-fit:contain;background:#0f1a16;display:block}
-    .gallery-badge{position:absolute;top:12px;left:12px;background:#17473dbb;color:#e8f4ee;padding:4px 10px;border-radius:20px;font-size:.68rem;font-weight:650;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(4px);border:1px solid #37685e}
+    .gallery-badge{position:absolute;top:12px;left:12px;background:#17473dbb;color:#e8f4ee;padding:4px 10px;border-radius:20px;font-size:.68rem;font-weight:650;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(4px);border:1px solid #37685e;z-index:4}
+    .gallery-touch-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(15,26,22,0.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.32);color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.35);transition:transform .15s ease,background .15s ease,opacity .2s ease;z-index:6;padding:0}
+    .gallery-touch-arrow:hover{background:rgba(28,68,57,0.9);transform:translateY(-50%) scale(1.06)}
+    .gallery-touch-arrow:active{transform:translateY(-50%) scale(0.92);background:rgba(18,48,40,0.95)}
+    .gallery-touch-arrow.prev{left:10px}
+    .gallery-touch-arrow.next{right:10px}
+    .gallery-touch-arrow[disabled]{opacity:0.22;cursor:not-allowed;pointer-events:none}
+    .gallery-touch-arrow .icon{width:18px;height:18px;stroke-width:2.4;fill:none;stroke:currentColor}
     .gallery-info{display:flex;flex-direction:column;gap:10px}
     .gallery-counter{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--teal);font-weight:700}
     .gallery-title{font-size:1.18rem;font-family:Georgia,serif;font-weight:400;margin:0;line-height:1.3}
@@ -1740,10 +1747,11 @@
         flex-direction: column;
         inset: auto 0 0 0;
         width: 100%;
-        max-height: 94dvh;
+        max-height: 95dvh;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         margin: 0;
+        overflow: hidden;
       }
 
       .font-label {
@@ -2007,32 +2015,212 @@
         padding: 14px 19px 20px
       }
 
-      .modal-body {
-        padding: 19px
+      .modal-header {
+        flex-shrink: 0;
+        padding: 14px 18px 12px;
+        border-bottom: 1px solid var(--line);
       }
 
-      .modal-header {
-        padding: 20px 19px 15px
+      .modal-header h2 {
+        font-size: 1.2rem;
+      }
+
+      .modal-body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 16px 18px;
       }
 
       .modal-footer {
-        padding: 15px 19px;
-        flex-wrap: wrap
+        flex-shrink: 0;
+        padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0px));
+        border-top: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
       }
 
-      .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 14px
+      dialog.gallery-modal[open] {
+        height: 95dvh;
+        max-height: 95dvh;
       }
 
-      .gallery-nav {
-        justify-content: center
+      dialog.gallery-modal .modal-header {
+        padding: 10px 16px;
       }
 
-      .gallery-pills {
-        order: -1;
+      dialog.gallery-modal .modal-header h2 {
+        font-size: 1.12rem;
+      }
+
+      dialog.gallery-modal .modal-body {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      dialog.gallery-modal .gallery-grid {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        gap: 0;
+      }
+
+      dialog.gallery-modal .gallery-frame {
+        flex-shrink: 0;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        border-bottom: 1px solid #23372f;
+        background: #09120e;
+        height: clamp(170px, 26vh, 210px);
         width: 100%;
-        justify-content: center
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      dialog.gallery-modal .gallery-img {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        background: #09120e;
+        display: block;
+      }
+
+      dialog.gallery-modal .gallery-badge {
+        top: 8px;
+        left: 8px;
+        font-size: .65rem;
+        padding: 3px 9px;
+      }
+
+      dialog.gallery-modal .gallery-info {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 12px 16px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+
+      dialog.gallery-modal .gallery-title {
+        font-size: 1.05rem;
+      }
+
+      dialog.gallery-modal .gallery-sub {
+        font-size: .74rem;
+      }
+
+      dialog.gallery-modal .gallery-card {
+        padding: 9px 12px;
+      }
+
+      dialog.gallery-modal .gallery-card p {
+        font-size: .76rem;
+      }
+
+      dialog.gallery-modal .gallery-nav {
+        flex-shrink: 0;
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        background: var(--paper);
+        border-top: 1px solid var(--line);
+        margin-top: 0;
+        padding: 8px 12px;
+        box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+      }
+
+      dialog.gallery-modal .gallery-pills {
+        order: 0;
+        width: auto;
+        flex: 1;
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        padding: 2px 4px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        min-width: 0;
+        scroll-behavior: smooth;
+      }
+
+      dialog.gallery-modal .gallery-pills::-webkit-scrollbar {
+        display: none;
+      }
+
+      dialog.gallery-modal .gallery-pill {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        font-size: .73rem;
+      }
+
+      dialog.gallery-modal .gallery-nav button.outline-btn {
+        padding: 7px 11px;
+        font-size: .77rem;
+        font-weight: 650;
+        flex-shrink: 0;
+        min-height: 38px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      dialog.gallery-modal .gallery-nav #gallery-next:not([disabled]) {
+        background: var(--teal);
+        color: #fff;
+        border-color: var(--teal);
+      }
+
+      dialog.gallery-modal .modal-footer {
+        padding: 7px 14px calc(7px + env(safe-area-inset-bottom, 0px));
+        flex-shrink: 0;
+        border-top: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fbfdfa;
+      }
+
+      dialog.gallery-modal .gallery-note {
+        font-size: .68rem;
+        max-width: 65%;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      dialog.gallery-modal .modal-footer button.primary {
+        padding: 6px 14px;
+        font-size: .78rem;
+        min-height: 34px;
       }
 
       .consent-grid {
@@ -3076,9 +3264,15 @@
     const step = steps[cur];
     $('modal-title').textContent=t('galleryTitle');
     $('modal').classList.add('gallery-modal');
-    $('modal-body').innerHTML=`<div class="gallery-grid"><div class="gallery-frame"><img class="gallery-img" src="${step.image}" alt="${esc(step.alt)}" id="gallery-photo"><div class="gallery-badge">${esc('Step '+(cur+1)+' of '+steps.length)}</div></div><div class="gallery-info"><div class="gallery-counter">Clinical Step ${cur+1} of ${steps.length}</div><h3 class="gallery-title">${esc(step.title)}</h3><p class="gallery-sub">${esc(step.sub)}</p><div class="gallery-tags">${step.instruments.map(inst=>`<span class="inst-tag">${esc(inst)}</span>`).join('')}</div><div class="gallery-card"><h4>${icon('shield')} Surgical Action</h4><p>${esc(step.action)}</p></div><div class="gallery-card"><h4>${icon('leaf')} Clinical Rationale</h4><p>${esc(step.rationale)}</p></div><div class="gallery-card correlation"><h4>${icon('heart')} Guide Correlation</h4><p>${esc(step.correlation)}</p></div></div></div><div class="gallery-nav"><button class="outline-btn" id="gallery-prev" ${cur===0?'disabled':''} aria-label="Previous step">${icon('left')}<span>Previous</span></button><div class="gallery-pills" role="group" aria-label="Procedure step selector">${steps.map((_,i)=>`<button class="gallery-pill ${i===cur?'active':''}" data-gallery-step="${i}" aria-label="Step ${i+1}" aria-pressed="${i===cur}">${i+1}</button>`).join('')}</div><button class="outline-btn" id="gallery-next" ${cur===steps.length-1?'disabled':''} aria-label="Next step"><span>Next</span>${icon('right')}</button></div>`;
+    $('modal-body').innerHTML=`<div class="gallery-grid"><div class="gallery-frame" id="gallery-frame"><img class="gallery-img" src="${step.image}" alt="${esc(step.alt)}" id="gallery-photo"><div class="gallery-badge">${esc('Step '+(cur+1)+' of '+steps.length)}</div><button class="gallery-touch-arrow prev" id="gallery-photo-prev" ${cur===0?'disabled':''} aria-label="Previous step photo">${icon('left')}</button><button class="gallery-touch-arrow next" id="gallery-photo-next" ${cur===steps.length-1?'disabled':''} aria-label="Next step photo">${icon('right')}</button></div><div class="gallery-info"><div class="gallery-counter">Clinical Step ${cur+1} of ${steps.length}</div><h3 class="gallery-title">${esc(step.title)}</h3><p class="gallery-sub">${esc(step.sub)}</p><div class="gallery-tags">${step.instruments.map(inst=>`<span class="inst-tag">${esc(inst)}</span>`).join('')}</div><div class="gallery-card"><h4>${icon('shield')} Surgical Action</h4><p>${esc(step.action)}</p></div><div class="gallery-card"><h4>${icon('leaf')} Clinical Rationale</h4><p>${esc(step.rationale)}</p></div><div class="gallery-card correlation"><h4>${icon('heart')} Guide Correlation</h4><p>${esc(step.correlation)}</p></div></div></div><div class="gallery-nav"><button class="outline-btn" id="gallery-prev" ${cur===0?'disabled':''} aria-label="Previous step">${icon('left')}<span>Previous</span></button><div class="gallery-pills" role="group" aria-label="Procedure step selector">${steps.map((_,i)=>`<button class="gallery-pill ${i===cur?'active':''}" data-gallery-step="${i}" aria-label="Step ${i+1}" aria-pressed="${i===cur}">${i+1}</button>`).join('')}</div><button class="outline-btn" id="gallery-next" ${cur===steps.length-1?'disabled':''} aria-label="Next step"><span>Next</span>${icon('right')}</button></div>`;
     $('modal-footer').innerHTML=`<span class="gallery-note">${icon('info')} Real procedural photography · Modified Seldinger percutaneous technique</span><button class="primary" data-action="close">${esc(t('close'))}</button>`;
     $('modal').showModal();$('modal').scrollTop=0;
+    const info = $('modal-body').querySelector('.gallery-info');
+    if(info) info.scrollTop = 0;
+    const activePill = $('modal-body').querySelector('.gallery-pill.active');
+    if(activePill && typeof activePill.scrollIntoView === 'function'){
+      activePill.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    }
   }
 
   function renderConsentCompanion(stepIndex){
@@ -3304,8 +3498,8 @@
     if(target.dataset.hotspot!==undefined){state.hotspot=Number(target.dataset.hotspot);renderVisual();document.querySelector(`[data-hotspot="${state.hotspot}"]`).focus();return;}
     if(target.dataset.sequence!==undefined){setSequence(Number(target.dataset.sequence));return;}
     if(target.id==='play-sequence'){toggleSequence();return;}
-    if(target.id==='gallery-prev'){if(state.galleryIndex>0)renderClinicalGallery(state.galleryIndex-1);return;}
-    if(target.id==='gallery-next'){if(state.galleryIndex<CLINICAL_STEPS.length-1)renderClinicalGallery(state.galleryIndex+1);return;}
+    if(target.id==='gallery-prev'||target.id==='gallery-photo-prev'){if(state.galleryIndex>0)renderClinicalGallery(state.galleryIndex-1);return;}
+    if(target.id==='gallery-next'||target.id==='gallery-photo-next'){if(state.galleryIndex<CLINICAL_STEPS.length-1)renderClinicalGallery(state.galleryIndex+1);return;}
     if(target.dataset.galleryStep!==undefined){renderClinicalGallery(Number(target.dataset.galleryStep));return;}
     if(target.dataset.consentStep!==undefined){state.consentStep=Number(target.dataset.consentStep);renderConsentCompanion(state.consentStep);return;}
     if(target.hasAttribute('data-consent-next')||target.closest('[data-consent-next]')){
@@ -3363,6 +3557,26 @@
       else if(e.key==='ArrowRight'&&state.galleryIndex<CLINICAL_STEPS.length-1)renderClinicalGallery(state.galleryIndex+1);
     }
   });
+  let touchStartX = 0, touchStartY = 0;
+  document.addEventListener('touchstart', e => {
+    const frame = e.target.closest('#gallery-frame');
+    if (!frame) return;
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const frame = e.target.closest('#gallery-frame');
+    if (!frame) return;
+    const diffX = e.changedTouches[0].screenX - touchStartX;
+    const diffY = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(diffX) > 38 && Math.abs(diffX) > Math.abs(diffY) * 1.3) {
+      if (diffX < 0 && state.galleryIndex < CLINICAL_STEPS.length - 1) {
+        renderClinicalGallery(state.galleryIndex + 1);
+      } else if (diffX > 0 && state.galleryIndex > 0) {
+        renderClinicalGallery(state.galleryIndex - 1);
+      }
+    }
+  }, { passive: true });
   window.addEventListener('pagehide',()=>{stopAudio();stopSequence();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){stopAudio();if(state.playing){stopSequence();renderVisual();}}});
   if('speechSynthesis' in window){
