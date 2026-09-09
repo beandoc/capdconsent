@@ -4155,6 +4155,8 @@
   const FIG_NO={anatomy:1,prepare:2,comfort:3,placement:4,recovery:5,healing:6,living:7,warnings:8};
   const plate=(caption,viewBox,inner,label,single=false,callouts={svg:'',items:[]})=>`<div class="plate"><p class="plate-cap">${esc(caption)}</p><svg class="plate-svg${single?' plate-wide':''}" viewBox="${viewBox}" role="img" aria-label="${esc(label)}">${inner}${callouts.svg}</svg>${callouts.items.length?legend(callouts.items):''}</div>`;
   const VISUAL_PHOTO_MAP = {
+    anatomy: [5, 6, 7, 9],
+    prepare: [],
     comfort: [0],
     placement: {
       0: [0],
@@ -4163,13 +4165,13 @@
       3: [0],
       4: [1],
       5: [2],
-      6: [3, 4, 5, 6, 7],
-      7: [8, 9]
+      6: [3, 4, 5, 6],
+      7: [7, 8, 9]
     },
     recovery: [8, 9],
     healing: [5, 7],
     living: [9],
-    anatomy: [9]
+    warnings: []
   };
 
   function getActivePhotoIndices(visual){
@@ -4185,8 +4187,8 @@
 
   function renderClinicalInplacePlate(visual, photoIndices){
     const steps = CLINICAL_STEPS_I18N[state.language] || CLINICAL_STEPS;
-    const subIdx = Math.min(state.photoSubIndex || 0, photoIndices.length - 1);
-    const photoIdx = photoIndices[subIdx];
+    const subIdx = Math.max(0, Math.min(state.photoSubIndex || 0, photoIndices.length - 1));
+    const photoIdx = photoIndices[subIdx] ?? 0;
     const step = steps[photoIdx] || steps[0];
 
     let subTabsHtml = '';
@@ -4212,13 +4214,19 @@
          </div>`
       : '';
 
+    const photoCountText = photoIndices.length > 1
+      ? (state.language === 'hi' ? ` · दृश्य ${subIdx + 1}/${photoIndices.length}` :
+         state.language === 'mr' ? ` · दृश्य ${subIdx + 1}/${photoIndices.length}` :
+         ` · View ${subIdx + 1} of ${photoIndices.length}`)
+      : '';
+
     return `
       <div class="clinical-inplace-plate">
         <div class="inplace-photo-frame">
           <div class="inplace-img-wrap">
             <img src="${esc(step.image)}" alt="${esc(step.alt)}" class="inplace-clinical-img" loading="eager" decoding="async">
             <div class="inplace-photo-badge">
-              ${icon('camera')} <span>${esc(t('realPhotoBadge'))} · Step ${photoIdx + 1} of 10</span>
+              ${icon('camera')} <span>${esc(t('realPhotoBadge'))}${photoCountText}</span>
             </div>
             <button type="button" class="inplace-expand-btn" data-action="inspect-clinical-photo" data-index="${photoIdx}" title="${esc(t('inspectFigure'))}">
               ${icon('maximize')} <span>${esc(t('inspectFigure'))}</span>
