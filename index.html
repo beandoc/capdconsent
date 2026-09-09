@@ -1737,10 +1737,11 @@
     }
 
     dialog.lightbox-modal {
-      max-width: 1200px !important;
-      width: 95vw !important;
+      max-width: min(1200px, 95vw);
+      width: min(1200px, 95vw);
       border-radius: 18px;
       padding: 24px;
+      margin: auto;
     }
 
     .lightbox-modal .inspection-lightbox .figure {
@@ -2403,13 +2404,16 @@
       background: var(--paper);
       color: var(--ink);
       width: min(620px, calc(100% - 30px));
+      max-width: min(620px, calc(100% - 30px));
       max-height: 90dvh;
-      box-shadow: 0 20px 90px #14362726
+      box-shadow: 0 20px 90px #14362726;
+      margin: auto;
     }
 
     dialog.gallery-modal,
     dialog.consent-modal {
       width: min(940px, calc(100% - 24px));
+      max-width: min(940px, calc(100% - 24px));
       max-height: 94dvh
     }
 
@@ -2734,12 +2738,28 @@
         display: flex;
         flex-direction: column;
         inset: auto 0 0 0;
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
         max-height: 95dvh;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        margin: 0;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
         overflow: hidden;
+      }
+
+      dialog.lightbox-modal,
+      dialog.lightbox-modal[open] {
+        width: 100% !important;
+        max-width: 100% !important;
+        inset: auto 0 0 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        padding: 14px 16px;
       }
 
       .font-label {
@@ -4636,23 +4656,13 @@
     if (!figEl) return;
     const modal = $('modal');
     modal.className = 'lightbox-modal';
-    modal.innerHTML = `
-      <div class="modal-header">
-        <div>
-          <span class="modal-eyebrow">${esc(t('figureTag', {n: state.index + 1}))}</span>
-          <h2 class="modal-title">${esc(p.title)}</h2>
-        </div>
-        <button class="modal-close" data-action="close" aria-label="${esc(t('close'))}">${icon('close')}</button>
-      </div>
-      <div class="inspection-lightbox" style="padding: 10px 0;">
-        ${figEl.outerHTML}
-      </div>
-      <div class="modal-actions" style="margin-top: 14px; justify-content: flex-end;">
-        <button class="primary" data-action="close">${esc(t('close'))}</button>
-      </div>
-    `;
+    $('modal-title').innerHTML = `<span class="modal-eyebrow" style="display:block;font-size:.7rem;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">${esc(t('figureTag', {n: state.index + 1}))}</span><span>${esc(p.title)}</span>`;
+    $('close-modal').innerHTML = icon('close');
+    $('modal-body').innerHTML = `<div class="inspection-lightbox" style="padding: 6px 0;">${figEl.outerHTML}</div>`;
+    $('modal-footer').innerHTML = `<button class="primary" data-action="close">${esc(t('close'))}</button>`;
     hydrate(modal);
     modal.showModal();
+    modal.scrollTop = 0;
   }
 
   function renderJourney(){
@@ -4960,7 +4970,7 @@
     state.clinicalPhotoIndex = cur;
     const step = steps[cur];
     $('modal-title').textContent=t('galleryTitle');
-    $('modal').classList.add('gallery-modal');
+    $('modal').className='gallery-modal';
     $('modal-body').innerHTML=`<div class="gallery-grid"><div class="gallery-frame" id="gallery-frame"><img class="gallery-img" src="${step.image}" alt="${esc(step.alt)}" id="gallery-photo"><div class="gallery-badge">${esc('Step '+(cur+1)+' of '+steps.length)}</div><button class="gallery-touch-arrow prev" id="gallery-photo-prev" ${cur===0?'disabled':''} aria-label="Previous step photo">${icon('left')}</button><button class="gallery-touch-arrow next" id="gallery-photo-next" ${cur===steps.length-1?'disabled':''} aria-label="Next step photo">${icon('right')}</button></div><div class="gallery-info"><div class="gallery-counter">Clinical Step ${cur+1} of ${steps.length}</div><h3 class="gallery-title">${esc(step.title)}</h3><p class="gallery-sub">${esc(step.sub)}</p><div class="gallery-tags">${step.instruments.map(inst=>`<span class="inst-tag">${esc(inst)}</span>`).join('')}</div><div class="gallery-card"><h4>${icon('shield')} Surgical Action</h4><p>${esc(step.action)}</p></div><div class="gallery-card"><h4>${icon('leaf')} Clinical Rationale</h4><p>${esc(step.rationale)}</p></div><div class="gallery-card correlation"><h4>${icon('heart')} Guide Correlation</h4><p>${esc(step.correlation)}</p></div></div></div><div class="gallery-nav"><button class="outline-btn" id="gallery-prev" ${cur===0?'disabled':''} aria-label="Previous step">${icon('left')}<span>Previous</span></button><div class="gallery-pills" role="group" aria-label="Procedure step selector">${steps.map((_,i)=>`<button class="gallery-pill ${i===cur?'active':''}" data-gallery-step="${i}" aria-label="Step ${i+1}" aria-pressed="${i===cur}">${i+1}</button>`).join('')}</div><button class="outline-btn" id="gallery-next" ${cur===steps.length-1?'disabled':''} aria-label="Next step"><span>Next</span>${icon('right')}</button></div>`;
     $('modal-footer').innerHTML=`<span class="gallery-note">${icon('info')} Real procedural photography · Modified Seldinger percutaneous technique</span><button class="primary" data-action="close">${esc(t('close'))}</button>`;
     $('modal').showModal();$('modal').scrollTop=0;
@@ -4978,8 +4988,7 @@
     state.consentStep = cur;
     const sec = sections[cur];
     $('modal-title').textContent=t('consentModalTitle');
-    $('modal').classList.remove('gallery-modal');
-    $('modal').classList.add('consent-modal');
+    $('modal').className='consent-modal';
     const stepper=`<div class="consent-stepper" role="tablist" aria-label="Consent discussion modules">${sections.map((s,i)=>`<button class="consent-step-btn ${i===cur?'active':''} ${i<cur?'done':''}" data-consent-step="${i}" role="tab" aria-selected="${i===cur}"><span class="step-icon">${i<cur?icon('check'):i+1}</span><span>${esc(s.shortTitle)}</span></button>`).join('')}</div>`;
     let content=`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;flex-wrap:wrap"><span class="consent-badge" style="margin-bottom:0">${esc(sec.badge)}</span><span class="companion-disclaimer-pill" style="display:inline-flex;align-items:center;gap:5px;background:#fef7ea;color:#7e5611;border:1px solid #ebcf93;padding:3px 9px;border-radius:14px;font-size:.73rem;font-weight:600">${icon('shield')} For illustration and educative purpose only</span></div><h3 style="margin:0 0 6px;font-family:Georgia,serif;font-size:1.3rem;font-weight:400;color:var(--deep)">${esc(sec.title)}</h3><p style="margin:0 0 16px;font-size:.84rem;color:var(--muted);line-height:1.6">${esc(sec.lead)}</p>`;
     if(sec.id==='overview'||sec.id==='technique'||sec.id==='alternatives'||sec.id==='risks'){
@@ -5446,11 +5455,11 @@ const LOGO_SC_JPG = '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgk
     const url=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));const a=document.createElement('a');a.href=url;a.download='PD-Consent-Buddy-your-journey.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(t('pdfSaved'));
   }
 
-  function resizeText(delta){state.scale=Math.min(1.375,Math.max(1,state.scale+delta));document.documentElement.style.setProperty('--scale',state.scale);$('font-down').disabled=state.scale<=1;$('font-up').disabled=state.scale>=1.375;toast(t('textSizeChanged',{n:Math.round(state.scale*100)}));}
-  function closeModal(){$('modal').classList.remove('gallery-modal','consent-modal');$('modal').close();}
+  function closeModal(){$('modal').className='';$('modal').close();}
 
   function openModal(kind){
     stopAudio();const wasPlaying=state.playing;stopSequence();if(wasPlaying)renderVisual();let title,body,buttons;
+    $('modal').className='';
     if(kind==='consent-tool'){renderConsentCompanion(state.consentStep||0);return;}
     if(['summary','checklist','caregiver'].includes(kind)){title=t(kind==='summary'?'summaryTitle':kind==='checklist'?'checklistTitle':'caregiverTitle');body=handoutBody(kind);buttons=`<button class="outline-btn" data-action="print">${icon('printer')}${esc(t('print'))}</button>${kind==='summary'?`<button class="primary" data-action="download">${icon('download')}${esc(t('download'))}</button>`:''}`;}
     else if(kind==='gallery-prompt'){
@@ -5592,7 +5601,7 @@ const LOGO_SC_JPG = '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgk
   $('caregiver-toggle').addEventListener('change',e=>{state.caregiver=e.target.checked;stopAudio();renderRight();});
   $('language').addEventListener('change',e=>{const lang=e.target.value;if(!TRANSLATIONS[lang]){e.target.value=state.language;toast(t('languageUnavailable'));return;}stopAudio();state.language=lang;document.documentElement.lang=lang;render();});
   $('close-modal').addEventListener('click',closeModal);
-  $('modal').addEventListener('close',()=>$('modal').classList.remove('gallery-modal','consent-modal'));
+  $('modal').addEventListener('close',()=>$('modal').className='');
   $('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
   document.addEventListener('keydown',e=>{
     if($('modal').open && $('modal').classList.contains('gallery-modal')){
